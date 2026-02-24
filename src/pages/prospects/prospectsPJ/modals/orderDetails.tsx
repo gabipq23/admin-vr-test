@@ -183,7 +183,7 @@ export function OrderDetailsModal({
                             Informações do comprador
                           </h2>
                           {/* {item?.cliente_gold === 1 ? (
-                            <span className="ml-2 text-[12px] font-medium bg-[#660099] text-neutral-100 px-2 py-1 rounded-full">
+                            <span className="ml-2 text-[12px] font-medium bg-[#029d23] text-neutral-100 px-2 py-1 rounded-full">
                               Cliente Gold
                             </span>
                           ) : (
@@ -334,7 +334,7 @@ export function OrderDetailsModal({
                                     <p className="text-[14px] text-[#666666]">
                                       Seguro de{" "}
                                       {item.seguro_tipo ===
-                                      "roubo_furto_simples_qualificado"
+                                        "roubo_furto_simples_qualificado"
                                         ? "Roubo, Furto Simples/Qualificado"
                                         : "Roubo, Furto Simples/Qualificado e Danos"}
                                     </p>
@@ -471,10 +471,10 @@ export function OrderDetailsModal({
         <div className="mt-4 flex gap-4 justify-end mr-4">
           <Button
             onClick={closeModal}
-            color="purple"
+            color="green"
             variant="outlined"
             style={{
-              color: "#660099",
+              color: "#029d23",
               fontSize: "14px",
             }}
           >

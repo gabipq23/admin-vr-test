@@ -64,7 +64,7 @@ export function ContactInfoModal({
           onClick={() => selectedId && handleCopy(text, setTooltipTitle)}
           className="text-[#666666] cursor-pointer"
         >
-          <CopyOutlined style={{ fontSize: 16, color: "purple" }} />
+          <CopyOutlined style={{ fontSize: 16, color: "green" }} />
         </div>
       </Tooltip>
     );
@@ -81,8 +81,8 @@ export function ContactInfoModal({
             theme={{
               components: {
                 Select: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                   activeOutlineColor: "none",
                 },
               },
@@ -160,10 +160,10 @@ export function ContactInfoModal({
       <div className="mt-4 flex gap-4 justify-end mr-4">
         <Button
           onClick={closeModal}
-          color="purple"
+          color="green"
           variant="outlined"
           style={{
-            color: "#660099",
+            color: "#029d23",
             fontSize: "14px",
           }}
         >

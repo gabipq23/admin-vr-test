@@ -118,7 +118,7 @@ const useStyle = createStyles(({ css }) => {
         display: flex;
         justify-content: center;
         margin-top: 16px; /* opcional: dá um espaçamento
-        colorText: "#660099",
+        colorText: "#029d23",
         colorTextActive: "#550088", */
       }
     `,
@@ -412,9 +412,9 @@ export function useAllOrdersFilterController({
       render: (_, record) => {
         const total = Array.isArray(record?.itens)
           ? record.itens.reduce(
-              (acc: number, it: any) => acc + Number(it?.quantidade ?? 0),
-              0,
-            )
+            (acc: number, it: any) => acc + Number(it?.quantidade ?? 0),
+            0,
+          )
           : 0;
         return total || "-";
       },

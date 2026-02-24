@@ -79,13 +79,13 @@ export default function EditUserModal({
                 theme={{
                   components: {
                     Input: {
-                      hoverBorderColor: "#660099",
-                      activeBorderColor: "#660099",
+                      hoverBorderColor: "#029d23",
+                      activeBorderColor: "#029d23",
                       activeShadow: "none",
                     },
                     Select: {
-                      hoverBorderColor: "#660099",
-                      activeBorderColor: "#660099",
+                      hoverBorderColor: "#029d23",
+                      activeBorderColor: "#029d23",
                       activeOutlineColor: "none",
                     },
                   },
@@ -195,8 +195,8 @@ export default function EditUserModal({
                           theme={{
                             components: {
                               Checkbox: {
-                                colorPrimary: "#660099",
-                                colorPrimaryHover: "#660099",
+                                colorPrimary: "#029d23",
+                                colorPrimaryHover: "#029d23",
                                 borderRadius: 4,
                                 controlInteractiveSize: 18,
                                 lineWidth: 2,
@@ -232,7 +232,7 @@ export default function EditUserModal({
                   {/* Botões de Ação */}
                   <div className="flex justify-end gap-3 pt-4">
                     <Button
-                      style={{ borderColor: "#660099", color: "#660099" }}
+                      style={{ borderColor: "#029d23", color: "#029d23" }}
                       onClick={() => setIsEditing(false)}
                     >
                       Cancelar
@@ -244,8 +244,8 @@ export default function EditUserModal({
                         setIsEditing(false);
                       }}
                       style={{
-                        backgroundColor: "#660099",
-                        borderColor: "#660099",
+                        backgroundColor: "#029d23",
+                        borderColor: "#029d23",
                       }}
                     >
                       Salvar
@@ -338,8 +338,8 @@ export default function EditUserModal({
                     type="primary"
                     onClick={() => setIsEditing(true)}
                     style={{
-                      backgroundColor: "#660099",
-                      borderColor: "#660099",
+                      backgroundColor: "#029d23",
+                      borderColor: "#029d23",
                     }}
                   >
                     Editar

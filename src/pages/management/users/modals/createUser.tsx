@@ -44,13 +44,13 @@ export default function CreateUserModal({
           theme={{
             components: {
               Input: {
-                hoverBorderColor: "#660099",
-                activeBorderColor: "#660099",
+                hoverBorderColor: "#029d23",
+                activeBorderColor: "#029d23",
                 activeShadow: "none",
               },
               Select: {
-                hoverBorderColor: "#660099",
-                activeBorderColor: "#660099",
+                hoverBorderColor: "#029d23",
+                activeBorderColor: "#029d23",
                 activeOutlineColor: "none",
               },
             },
@@ -155,8 +155,8 @@ export default function CreateUserModal({
                     theme={{
                       components: {
                         Checkbox: {
-                          colorPrimary: "#660099",
-                          colorPrimaryHover: "#660099",
+                          colorPrimary: "#029d23",
+                          colorPrimaryHover: "#029d23",
                           borderRadius: 4,
                           controlInteractiveSize: 18,
                           lineWidth: 2,
@@ -194,7 +194,7 @@ export default function CreateUserModal({
             {/* Botões de Ação */}
             <div className="flex justify-end gap-3 pt-4">
               <Button
-                style={{ borderColor: "#660099", color: "#660099" }}
+                style={{ borderColor: "#029d23", color: "#029d23" }}
                 onClick={handleCancel}
               >
                 Cancelar
@@ -202,7 +202,7 @@ export default function CreateUserModal({
               <Button
                 onClick={handleSave}
                 type="primary"
-                style={{ backgroundColor: "#660099", borderColor: "#660099" }}
+                style={{ backgroundColor: "#029d23", borderColor: "#029d23" }}
               >
                 Adicionar
               </Button>

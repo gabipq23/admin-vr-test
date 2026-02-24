@@ -139,110 +139,18 @@ export default function SubHeader() {
 
   const lpMenuItems: MenuProps["items"] = [
     {
-      key: "loja-banda-larga-pf",
+      key: "loja-vr",
       label: (
         <a
-          href="https://vivofibra.gold/pf/index.html"
+          href="https://getempresas.com.br/vr/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Banda Larga PF
+          VR
         </a>
       ),
     },
-    {
-      key: "loja-banda-larga-pj",
-      label: (
-        <a
-          href="https://vivofibra.gold/pj/index.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Banda Larga PJ
-        </a>
-      ),
-    },
-    {
-      key: "loja-aparelhos",
-      label: (
-        <a
-          href="https://lojavivo.gold/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Loja Aparelhos
-        </a>
-      ),
-    },
-    {
-      key: "loja-office-365",
-      label: (
-        <a
-          href="https://new-office-lead.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Office 365
-        </a>
-      ),
-    },
-    {
-      key: "loja-workspace",
-      label: (
-        <a
-          href="https://new-workspace-lead.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Workspace
-        </a>
-      ),
-    },
-    // Novas LPs sem link ainda
-    {
-      key: "lp-banda-larga-ultra-pf",
-      label: <span>Banda Larga - Ultra velocidade PF</span>,
-    },
-    {
-      key: "lp-banda-larga-ultra-pj",
-      label: <span>Banda Larga - Ultra velocidade PJ</span>,
-    },
-    {
-      key: "lp-vivo-tv-pf",
-      label: <span>Vivo TV PF</span>,
-    },
-    {
-      key: "lp-seguros",
-      label: <span>Seguros</span>,
-    },
-    {
-      key: "lp-vivo-movel-pos-pf",
-      label: <span>Vivo Móvel-pós PF</span>,
-    },
-    {
-      key: "lp-vivo-movel-pos-pj",
-      label: <span>Vivo Móvel-pós PJ</span>,
-    },
-    {
-      key: "lp-vivo-controle",
-      label: <span>Vivo Controle</span>,
-    },
-    {
-      key: "lp-vivo-total",
-      label: <span>Vivo Total</span>,
-    },
-    {
-      key: "lp-vivo-voz-negocio",
-      label: <span>Vivo Voz Negócio</span>,
-    },
-    {
-      key: "lp-vivo-energia",
-      label: <span>Vivo Energia</span>,
-    },
-    {
-      key: "lp-internet-dedicada",
-      label: <span>Internet Dedicada</span>,
-    },
+
   ];
 
   // const managementMenuItems: MenuProps["items"] = [
@@ -274,73 +182,6 @@ export default function SubHeader() {
   //   // },
   // ];
 
-  const backofficeMenuItems: MenuProps["items"] = [
-    {
-      key: "faturas",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("faturas");
-            navigate("/admin/painel-faturas");
-          }}
-        >
-          Faturas
-        </span>
-      ),
-    },
-    {
-      key: "produtos",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("produtos");
-            navigate("/admin/painel-produtos");
-          }}
-        >
-          Visão 360
-        </span>
-      ),
-    },
-    {
-      key: "parque-movel",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("parque-movel");
-            navigate("/admin/parque-movel");
-          }}
-        >
-          Parque Móvel
-        </span>
-      ),
-    },
-    {
-      key: "parque-fixo",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("parque-fixo");
-            navigate("/admin/parque-fixo");
-          }}
-        >
-          Parque Fixo
-        </span>
-      ),
-    },
-    {
-      key: "consulta-disponibilidade",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("consulta-disponibilidade");
-            navigate("/admin/consulta-disponibilidade");
-          }}
-        >
-          Disponibilidade
-        </span>
-      ),
-    },
-  ];
 
   const ordersMenuItems: MenuProps["items"] = [
     {
@@ -369,246 +210,10 @@ export default function SubHeader() {
         </span>
       ),
     },
-    {
-      key: "pedidos-banda-larga-pj",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("pedidos-banda-larga-pj");
-            navigate(`/admin/pedidos-banda-larga-pj`);
-          }}
-        >
-          Banda Larga PJ
-        </span>
-      ),
-    },
-    {
-      key: "pedidos-office-pj",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("pedidos-office-pj");
-            navigate(`/admin/pedidos-office-pj`);
-          }}
-        >
-          Office 365
-        </span>
-      ),
-    },
-    {
-      key: "pedidos-workspace-pj",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("pedidos-workspace-pj");
-            navigate(`/admin/pedidos-workspace-pj`);
-          }}
-        >
-          Workspace
-        </span>
-      ),
-    },
 
-    {
-      key: "pedidos-energia",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("pedidos-energia");
-            navigate(`/admin/pedidos-energia`);
-          }}
-        >
-          Energia
-        </span>
-      ),
-    },
-    // {
-    //   key: "pedido-vivo-tech-pj",
-    //   label: (
-    //     <span
-    //       onClick={() => {
-    //         setSelectedLink("pedido-vivo-tech-pj");
-    //         navigate(`/admin/pedido-vivo-tech-pj`);
-    //       }}
-    //     >
-    //       Pedido Vivo Tech PJ
-    //     </span>
-    //   ),
-    // },
-    {
-      key: "pedidos-tv",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("pedidos-tv");
-            navigate(`/admin/pedidos-tv`);
-          }}
-        >
-          TV
-        </span>
-      ),
-    },
   ];
 
-  const productsMenuItems: MenuProps["items"] = [
-    {
-      key: "estoque-aparelhos",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("estoque-aparelhos");
-            navigate(`/admin/estoque`);
-          }}
-        >
-          Estoque Aparelhos
-        </span>
-      ),
-    },
-    // {
-    //   key: "estoque-equipamento",
-    //   label: (
-    //     <span
-    //       onClick={() => {
-    //         setSelectedLink("estoque-equipamento");
-    //         navigate(`/admin/estoque-equipamento`);
-    //       }}
-    //     >
-    //       Estoque VivoTech
-    //     </span>
-    //   ),
-    // },
-    {
-      key: "estoque-banda-larga",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("planos-banda-larga");
-            navigate(`/admin/planos-banda-larga`);
-          }}
-        >
-          Planos Banda Larga
-        </span>
-      ),
-    },
-    {
-      key: "planos-vivo-total",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("planos-vivo-total");
-            navigate(`/admin/planos-vivo-total`);
-          }}
-        >
-          Planos Vivo Total
-        </span>
-      ),
-    },
 
-    {
-      key: "telefonia-fixa",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("telefonia-fixa");
-            navigate(`/admin/telefonia-fixa`);
-          }}
-        >
-          Telefonia Fixa
-        </span>
-      ),
-    },
-    {
-      key: "telefonia-movel",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("telefonia-movel");
-            navigate(`/admin/telefonia-movel`);
-          }}
-        >
-          Telefonia Móvel
-        </span>
-      ),
-    },
-    {
-      key: "streaming",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("streaming");
-            navigate(`/admin/streaming`);
-          }}
-        >
-          Streaming
-        </span>
-      ),
-    },
-    {
-      key: "tv",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("tv");
-            navigate(`/admin/tv`);
-          }}
-        >
-          TV
-        </span>
-      ),
-    },
-    {
-      key: "seguros",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("seguros");
-            navigate(`/admin/seguros`);
-          }}
-        >
-          Seguros
-        </span>
-      ),
-    },
-    {
-      key: "energia",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("energia");
-            navigate(`/admin/energia`);
-          }}
-        >
-          Energia
-        </span>
-      ),
-    },
-    // {
-    //   key: "produtos-office365",
-    //   label: (
-    //     <span
-    //       onClick={() => {
-    //         setSelectedLink("produtos-office365");
-    //         navigate(`/admin/produtos-office365`);
-    //       }}
-    //     >
-    //       Office 365
-    //     </span>
-    //   ),
-    // },
-    // {
-    //   key: "produtos-workspace",
-    //   label: (
-    //     <span
-    //       onClick={() => {
-    //         setSelectedLink("produtos-workspace");
-    //         navigate(`/admin/produtos-workspace`);
-    //       }}
-    //     >
-    //       Workspace
-    //     </span>
-    //   ),
-    // },
-  ];
   const chatsMenuItems: MenuProps["items"] = [
     {
       key: "chats",
@@ -638,14 +243,15 @@ export default function SubHeader() {
     },
   ];
 
-  const clientsMenuItems: MenuProps["items"] = [
+
+  const prospectsMenuItems: MenuProps["items"] = [
     {
-      key: "clientes-pj",
+      key: "prospects-pj",
       label: (
         <span
           onClick={() => {
-            setSelectedLink("clientes-pj");
-            navigate(`/admin/clientes-pj`);
+            setSelectedLink("prospects-pj");
+            navigate(`/admin/prospects-pj`);
           }}
         >
           PJ
@@ -653,12 +259,12 @@ export default function SubHeader() {
       ),
     },
     {
-      key: "clientes-pf",
+      key: "prospects-pf",
       label: (
         <span
           onClick={() => {
-            setSelectedLink("clientes-pf");
-            navigate(`/admin/clientes-pf`);
+            setSelectedLink("prospects-pf");
+            navigate(`/admin/prospects-pf`);
           }}
         >
           PF
@@ -667,151 +273,73 @@ export default function SubHeader() {
     },
   ];
 
-  // // const prospectsMenuItems: MenuProps["items"] = [
-  // //   {
-  // //     key: "prospects-pj",
-  // //     label: (
-  // //       <span
-  // //         onClick={() => {
-  // //           setSelectedLink("prospects-pj");
-  // //           navigate(`/admin/prospects-pj`);
-  // //         }}
-  // //       >
-  // //         PJ
-  // //       </span>
-  // //     ),
-  // //   },
-  // //   {
-  // //     key: "prospects-pf",
-  // //     label: (
-  // //       <span
-  // //         onClick={() => {
-  // //           setSelectedLink("prospects-pf");
-  // //           navigate(`/admin/prospects-pf`);
-  // //         }}
-  // //       >
-  // //         PF
-  // //       </span>
-  // //     ),
-  // //   },
-  // // ];
-
   return (
     <div className="relative z-2">
       <div className="">
-        <div className="flex  justify-between items-center p-2 bg-[#44066b] px-6 md:px-10 lg:px-14">
+        <div className="flex  justify-between items-center p-2 bg-[#b3b3b3] px-6 md:px-10 lg:px-14">
           <div className="flex items-center gap-8">
             <Dropdown menu={{ items: ordersMenuItems }} placement="bottom">
               <a
                 onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                  selectedLink === "pedidos-aparelhos"
-                    ? "font-bold text-neutral-100"
-                    : ""
-                }`}
+                className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "pedidos-aparelhos"
+                  ? "font-bold text-[#029d23]"
+                  : ""
+                  }`}
               >
                 Pedidos
               </a>
             </Dropdown>
-            <Dropdown menu={{ items: productsMenuItems }} placement="bottom">
-              <a
-                onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                  selectedLink === "estoque-aparelhos"
-                    ? "font-bold text-neutral-100"
-                    : ""
-                }`}
-              >
-                Produtos
-              </a>
-            </Dropdown>
-            <Dropdown menu={{ items: clientsMenuItems }} placement="bottom">
-              <a
-                onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                  selectedLink === "clientes-pj"
-                    ? "font-bold text-neutral-100"
-                    : ""
-                }`}
-              >
-                Clientes
-              </a>
-            </Dropdown>
-            {/* 
+
+
+
             <Dropdown menu={{ items: prospectsMenuItems }} placement="bottom">
               <a
                 onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                  selectedLink === "prospects-pj"
-                    ? "font-bold text-neutral-100"
-                    : ""
-                }`}
+                className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "prospects-pj"
+                  ? "font-bold text-[#029d23]"
+                  : ""
+                  }`}
               >
                 Prospects
               </a>
-            </Dropdown> */}
+            </Dropdown>
 
             <a
               onClick={() => {
                 setSelectedLink("contatos");
                 navigate(`/admin/contatos`);
               }}
-              className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                selectedLink === "contatos" ? "font-bold text-neutral-100" : ""
-              }`}
+              className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "contatos" ? "font-bold text-[#029d23]" : ""
+                }`}
             >
               Mensagens
             </a>
 
             <Dropdown menu={{ items: chatsMenuItems }} placement="bottom">
-              <a className="text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100">
+              <a className="text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23]">
                 Chatter
               </a>
             </Dropdown>
 
-            <a
-              onClick={() => {
-                setSelectedLink("book-de-ofertas");
-                navigate(`/admin/book-de-ofertas`);
-              }}
-              className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                selectedLink === "book-de-ofertas"
-                  ? "font-bold text-neutral-100"
-                  : ""
-              }`}
-            >
-              Book de Ofertas
-            </a>
+
             <Dropdown menu={{ items: lpMenuItems }} placement="bottom">
-              <a className="text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100">
+              <a className="text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23]">
                 LPs
               </a>
             </Dropdown>
-            <Dropdown menu={{ items: backofficeMenuItems }} placement="bottom">
-              <a
-                onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                  selectedLink === "faturas" || selectedLink === "produtos"
-                    ? "font-bold text-neutral-100"
-                    : ""
-                }`}
-              >
-                Backoffice
-              </a>
-            </Dropdown>
+
             <Dropdown menu={{ items: toolsMenuItems }} placement="bottom">
               <a
                 onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
-                  selectedLink === "pj-checker" ||
+                className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "pj-checker" ||
                   selectedLink === "check-anatel" ||
                   selectedLink === "zap-checker" ||
                   selectedLink === "base2b-empresa" ||
                   selectedLink === "base2b-socio" ||
                   selectedLink === "check-operadora"
-                    ? "font-bold text-neutral-100"
-                    : ""
-                }`}
+                  ? "font-bold text-[#029d23]"
+                  : ""
+                  }`}
               >
                 Tools
               </a>
@@ -820,9 +348,9 @@ export default function SubHeader() {
             {/* <Dropdown menu={{ items: prospectsMenuItems }} placement="bottom">
               <a
                 onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100 ${
+                className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${
                   selectedLink === "prospects-pj"
-                    ? "font-bold text-neutral-100"
+                    ? "font-bold text-[#029d23]"
                     : ""
                 }`}
               >
@@ -831,7 +359,7 @@ export default function SubHeader() {
             </Dropdown> */}
 
             {/* <Dropdown menu={{ items: managementMenuItems }} placement="bottom">
-              <a className="text-[14px] cursor-pointer text-neutral-300 hover:text-neutral-100">
+              <a className="text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23]">
                 Gestão
               </a>
             </Dropdown> */}

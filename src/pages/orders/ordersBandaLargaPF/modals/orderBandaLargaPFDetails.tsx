@@ -18,7 +18,7 @@ export function OrderBandaLargaPFDetailsModal({
   isRemoveOrderFetching,
   updateDataIdVivoAndConsultorResponsavel,
   changeBandaLargaOrderStatus,
-  planBLPFStock,
+
   statusOptions,
 }: {
   isModalOpen: boolean;
@@ -29,7 +29,7 @@ export function OrderBandaLargaPFDetailsModal({
   isRemoveOrderFetching: boolean;
   updateDataIdVivoAndConsultorResponsavel: any;
   changeBandaLargaOrderStatus: any;
-  planBLPFStock: any;
+
   statusOptions: string[] | undefined;
 }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -48,42 +48,8 @@ export function OrderBandaLargaPFDetailsModal({
     }
   }, [selectedId]);
 
-  const planOptions = Array.isArray(planBLPFStock)
-    ? planBLPFStock.map((plan: any) => ({
-        value: plan.id,
-        label: `${plan.plan_name} ${
-          plan.plan_speed ? "- " + plan.plan_speed : ""
-        } - R$ ${plan.plan_price_to}`,
-        name: plan.plan_name,
-        price: plan.plan_price_to,
-        speed: plan.plan_speed,
-      }))
-    : [];
 
-  const handlePlanChange = (planId: number) => {
-    const selectedPlan = planOptions.find((plan) => plan.value === planId);
-    if (selectedPlan) {
-      form.setFieldsValue({
-        plan_name: selectedPlan.name,
-        plan_price: selectedPlan.price,
-        id: localData?.plan?.id || "",
-      });
 
-      setLocalData((prev) =>
-        prev
-          ? {
-              ...prev,
-              plan: {
-                name: selectedPlan.name,
-                price: parseFloat(selectedPlan.price),
-                speed: selectedPlan.speed,
-                id: selectedPlan.value,
-              },
-            }
-          : null,
-      );
-    }
-  };
 
   useEffect(() => {
     setConsultor(localData?.consultor_responsavel || "");
@@ -148,12 +114,8 @@ export function OrderBandaLargaPFDetailsModal({
       setLoading(true);
       const values = await form.validateFields();
 
-      let selectedPlan = planBLPFStock.find(
-        (plan: any) => plan.id === values.plan_id,
-      );
-      if (!selectedPlan && localData?.plan) {
-        selectedPlan = localData.plan;
-      }
+
+
       if (values.installation_preferred_date_one) {
         values.installation_preferred_date_one = dayjs(
           values.installation_preferred_date_one,
@@ -170,18 +132,7 @@ export function OrderBandaLargaPFDetailsModal({
         },
       };
 
-      if (selectedPlan && selectedPlan.id) {
-        formattedData.itens = [
-          {
-            plan: {
-              id: selectedPlan.id,
-              name: selectedPlan.plan_name || selectedPlan.name,
-              price: selectedPlan.plan_price_to || selectedPlan.price,
-              speed: selectedPlan.plan_speed || selectedPlan.speed,
-            },
-          },
-        ];
-      }
+
 
       if (updateOrderData && localData && localData.id) {
         await updateOrderData({
@@ -211,23 +162,23 @@ export function OrderBandaLargaPFDetailsModal({
       theme={{
         components: {
           Input: {
-            hoverBorderColor: "#660099",
-            activeBorderColor: "#660099",
+            hoverBorderColor: "#029d23",
+            activeBorderColor: "#029d23",
             activeShadow: "none",
             colorBorder: "#bfbfbf",
             colorTextPlaceholder: "#666666",
           },
           Select: {
-            hoverBorderColor: "#660099",
-            activeBorderColor: "#660099",
+            hoverBorderColor: "#029d23",
+            activeBorderColor: "#029d23",
             activeOutlineColor: "none",
             colorBorder: "#bfbfbf",
             colorTextPlaceholder: "#666666",
           },
           Button: {
-            colorBorder: "#660099",
-            colorText: "#660099",
-            colorPrimary: "#660099",
+            colorBorder: "#029d23",
+            colorText: "#029d23",
+            colorPrimary: "#029d23",
             colorPrimaryHover: "#883fa2",
           },
         },
@@ -266,8 +217,6 @@ export function OrderBandaLargaPFDetailsModal({
             <OrderBandaLargaPFEdit
               localData={localData}
               form={form}
-              onPlanChange={handlePlanChange}
-              planOptions={planOptions}
               handleSave={handleSave}
               handleCancel={handleCancel}
               loading={loading}

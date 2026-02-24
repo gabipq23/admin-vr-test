@@ -156,15 +156,15 @@ function AllOrders() {
             locale={customLocale}
             theme={{
               token: {
-                colorPrimary: "#660099",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#833baa",
-                colorLink: "#660099",
+                colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },
               components: {
                 Checkbox: {
-                  colorPrimary: "#660099",
-                  colorPrimaryHover: "#660099",
+                  colorPrimary: "#029d23",
+                  colorPrimaryHover: "#029d23",
                   borderRadius: 4,
                   controlInteractiveSize: 18,
                   lineWidth: 2,

@@ -10,7 +10,6 @@ import { FiltroOrdersBandaLargaPFForm } from "./components/filter";
 import { OrderBandaLargaPF } from "@/interfaces/bandaLargaPF";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
-import { usePlansBLPJStockController } from "@/pages/products/BLPJStock/controllers/dataController";
 
 export default function OrdersBandaLargaPF() {
   const queryClient = new QueryClient();
@@ -29,7 +28,6 @@ export default function OrdersBandaLargaPF() {
     changeBandaLargaOrderStatus,
   } = useAllOrdersController();
   const navigate = useNavigate();
-  const { planBLPF } = usePlansBLPJStockController();
   const {
     control,
     onSubmit,
@@ -94,7 +92,7 @@ export default function OrdersBandaLargaPF() {
                 onClear={clearFilters}
                 statusOptions={ordersBandaLarga?.status_pos_venda_enum}
                 orderBandaLargaPF={orderBandaLargaPF}
-                planBLPFStock={planBLPF}
+
                 allColumnOptions={allColumnOptions}
                 visibleColumns={visibleColumns}
                 handleColumnsChange={handleColumnsChange}
@@ -106,15 +104,15 @@ export default function OrdersBandaLargaPF() {
             locale={customLocale}
             theme={{
               token: {
-                colorPrimary: "#660099",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#833baa",
-                colorLink: "#660099",
+                colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },
               components: {
                 Checkbox: {
-                  colorPrimary: "#660099",
-                  colorPrimaryHover: "#660099",
+                  colorPrimary: "#029d23",
+                  colorPrimaryHover: "#029d23",
                   borderRadius: 4,
                   controlInteractiveSize: 18,
                   lineWidth: 2,
@@ -162,7 +160,7 @@ export default function OrdersBandaLargaPF() {
           {/* Modal */}
           <OrderBandaLargaPFDetailsModal
             statusOptions={ordersBandaLarga?.status_pos_venda_enum}
-            planBLPFStock={planBLPF}
+
             updateOrderData={updateBandaLargaOrder}
             isModalOpen={isModalOpen}
             closeModal={closeModal}

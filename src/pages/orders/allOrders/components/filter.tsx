@@ -50,21 +50,21 @@ export function FiltroPedidosForm({
           theme={{
             components: {
               Input: {
-                hoverBorderColor: "#660099",
-                activeBorderColor: "#660099",
+                hoverBorderColor: "#029d23",
+                activeBorderColor: "#029d23",
                 activeShadow: "none",
               },
               Select: {
-                hoverBorderColor: "#660099",
-                activeBorderColor: "#660099",
+                hoverBorderColor: "#029d23",
+                activeBorderColor: "#029d23",
                 activeOutlineColor: "none",
                 optionSelectedBg: "#e6e6e6",
               },
               DatePicker: {
-                hoverBorderColor: "#660099",
-                activeBorderColor: "#660099",
-                colorPrimaryBorder: "#660099",
-                colorPrimary: "#660099",
+                hoverBorderColor: "#029d23",
+                activeBorderColor: "#029d23",
+                colorPrimaryBorder: "#029d23",
+                colorPrimary: "#029d23",
               },
             },
           }}
@@ -213,13 +213,13 @@ export function FiltroPedidosForm({
                     value={
                       fieldDe.value && fieldAte.value
                         ? [
-                            fieldDe.value
-                              ? dayjs(decodeURIComponent(fieldDe.value))
-                              : null,
-                            fieldAte.value
-                              ? dayjs(decodeURIComponent(fieldAte.value))
-                              : null,
-                          ]
+                          fieldDe.value
+                            ? dayjs(decodeURIComponent(fieldDe.value))
+                            : null,
+                          fieldAte.value
+                            ? dayjs(decodeURIComponent(fieldAte.value))
+                            : null,
+                        ]
                         : [null, null]
                     }
                     format="DD/MM/YYYY"
@@ -227,15 +227,15 @@ export function FiltroPedidosForm({
                       fieldDe.onChange(
                         dates && dates[0]
                           ? encodeURIComponent(
-                              dates[0].startOf("day").format("YYYY-MM-DD"),
-                            )
+                            dates[0].startOf("day").format("YYYY-MM-DD"),
+                          )
                           : null,
                       );
                       fieldAte.onChange(
                         dates && dates[1]
                           ? encodeURIComponent(
-                              dates[1].endOf("day").format("YYYY-MM-DD"),
-                            )
+                            dates[1].endOf("day").format("YYYY-MM-DD"),
+                          )
                           : null,
                       );
                     }}
@@ -256,11 +256,11 @@ export function FiltroPedidosForm({
           >
             <Button
               variant="outlined"
-              color="purple"
+              color="green"
               style={{
                 width: "24px",
                 height: "28px",
-                color: "#660099",
+                color: "#029d23",
               }}
               htmlType="submit"
             >
@@ -275,9 +275,9 @@ export function FiltroPedidosForm({
           >
             <Button
               variant="outlined"
-              color="purple"
+              color="green"
               onClick={onClear}
-              style={{ width: "24px", height: "28px", color: "#660099" }}
+              style={{ width: "24px", height: "28px", color: "#029d23" }}
             >
               X
             </Button>
@@ -289,8 +289,8 @@ export function FiltroPedidosForm({
           >
             <Button
               variant="outlined"
-              color="purple"
-              style={{ width: "24px", height: "28px", color: "#660099" }}
+              color="green"
+              style={{ width: "24px", height: "28px", color: "#029d23" }}
               onClick={() =>
                 handleExportXLSX(productsFilteredQuery, selectedRowKeys)
               }

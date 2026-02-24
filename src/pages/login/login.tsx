@@ -74,7 +74,7 @@ export function Login() {
               )}
             />
             <div className="flex justify-center mt-4">
-              <Button variant="outlined" color="purple" htmlType="submit">
+              <Button variant="outlined" color="green" htmlType="submit">
                 Entrar
               </Button>
             </div>

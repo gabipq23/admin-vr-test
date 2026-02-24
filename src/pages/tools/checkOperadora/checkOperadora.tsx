@@ -56,8 +56,8 @@ export default function CheckOperadora() {
               theme={{
                 components: {
                   Input: {
-                    activeBorderColor: "#660099",
-                    hoverBorderColor: "#660099",
+                    activeBorderColor: "#029d23",
+                    hoverBorderColor: "#029d23",
                   },
                 },
               }}
@@ -73,7 +73,7 @@ export default function CheckOperadora() {
                       htmlType="submit"
                       loading={isLoadingCheckOperadora}
                       style={{
-                        backgroundColor: "#660099",
+                        backgroundColor: "#029d23",
                         color: "white",
                         borderColor: "#000000",
                         borderTopLeftRadius: 0,
@@ -88,9 +88,9 @@ export default function CheckOperadora() {
                     theme={{
                       components: {
                         Button: {
-                          colorBorder: "#660099",
-                          colorText: "#660099",
-                          colorPrimary: "#660099",
+                          colorBorder: "#029d23",
+                          colorText: "#029d23",
+                          colorPrimary: "#029d23",
                           colorPrimaryHover: "#883fa2",
                         },
                       },
@@ -116,9 +116,9 @@ export default function CheckOperadora() {
             locale={customLocale}
             theme={{
               token: {
-                colorPrimary: "#660099",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#833baa",
-                colorLink: "#660099",
+                colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },
             }}

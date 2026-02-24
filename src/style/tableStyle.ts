@@ -33,7 +33,7 @@ export const useStyle = createStyles(({ css }) => {
         display: flex;
         justify-content: center;
         margin-top: 16px; 
-        colorText: "#660099",
+        colorText: "#029d23",
         colorTextActive: "#550088", 
       }
     `,

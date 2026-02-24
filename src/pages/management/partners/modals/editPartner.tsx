@@ -63,13 +63,13 @@ export default function EditPartnerModal({
                 theme={{
                   components: {
                     Input: {
-                      hoverBorderColor: "#660099",
-                      activeBorderColor: "#660099",
+                      hoverBorderColor: "#029d23",
+                      activeBorderColor: "#029d23",
                       activeShadow: "none",
                     },
                     Select: {
-                      hoverBorderColor: "#660099",
-                      activeBorderColor: "#660099",
+                      hoverBorderColor: "#029d23",
+                      activeBorderColor: "#029d23",
                       activeOutlineColor: "none",
                     },
                   },
@@ -165,7 +165,7 @@ export default function EditPartnerModal({
                   {/* Botões de Ação */}
                   <div className="flex justify-end gap-3 pt-4">
                     <Button
-                      style={{ borderColor: "#660099", color: "#660099" }}
+                      style={{ borderColor: "#029d23", color: "#029d23" }}
                       onClick={() => {
                         setIsEditing(false);
                       }}
@@ -179,8 +179,8 @@ export default function EditPartnerModal({
                         setIsEditing(false);
                       }}
                       style={{
-                        backgroundColor: "#660099",
-                        borderColor: "#660099",
+                        backgroundColor: "#029d23",
+                        borderColor: "#029d23",
                       }}
                     >
                       Salvar
@@ -253,8 +253,8 @@ export default function EditPartnerModal({
                     type="primary"
                     onClick={() => setIsEditing(true)}
                     style={{
-                      backgroundColor: "#660099",
-                      borderColor: "#660099",
+                      backgroundColor: "#029d23",
+                      borderColor: "#029d23",
                     }}
                   >
                     Editar

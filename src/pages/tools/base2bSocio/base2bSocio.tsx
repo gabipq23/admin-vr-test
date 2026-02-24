@@ -99,7 +99,7 @@ export default function Base2bSocio() {
                   href="https://base2b.online"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-[#660099]"
+                  className="underline text-[#029d23]"
                 >
                   https://base2b.online
                 </a>{" "}
@@ -113,8 +113,8 @@ export default function Base2bSocio() {
               theme={{
                 components: {
                   Input: {
-                    activeBorderColor: "#660099",
-                    hoverBorderColor: "#660099",
+                    activeBorderColor: "#029d23",
+                    hoverBorderColor: "#029d23",
                   },
                 },
               }}
@@ -134,7 +134,7 @@ export default function Base2bSocio() {
                         htmlType="submit"
                         loading={isLoadingSociosCPF || isLoadingSociosCNPJ}
                         style={{
-                          backgroundColor: "#660099",
+                          backgroundColor: "#029d23",
                           color: "white",
                           borderColor: "#000000",
 
@@ -150,9 +150,9 @@ export default function Base2bSocio() {
                     theme={{
                       components: {
                         Button: {
-                          colorBorder: "#660099",
-                          colorText: "#660099",
-                          colorPrimary: "#660099",
+                          colorBorder: "#029d23",
+                          colorText: "#029d23",
+                          colorPrimary: "#029d23",
                           colorPrimaryHover: "#883fa2",
                         },
                       },
@@ -178,9 +178,9 @@ export default function Base2bSocio() {
             locale={customLocale}
             theme={{
               token: {
-                colorPrimary: "#660099",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#833baa",
-                colorLink: "#660099",
+                colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },
             }}

@@ -14,8 +14,6 @@ import InputGenerator from "@/components/inputGenerator";
 interface OrderBandaLargaPFEditProps {
   localData: OrderBandaLargaPF;
   form: FormInstance;
-  onPlanChange: (planId: number) => void;
-  planOptions: any;
   handleSave: () => void;
   handleCancel: () => void;
   loading: boolean;
@@ -23,8 +21,6 @@ interface OrderBandaLargaPFEditProps {
 
 export function OrderBandaLargaPFEdit({
   localData,
-  onPlanChange,
-  planOptions,
   form,
   handleSave,
   handleCancel,
@@ -60,16 +56,7 @@ export function OrderBandaLargaPFEdit({
             <div className="flex px-8 items-center justify-between py-4 pb-0 text-[14px]">
               {/* Plano */}
               <div className="w-66 flex justify-center">
-                <Form.Item name="plan_id" className="mb-0">
-                  <Select
-                    size="small"
-                    showSearch
-                    placeholder="Selecione o plano"
-                    className="min-w-64"
-                    onChange={onPlanChange}
-                    options={planOptions}
-                  />
-                </Form.Item>
+
               </div>
 
               {/* Data Instalação 1 */}
@@ -180,9 +167,9 @@ export function OrderBandaLargaPFEdit({
                 theme={{
                   components: {
                     Checkbox: {
-                      colorBorder: "#660099",
-                      colorPrimary: "#660099",
-                      colorPrimaryHover: "#660099",
+                      colorBorder: "#029d23",
+                      colorPrimary: "#029d23",
+                      colorPrimaryHover: "#029d23",
                     },
                   },
                 }}
@@ -433,10 +420,10 @@ export function OrderBandaLargaPFEdit({
       >
         <Button
           onClick={handleCancel}
-          color="purple"
+          color="green"
           variant="outlined"
           style={{
-            color: "#660099",
+            color: "#029d23",
             fontSize: "14px",
           }}
         >
@@ -445,10 +432,10 @@ export function OrderBandaLargaPFEdit({
         <Button
           htmlType="submit"
           loading={loading}
-          color="purple"
+          color="green"
           variant="outlined"
           style={{
-            color: "#660099",
+            color: "#029d23",
             fontSize: "14px",
           }}
         >

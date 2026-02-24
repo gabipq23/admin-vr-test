@@ -612,17 +612,17 @@ export const InfoPaymentChartPage = ({
         theme={{
           components: {
             Input: {
-              hoverBorderColor: "#660099",
-              activeBorderColor: "#660099",
+              hoverBorderColor: "#029d23",
+              activeBorderColor: "#029d23",
               activeShadow: "none",
               colorBorder: "#bfbfbf",
               colorTextPlaceholder: "#666666",
             },
             Button: {
-              colorBorder: "#660099",
-              colorText: "#660099",
+              colorBorder: "#029d23",
+              colorText: "#029d23",
 
-              colorPrimary: "#660099",
+              colorPrimary: "#029d23",
 
               colorPrimaryHover: "#883fa2",
             },

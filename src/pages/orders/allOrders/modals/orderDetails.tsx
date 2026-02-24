@@ -98,13 +98,13 @@ export function OrderDetailsModal({
                 theme={{
                   components: {
                     Select: {
-                      hoverBorderColor: "#660099",
-                      activeBorderColor: "#660099",
+                      hoverBorderColor: "#029d23",
+                      activeBorderColor: "#029d23",
                       activeOutlineColor: "none",
                     },
                     Input: {
-                      hoverBorderColor: "#660099",
-                      activeBorderColor: "#660099",
+                      hoverBorderColor: "#029d23",
+                      activeBorderColor: "#029d23",
                     },
                   },
                 }}
@@ -294,17 +294,17 @@ export function OrderDetailsModal({
                   )
                 }
                 variant="outlined"
-                color="purple"
+                color="green"
               >
                 Gerar PDF
               </Button>
 
               <Button
                 onClick={() => setShowEditOrderLayout(true)}
-                color="purple"
+                color="green"
                 variant="outlined"
                 style={{
-                  color: "#660099",
+                  color: "#029d23",
                   fontSize: "14px",
                 }}
               >

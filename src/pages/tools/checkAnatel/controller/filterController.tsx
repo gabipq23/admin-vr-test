@@ -38,7 +38,7 @@ const useStyle = createStyles(({ css }) => {
         display: flex;
         justify-content: center;
         margin-top: 16px; /* opcional: dá um espaçamento
-        colorText: "#660099",
+        colorText: "#029d23",
         colorTextActive: "#550088", */
       }
     `,
@@ -148,9 +148,9 @@ M: ${record.m || "-"}`;
           theme={{
             components: {
               Button: {
-                colorBorder: "#660099",
-                colorText: "#660099",
-                colorPrimary: "#660099",
+                colorBorder: "#029d23",
+                colorText: "#029d23",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#883fa2",
               },
             },

@@ -28,13 +28,13 @@ export default function HeaderInputs({
             theme={{
               components: {
                 Select: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                   activeOutlineColor: "none",
                 },
                 Input: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                 },
               },
             }}

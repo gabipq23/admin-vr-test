@@ -61,9 +61,9 @@ export default function Evolution() {
                     theme={{
                       components: {
                         Button: {
-                          colorBorder: "#660099",
-                          colorText: "#660099",
-                          colorPrimary: "#660099",
+                          colorBorder: "#029d23",
+                          colorText: "#029d23",
+                          colorPrimary: "#029d23",
                           colorPrimaryHover: "#883fa2",
                         },
                       },
@@ -91,16 +91,16 @@ export default function Evolution() {
             locale={customLocale}
             theme={{
               token: {
-                colorPrimary: "#660099",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#833baa",
-                colorLink: "#660099",
+                colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },
               components: {
                 Checkbox: {
                   borderRadius: 4,
-                  colorPrimary: "#660099",
-                  colorPrimaryHover: "#660099",
+                  colorPrimary: "#029d23",
+                  colorPrimaryHover: "#029d23",
                   controlInteractiveSize: 18,
                   lineWidth: 2,
                 },
@@ -114,32 +114,32 @@ export default function Evolution() {
                 columns={columns}
                 dataSource={evolution}
                 loading={isFetching}
-                //     onRow={(record) => ({
-                //       onClick: () => {
-                //         setSelectedWorkspaceOrder(record);
-                //         showModal();
-                //       },
-                //       style: { cursor: "pointer" },
-                //     })}
-                //     pagination={{
-                //       current: currentPage,
-                //       onChange: (page, pageSize) => {
-                //         const params = new URLSearchParams(window.location.search);
-                //         params.set("page", page.toString());
-                //         params.set("limit", pageSize.toString());
-                //         navigate(`?${params.toString()}`);
-                //       },
-                //       pageSize: pageSize,
-                //       pageSizeOptions: ["50", "100", "200", "500"],
-                //       showLessItems: true,
-                //       showSizeChanger: true,
-                //       showTotal: (total) => `Total de ${total} pedidos`,
-                //       total: totalItems,
-                //     }}
-                //     rowClassName={(record) => rowClassName(record) ?? ""}
-                //     rowKey="id"
-                //     rowSelection={rowSelection}
-                //   />
+              //     onRow={(record) => ({
+              //       onClick: () => {
+              //         setSelectedWorkspaceOrder(record);
+              //         showModal();
+              //       },
+              //       style: { cursor: "pointer" },
+              //     })}
+              //     pagination={{
+              //       current: currentPage,
+              //       onChange: (page, pageSize) => {
+              //         const params = new URLSearchParams(window.location.search);
+              //         params.set("page", page.toString());
+              //         params.set("limit", pageSize.toString());
+              //         navigate(`?${params.toString()}`);
+              //       },
+              //       pageSize: pageSize,
+              //       pageSizeOptions: ["50", "100", "200", "500"],
+              //       showLessItems: true,
+              //       showSizeChanger: true,
+              //       showTotal: (total) => `Total de ${total} pedidos`,
+              //       total: totalItems,
+              //     }}
+              //     rowClassName={(record) => rowClassName(record) ?? ""}
+              //     rowKey="id"
+              //     rowSelection={rowSelection}
+              //   />
               />
             </div>
           </ConfigProvider>
@@ -215,9 +215,9 @@ export function ModalDelete({
           theme={{
             components: {
               Button: {
-                colorBorder: "#660099",
-                colorText: "#660099",
-                colorPrimary: "#660099",
+                colorBorder: "#029d23",
+                colorText: "#029d23",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#883fa2",
               },
             },
@@ -303,9 +303,9 @@ export function ModalDisconnect({
           theme={{
             components: {
               Button: {
-                colorBorder: "#660099",
-                colorText: "#660099",
-                colorPrimary: "#660099",
+                colorBorder: "#029d23",
+                colorText: "#029d23",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#883fa2",
               },
             },

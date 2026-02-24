@@ -371,7 +371,7 @@ export function OrderBandaLargaPFDisplay({
                       localData.numero_valido
                         ? "Sim"
                         : localData.numero_valido === null ||
-                            localData.numero_valido === undefined
+                          localData.numero_valido === undefined
                           ? "-"
                           : "Não"
                     }
@@ -548,7 +548,7 @@ export function OrderBandaLargaPFDisplay({
                 title="Coordenadas:"
                 value={
                   localData.geolocalizacao?.latitude &&
-                  localData.geolocalizacao?.longitude
+                    localData.geolocalizacao?.longitude
                     ? `${localData.geolocalizacao.latitude}, ${localData.geolocalizacao.longitude}`
                     : "-"
                 }
@@ -557,7 +557,7 @@ export function OrderBandaLargaPFDisplay({
               <a
                 href={localData.geolocalizacao?.link_maps}
                 target="_blank"
-                style={{ color: "#660099", textDecoration: "underline" }}
+                style={{ color: "#029d23", textDecoration: "underline" }}
                 rel="noopener noreferrer"
               >
                 Ver no Google Maps
@@ -566,9 +566,9 @@ export function OrderBandaLargaPFDisplay({
               <a
                 href={localData.geolocalizacao?.link_street_view}
                 target="_blank"
-                style={{ color: "#660099", textDecoration: "underline" }}
+                style={{ color: "#029d23", textDecoration: "underline" }}
                 rel="noopener noreferrer"
-                className="text-[#660099]  underline"
+                className="text-[#029d23]  underline"
               >
                 Ver no Street View
               </a>
@@ -681,17 +681,17 @@ export function OrderBandaLargaPFDisplay({
         theme={{
           components: {
             Input: {
-              hoverBorderColor: "#660099",
-              activeBorderColor: "#660099",
+              hoverBorderColor: "#029d23",
+              activeBorderColor: "#029d23",
               activeShadow: "none",
               colorBorder: "#bfbfbf",
               colorTextPlaceholder: "#666666",
             },
             Button: {
-              colorBorder: "#660099",
-              colorText: "#660099",
+              colorBorder: "#029d23",
+              colorText: "#029d23",
 
-              colorPrimary: "#660099",
+              colorPrimary: "#029d23",
 
               colorPrimaryHover: "#883fa2",
             },

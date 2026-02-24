@@ -33,20 +33,20 @@ export function FiltroPartnersForm({
             theme={{
               components: {
                 Input: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                   activeShadow: "none",
                 },
                 Select: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                   activeOutlineColor: "none",
                 },
                 DatePicker: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
-                  colorPrimaryBorder: "#660099",
-                  colorPrimary: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
+                  colorPrimaryBorder: "#029d23",
+                  colorPrimary: "#029d23",
                 },
               },
             }}
@@ -92,11 +92,11 @@ export function FiltroPartnersForm({
           >
             <Button
               variant="outlined"
-              color="purple"
+              color="green"
               style={{
                 width: "24px",
                 height: "28px",
-                color: "#660099",
+                color: "#029d23",
               }}
               htmlType="submit"
             >
@@ -111,9 +111,9 @@ export function FiltroPartnersForm({
           >
             <Button
               variant="outlined"
-              color="purple"
+              color="green"
               onClick={onClear}
-              style={{ width: "24px", height: "28px", color: "#660099" }}
+              style={{ width: "24px", height: "28px", color: "#029d23" }}
             >
               X
             </Button>
@@ -125,9 +125,9 @@ export function FiltroPartnersForm({
           >
             <Button
               variant="outlined"
-              color="purple"
+              color="green"
               onClick={() => setShowCreatePartnerModal(true)}
-              style={{ width: "24px", height: "28px", color: "#660099" }}
+              style={{ width: "24px", height: "28px", color: "#029d23" }}
             >
               +
             </Button>

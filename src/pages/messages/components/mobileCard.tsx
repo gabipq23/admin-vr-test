@@ -49,7 +49,7 @@ function MobileCard({
                     setSelectedContact(contact);
                     showModal();
                   }}
-                  color="purple"
+                  color="green"
                   variant="link"
                   className="w-full"
                 >
@@ -64,8 +64,8 @@ function MobileCard({
           theme={{
             components: {
               Pagination: {
-                colorPrimaryBorder: "#660099",
-                colorPrimary: "#660099",
+                colorPrimaryBorder: "#029d23",
+                colorPrimary: "#029d23",
                 colorPrimaryHover: "#550088",
               },
             },

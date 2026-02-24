@@ -44,10 +44,10 @@ export function ProspectsPFModal({
         <div className="mt-4 flex gap-4 justify-end mr-4">
           <Button
             onClick={closeModal}
-            color="purple"
+            color="green"
             variant="outlined"
             style={{
-              color: "#660099",
+              color: "#029d23",
               fontSize: "14px",
             }}
           >

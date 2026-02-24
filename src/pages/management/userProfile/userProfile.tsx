@@ -12,10 +12,10 @@ export default function UserProfile() {
   const userID = user?.id;
   const initials = userProfileQuery?.dados?.nome
     ? userProfileQuery.dados.nome
-        .split(" ")
-        .map((n: string) => n[0])
-        .join("")
-        .toUpperCase()
+      .split(" ")
+      .map((n: string) => n[0])
+      .join("")
+      .toUpperCase()
     : "";
 
   const formatBrazilianDate = (dateStr: string) => {
@@ -93,14 +93,14 @@ export default function UserProfile() {
                 theme={{
                   components: {
                     Checkbox: {
-                      colorPrimary: "#660099",
-                      colorPrimaryHover: "#660099",
+                      colorPrimary: "#029d23",
+                      colorPrimaryHover: "#029d23",
                       borderRadius: 4,
                       controlInteractiveSize: 18,
                       lineWidth: 2,
                     },
                     Button: {
-                      colorPrimary: "#660099",
+                      colorPrimary: "#029d23",
                       colorPrimaryHover: "#cb1ef5",
                     },
                   },

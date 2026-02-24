@@ -20,15 +20,15 @@ export default function FooterButtons({
   return (
     <>
       <div className="mt-4 flex gap-4 justify-end">
-        <Button onClick={onGeneratePDF} variant="outlined" color="purple">
+        <Button onClick={onGeneratePDF} variant="outlined" color="green">
           {generatePDFText}
         </Button>
         <Button
           onClick={onEdit}
-          color="purple"
+          color="green"
           variant="outlined"
           style={{
-            color: "#660099",
+            color: "#029d23",
             fontSize: "14px",
           }}
         >

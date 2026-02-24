@@ -42,172 +42,172 @@ const App: React.FC<{
   saveSelectedSeguro,
   item,
 }) => {
-  const seguro1 = product?.valor_roubo_furto_simples_qualificado ?? 0;
-  const seguro2 = product?.valor_roubo_furto_simples_qualificado_danos ?? 0;
+    const seguro1 = product?.valor_roubo_furto_simples_qualificado ?? 0;
+    const seguro2 = product?.valor_roubo_furto_simples_qualificado_danos ?? 0;
 
-  const getInitialSeguro = () => {
-    if (item?.seguro_tipo === "roubo_furto_simples_qualificado") return seguro1;
-    if (item?.seguro_tipo === "roubo_furto_simples_qualificado_danos")
-      return seguro2;
-    return null;
-  };
-  const [selectedSeguro, setSelectedSeguro] = React.useState<number | null>(
-    getInitialSeguro(),
-  );
+    const getInitialSeguro = () => {
+      if (item?.seguro_tipo === "roubo_furto_simples_qualificado") return seguro1;
+      if (item?.seguro_tipo === "roubo_furto_simples_qualificado_danos")
+        return seguro2;
+      return null;
+    };
+    const [selectedSeguro, setSelectedSeguro] = React.useState<number | null>(
+      getInitialSeguro(),
+    );
 
-  useEffect(() => {
-    setSelectedSeguro(getInitialSeguro());
-  }, [item?.seguro_tipo, seguro1, seguro2]);
+    useEffect(() => {
+      setSelectedSeguro(getInitialSeguro());
+    }, [item?.seguro_tipo, seguro1, seguro2]);
 
-  const handleChange = (key: number) => (e: any) => {
-    if (e.target.checked) {
-      setSelectedSeguro(key === 0 ? seguro1 : seguro2);
-      const seguroTipo =
-        key === 0
-          ? "roubo_furto_simples_qualificado"
-          : "roubo_furto_simples_qualificado_danos";
-      saveSelectedSeguro(purchaseById?.id, itemId, seguroTipo);
-    } else {
-      setSelectedSeguro(null);
-      saveSelectedSeguro(purchaseById?.id, itemId, "");
-    }
-  };
+    const handleChange = (key: number) => (e: any) => {
+      if (e.target.checked) {
+        setSelectedSeguro(key === 0 ? seguro1 : seguro2);
+        const seguroTipo =
+          key === 0
+            ? "roubo_furto_simples_qualificado"
+            : "roubo_furto_simples_qualificado_danos";
+        saveSelectedSeguro(purchaseById?.id, itemId, seguroTipo);
+      } else {
+        setSelectedSeguro(null);
+        saveSelectedSeguro(purchaseById?.id, itemId, "");
+      }
+    };
 
-  const handleRemoveSeguro = () => {
-    if (purchaseById?.id && itemId) {
-      removeInsurance({
-        id: Number(purchaseById?.id),
-        itemId: itemId,
-      });
-    }
-  };
-  const items: MenuProps["items"] = [
-    {
-      type: "group",
-      label: (
-        <div className="px-2 py-1 text-xs text-gray-500">
-          Deseja escolher um seguro para esse produto?
-        </div>
-      ),
-      children: [
-        {
-          label: (
-            <span className="flex items-center gap-2">
-              <ConfigProvider
-                theme={{
-                  components: {
-                    Checkbox: {
-                      colorPrimary: "#660099",
-                      colorPrimaryHover: "#660099",
-                      borderRadius: 4,
-                      controlInteractiveSize: 18,
-                      lineWidth: 2,
+    const handleRemoveSeguro = () => {
+      if (purchaseById?.id && itemId) {
+        removeInsurance({
+          id: Number(purchaseById?.id),
+          itemId: itemId,
+        });
+      }
+    };
+    const items: MenuProps["items"] = [
+      {
+        type: "group",
+        label: (
+          <div className="px-2 py-1 text-xs text-gray-500">
+            Deseja escolher um seguro para esse produto?
+          </div>
+        ),
+        children: [
+          {
+            label: (
+              <span className="flex items-center gap-2">
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Checkbox: {
+                        colorPrimary: "#029d23",
+                        colorPrimaryHover: "#029d23",
+                        borderRadius: 4,
+                        controlInteractiveSize: 18,
+                        lineWidth: 2,
+                      },
                     },
-                  },
-                }}
-              >
-                <Checkbox
-                  onChange={handleChange(0)}
-                  checked={
-                    item?.seguro_tipo === "roubo_furto_simples_qualificado"
-                  }
-                ></Checkbox>{" "}
-              </ConfigProvider>
-              Roubo, Furto, Simples e Qualificado: R$
-              {seguro1.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-              /mês
-            </span>
-          ),
-          key: "0",
-        },
-        {
-          label: (
-            <span className="flex items-center gap-2">
-              <ConfigProvider
-                theme={{
-                  components: {
-                    Checkbox: {
-                      colorPrimary: "#660099",
-                      colorPrimaryHover: "#660099",
-                      borderRadius: 4,
-                      controlInteractiveSize: 18,
-                      lineWidth: 2,
-                    },
-                  },
-                }}
-              >
-                <Checkbox
-                  onChange={handleChange(1)}
-                  checked={
-                    item?.seguro_tipo ===
-                    "roubo_furto_simples_qualificado_danos"
-                  }
-                ></Checkbox>{" "}
-              </ConfigProvider>
-              Roubo, Furto, Simples, Qualificado e Danos: R$
-              {seguro2.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-              /mês
-            </span>
-          ),
-          key: "1",
-        },
-        {
-          label: (
-            <span className="flex items-center gap-2">
-              <ConfigProvider
-                theme={{
-                  components: { Checkbox: { colorPrimary: "#660099" } },
-                }}
-              >
-                <Checkbox
-                  checked={!item?.seguro_tipo}
-                  onChange={handleRemoveSeguro}
+                  }}
                 >
-                  Sem seguro
-                </Checkbox>
-              </ConfigProvider>
-            </span>
-          ),
-          key: "none",
-        },
-      ],
-    },
-  ];
-  const tooltipMessage =
-    selectedSeguro !== null ? "Mudar seguro" : "Adicionar seguro";
-  return (
-    <Dropdown menu={{ items }} trigger={["click"]}>
-      <a onClick={(e) => e.preventDefault()}>
-        <Tooltip
-          title={tooltipMessage}
-          placement="top"
-          styles={{ body: { fontSize: "11px" } }}
-        >
-          <Button color="purple" variant="link" className="w-13">
-            {item?.seguro_valor !== null ? (
-              <span style={{ fontWeight: 600, color: "#660099" }}>
-                R${" "}
-                {item?.seguro_valor?.toLocaleString("pt-BR", {
+                  <Checkbox
+                    onChange={handleChange(0)}
+                    checked={
+                      item?.seguro_tipo === "roubo_furto_simples_qualificado"
+                    }
+                  ></Checkbox>{" "}
+                </ConfigProvider>
+                Roubo, Furto, Simples e Qualificado: R$
+                {seguro1.toLocaleString("pt-BR", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
                 /mês
               </span>
-            ) : (
-              <img src="/assets/seguro-favicon.png" alt="Seguro" />
-            )}
-          </Button>
-        </Tooltip>
-      </a>
-    </Dropdown>
-  );
-};
+            ),
+            key: "0",
+          },
+          {
+            label: (
+              <span className="flex items-center gap-2">
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Checkbox: {
+                        colorPrimary: "#029d23",
+                        colorPrimaryHover: "#029d23",
+                        borderRadius: 4,
+                        controlInteractiveSize: 18,
+                        lineWidth: 2,
+                      },
+                    },
+                  }}
+                >
+                  <Checkbox
+                    onChange={handleChange(1)}
+                    checked={
+                      item?.seguro_tipo ===
+                      "roubo_furto_simples_qualificado_danos"
+                    }
+                  ></Checkbox>{" "}
+                </ConfigProvider>
+                Roubo, Furto, Simples, Qualificado e Danos: R$
+                {seguro2.toLocaleString("pt-BR", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+                /mês
+              </span>
+            ),
+            key: "1",
+          },
+          {
+            label: (
+              <span className="flex items-center gap-2">
+                <ConfigProvider
+                  theme={{
+                    components: { Checkbox: { colorPrimary: "#029d23" } },
+                  }}
+                >
+                  <Checkbox
+                    checked={!item?.seguro_tipo}
+                    onChange={handleRemoveSeguro}
+                  >
+                    Sem seguro
+                  </Checkbox>
+                </ConfigProvider>
+              </span>
+            ),
+            key: "none",
+          },
+        ],
+      },
+    ];
+    const tooltipMessage =
+      selectedSeguro !== null ? "Mudar seguro" : "Adicionar seguro";
+    return (
+      <Dropdown menu={{ items }} trigger={["click"]}>
+        <a onClick={(e) => e.preventDefault()}>
+          <Tooltip
+            title={tooltipMessage}
+            placement="top"
+            styles={{ body: { fontSize: "11px" } }}
+          >
+            <Button color="green" variant="link" className="w-13">
+              {item?.seguro_valor !== null ? (
+                <span style={{ fontWeight: 600, color: "#029d23" }}>
+                  R${" "}
+                  {item?.seguro_valor?.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  /mês
+                </span>
+              ) : (
+                <img src="/assets/seguro-favicon.png" alt="Seguro" />
+              )}
+            </Button>
+          </Tooltip>
+        </a>
+      </Dropdown>
+    );
+  };
 
 export default function EditOrder({
   dataSource,
@@ -329,13 +329,13 @@ export default function EditOrder({
         theme={{
           components: {
             Input: {
-              hoverBorderColor: "#660099",
-              activeBorderColor: "#660099",
+              hoverBorderColor: "#029d23",
+              activeBorderColor: "#029d23",
               activeShadow: "none",
             },
             Select: {
-              hoverBorderColor: "#660099",
-              activeBorderColor: "#660099",
+              hoverBorderColor: "#029d23",
+              activeBorderColor: "#029d23",
               activeOutlineColor: "none",
               colorBorder: "#a2a2a2",
               colorTextPlaceholder: "#a2a2a2",
@@ -367,9 +367,9 @@ export default function EditOrder({
                         hoverBorderColor: "#cb1ef5",
                         activeBorderColor: "#cb1ef5",
                         activeOutlineColor: "none",
-                        colorBorder: "#660099",
+                        colorBorder: "#029d23",
 
-                        colorTextPlaceholder: "#660099",
+                        colorTextPlaceholder: "#029d23",
                       },
                     },
                   }}
@@ -510,7 +510,7 @@ export default function EditOrder({
                             styles={{ body: { fontSize: "11px" } }}
                           >
                             <Button
-                              color="purple"
+                              color="green"
                               variant="link"
                               className="w-12"
                               onClick={() =>
@@ -576,16 +576,16 @@ export default function EditOrder({
                     theme={{
                       components: {
                         Input: {
-                          hoverBorderColor: "#660099",
-                          activeBorderColor: "#660099",
+                          hoverBorderColor: "#029d23",
+                          activeBorderColor: "#029d23",
                           activeShadow: "none",
                           colorBorder: "#bfbfbf",
                           colorTextPlaceholder: "#666666",
                         },
                         Button: {
-                          colorBorder: "#660099",
-                          colorText: "#660099",
-                          colorPrimary: "#660099",
+                          colorBorder: "#029d23",
+                          colorText: "#029d23",
+                          colorPrimary: "#029d23",
                           colorPrimaryHover: "#883fa2",
                         },
                       },
@@ -688,17 +688,17 @@ export default function EditOrder({
                   theme={{
                     components: {
                       Input: {
-                        hoverBorderColor: "#660099",
-                        activeBorderColor: "#660099",
+                        hoverBorderColor: "#029d23",
+                        activeBorderColor: "#029d23",
                         activeShadow: "none",
                         colorBorder: "#bfbfbf",
                         colorTextPlaceholder: "#666666",
                       },
                       Button: {
-                        colorBorder: "#660099",
-                        colorText: "#660099",
+                        colorBorder: "#029d23",
+                        colorText: "#029d23",
 
-                        colorPrimary: "#660099",
+                        colorPrimary: "#029d23",
 
                         colorPrimaryHover: "#883fa2",
                       },
@@ -788,20 +788,20 @@ export default function EditOrder({
           >
             <Button
               onClick={() => setShowEditOrderLayout(false)}
-              color="purple"
+              color="green"
               variant="outlined"
               style={{
-                color: "#660099",
+                color: "#029d23",
                 fontSize: "14px",
               }}
             >
               Cancelar
             </Button>
             <Button
-              color="purple"
+              color="green"
               variant="outlined"
               style={{
-                color: "#660099",
+                color: "#029d23",
                 fontSize: "14px",
               }}
               htmlType="submit"

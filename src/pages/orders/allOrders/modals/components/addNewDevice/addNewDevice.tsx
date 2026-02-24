@@ -41,15 +41,15 @@ export const AllSelectsToAddProducts: React.FC<
         theme={{
           components: {
             Select: {
-              hoverBorderColor: "#660099",
-              activeBorderColor: "#660099",
+              hoverBorderColor: "#029d23",
+              activeBorderColor: "#029d23",
               activeOutlineColor: "none",
               colorBorder: "#a2a2a2",
               colorTextPlaceholder: "#a2a2a2",
             },
             Button: {
-              colorBorder: "#660099",
-              colorText: "#660099",
+              colorBorder: "#029d23",
+              colorText: "#029d23",
               colorPrimaryHover: "#cb1ef5",
               colorPrimaryBorderHover: "#cb1ef5",
             },
@@ -129,7 +129,7 @@ export const AllSelectsToAddProducts: React.FC<
               <Button
                 style={{ width: "18px", height: "32px" }}
                 variant="outlined"
-                color="purple"
+                color="green"
                 onClick={() => {
                   addItemInChart({
                     idProduto: selectedId,
@@ -153,7 +153,7 @@ export const AllSelectsToAddProducts: React.FC<
               </Button>
               <Button
                 variant="outlined"
-                color="purple"
+                color="green"
                 style={{ width: "18px", height: "32px" }}
                 onClick={() => {
                   clearFilter();

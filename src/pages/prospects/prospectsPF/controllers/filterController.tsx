@@ -97,7 +97,7 @@ const useStyle = createStyles(({ css }) => {
         display: flex;
         justify-content: center;
         margin-top: 16px; /* opcional: dá um espaçamento
-        colorText: "#660099",
+        colorText: "#029d23",
         colorTextActive: "#550088", */
       }
     `,
@@ -204,8 +204,8 @@ export function useAllOrdersFilterController() {
           ? filters.order === "asc"
             ? "ascend"
             : filters.order === "desc"
-            ? "descend"
-            : undefined
+              ? "descend"
+              : undefined
           : undefined,
       onHeaderCell: () => ({
         onClick: () => {

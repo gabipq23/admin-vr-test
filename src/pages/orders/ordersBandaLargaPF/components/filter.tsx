@@ -25,7 +25,6 @@ interface FiltroPedidosFormProps {
   selectedRowKeys: any;
   statusOptions?: string[];
   orderBandaLargaPF: any;
-  planBLPFStock: any;
   allColumnOptions: any[];
   visibleColumns: string[];
   handleColumnsChange: (checked: string[]) => void;
@@ -49,20 +48,13 @@ export function FiltroOrdersBandaLargaPFForm({
   statusOptions,
   selectedRowKeys,
   orderBandaLargaPF,
-  planBLPFStock,
+
   allColumnOptions,
   visibleColumns,
   handleColumnsChange,
 }: FiltroPedidosFormProps) {
   const { RangePicker } = DatePicker;
 
-  const uniquePlans = Array.isArray(planBLPFStock)
-    ? Array.from(
-        new Map(
-          planBLPFStock.map((plan: any) => [plan.plan_name, plan]),
-        ).values(),
-      )
-    : [];
 
   return (
     <form
@@ -77,20 +69,20 @@ export function FiltroOrdersBandaLargaPFForm({
             theme={{
               components: {
                 Input: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                   activeShadow: "none",
                 },
                 Select: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
                   activeOutlineColor: "none",
                 },
                 DatePicker: {
-                  hoverBorderColor: "#660099",
-                  activeBorderColor: "#660099",
-                  colorPrimaryBorder: "#660099",
-                  colorPrimary: "#660099",
+                  hoverBorderColor: "#029d23",
+                  activeBorderColor: "#029d23",
+                  colorPrimaryBorder: "#029d23",
+                  colorPrimary: "#029d23",
                 },
               },
             }}
@@ -194,23 +186,7 @@ export function FiltroOrdersBandaLargaPFForm({
                 />
               )}
             />
-            <Controller
-              control={control}
-              name="plan"
-              render={({ field }) => (
-                <Select
-                  style={{ minWidth: "200px" }}
-                  placeholder="Plano"
-                  value={field.value?.length ? field.value : []}
-                  onChange={field.onChange}
-                  options={uniquePlans.map((plan: any) => ({
-                    value: plan.plan_name,
-                    label: plan.plan_name,
-                  }))}
-                  allowClear
-                />
-              )}
-            />
+
             <Controller
               control={control}
               name="status_pos_venda"
@@ -246,13 +222,13 @@ export function FiltroOrdersBandaLargaPFForm({
                       value={
                         fieldDe.value && fieldAte.value
                           ? [
-                              fieldDe.value
-                                ? dayjs(decodeURIComponent(fieldDe.value))
-                                : null,
-                              fieldAte.value
-                                ? dayjs(decodeURIComponent(fieldAte.value))
-                                : null,
-                            ]
+                            fieldDe.value
+                              ? dayjs(decodeURIComponent(fieldDe.value))
+                              : null,
+                            fieldAte.value
+                              ? dayjs(decodeURIComponent(fieldAte.value))
+                              : null,
+                          ]
                           : [null, null]
                       }
                       format="DD/MM/YYYY"
@@ -260,15 +236,15 @@ export function FiltroOrdersBandaLargaPFForm({
                         fieldDe.onChange(
                           dates && dates[0]
                             ? encodeURIComponent(
-                                dates[0].startOf("day").format("YYYY-MM-DD"),
-                              )
+                              dates[0].startOf("day").format("YYYY-MM-DD"),
+                            )
                             : null,
                         );
                         fieldAte.onChange(
                           dates && dates[1]
                             ? encodeURIComponent(
-                                dates[1].endOf("day").format("YYYY-MM-DD"),
-                              )
+                              dates[1].endOf("day").format("YYYY-MM-DD"),
+                            )
                             : null,
                         );
                       }}
@@ -288,11 +264,11 @@ export function FiltroOrdersBandaLargaPFForm({
             >
               <Button
                 variant="outlined"
-                color="purple"
+                color="green"
                 style={{
                   width: "24px",
                   height: "28px",
-                  color: "#660099",
+                  color: "#029d23",
                 }}
                 htmlType="submit"
               >
@@ -307,9 +283,9 @@ export function FiltroOrdersBandaLargaPFForm({
             >
               <Button
                 variant="outlined"
-                color="purple"
+                color="green"
                 onClick={onClear}
-                style={{ width: "24px", height: "28px", color: "#660099" }}
+                style={{ width: "24px", height: "28px", color: "#029d23" }}
               >
                 X
               </Button>
@@ -321,8 +297,8 @@ export function FiltroOrdersBandaLargaPFForm({
             >
               <Button
                 variant="outlined"
-                color="purple"
-                style={{ width: "24px", height: "28px", color: "#660099" }}
+                color="green"
+                style={{ width: "24px", height: "28px", color: "#029d23" }}
                 onClick={() =>
                   handleExportXLSX(orderBandaLargaPF, selectedRowKeys)
                 }
@@ -340,15 +316,15 @@ export function FiltroOrdersBandaLargaPFForm({
           theme={{
             components: {
               Checkbox: {
-                colorPrimary: "#660099",
-                colorPrimaryHover: "#660099",
+                colorPrimary: "#029d23",
+                colorPrimaryHover: "#029d23",
                 borderRadius: 4,
                 controlInteractiveSize: 18,
                 lineWidth: 2,
               },
               Button: {
-                colorBorder: "#660099",
-                colorText: "#660099",
+                colorBorder: "#029d23",
+                colorText: "#029d23",
                 colorPrimaryHover: "#cb1ef5",
                 colorPrimaryBorderHover: "#cb1ef5",
               },
