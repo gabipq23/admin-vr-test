@@ -380,12 +380,12 @@ export default function SubHeader() {
               style={{ padding: 0 }}
               className="logout-btn "
             >
-              <LogoutOutlined style={{ color: "#e4e0e0" }} />
+              <LogoutOutlined style={{ color: "#029d23" }} />
             </Button>
             <style>
               {`
               .logout-btn:hover .anticon {
-                color: #ffffff !important;
+                color: #029d23 !important;
                 font-size: 15px;
               }
             
