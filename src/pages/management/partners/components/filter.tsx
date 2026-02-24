@@ -1,0 +1,144 @@
+import { Control, Controller, UseFormHandleSubmit } from "react-hook-form";
+import { Input, Button, Tooltip, ConfigProvider } from "antd";
+import { FilterOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import CreatePartnerModal from "../modals/createPartner";
+interface FiltroPartnersFormProps {
+  control: Control<any>;
+  handleSubmit: UseFormHandleSubmit<any>;
+  onSubmit: (data: any) => void;
+  onClear: () => void;
+  isFiltered: boolean;
+  createPartner: any;
+}
+
+export function FiltroPartnersForm({
+  createPartner,
+  control,
+  handleSubmit,
+  onSubmit,
+  onClear,
+}: FiltroPartnersFormProps) {
+  const [showCreatePartnerModal, setShowCreatePartnerModal] = useState(false);
+
+  return (
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onReset={onClear}
+        className="flex min-w-[200px] flex-wrap  gap-2 mb-4"
+      >
+        <div className="flex gap-2 flex-wrap">
+          <ConfigProvider
+            theme={{
+              components: {
+                Input: {
+                  hoverBorderColor: "#660099",
+                  activeBorderColor: "#660099",
+                  activeShadow: "none",
+                },
+                Select: {
+                  hoverBorderColor: "#660099",
+                  activeBorderColor: "#660099",
+                  activeOutlineColor: "none",
+                },
+                DatePicker: {
+                  hoverBorderColor: "#660099",
+                  activeBorderColor: "#660099",
+                  colorPrimaryBorder: "#660099",
+                  colorPrimary: "#660099",
+                },
+              },
+            }}
+          >
+            <Controller
+              control={control}
+              name="cnpj"
+              render={({ field }) => (
+                <Input
+                  style={{
+                    width: "140px",
+                  }}
+                  {...field}
+                  placeholder="CNPJ"
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="razao_social"
+              render={({ field }) => (
+                <Input
+                  style={{
+                    width: "160px",
+                  }}
+                  {...field}
+                  placeholder="Razão Social"
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+          </ConfigProvider>
+        </div>
+
+        <div className="flex gap-2 items-center">
+          <Tooltip
+            title="Filtrar"
+            placement="top"
+            styles={{ body: { fontSize: "11px" } }}
+          >
+            <Button
+              variant="outlined"
+              color="purple"
+              style={{
+                width: "24px",
+                height: "28px",
+                color: "#660099",
+              }}
+              htmlType="submit"
+            >
+              <FilterOutlined />
+            </Button>
+          </Tooltip>
+
+          <Tooltip
+            title="Limpar filtro"
+            placement="top"
+            styles={{ body: { fontSize: "11px" } }}
+          >
+            <Button
+              variant="outlined"
+              color="purple"
+              onClick={onClear}
+              style={{ width: "24px", height: "28px", color: "#660099" }}
+            >
+              X
+            </Button>
+          </Tooltip>
+          <Tooltip
+            title="Adicionar Representante"
+            placement="top"
+            styles={{ body: { fontSize: "12px" } }}
+          >
+            <Button
+              variant="outlined"
+              color="purple"
+              onClick={() => setShowCreatePartnerModal(true)}
+              style={{ width: "24px", height: "28px", color: "#660099" }}
+            >
+              +
+            </Button>
+          </Tooltip>
+        </div>
+      </form>
+      <CreatePartnerModal
+        createPartner={createPartner}
+        showCreatePartnerModal={showCreatePartnerModal}
+        setShowCreatePartnerModal={setShowCreatePartnerModal}
+      />
+    </>
+  );
+}

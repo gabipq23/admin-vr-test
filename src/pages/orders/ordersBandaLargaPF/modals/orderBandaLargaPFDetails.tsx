@@ -1,0 +1,305 @@
+import { ConfigProvider, Modal, Form } from "antd";
+import { useState, useEffect } from "react";
+import { OrderBandaLargaPF } from "@/interfaces/bandaLargaPF";
+import { OrderBandaLargaPFDisplay } from "./BLPFDisplay";
+import { OrderBandaLargaPFEdit } from "./BLPFEdit";
+import HeaderInputs from "./headerInputs";
+import dayjs from "dayjs";
+import ConfirmDeleteModal from "@/components/confirmDeleteModal";
+import FooterButtons from "@/components/orders/footerButtons";
+import { generatePDF } from "../controllers/exportPDF";
+
+export function OrderBandaLargaPFDetailsModal({
+  isModalOpen,
+  closeModal,
+  selectedId,
+  updateOrderData,
+  removeOrderData,
+  isRemoveOrderFetching,
+  updateDataIdVivoAndConsultorResponsavel,
+  changeBandaLargaOrderStatus,
+  planBLPFStock,
+  statusOptions,
+}: {
+  isModalOpen: boolean;
+  closeModal: () => void;
+  selectedId: OrderBandaLargaPF | null;
+  updateOrderData?: (params: { id: number; data: any }) => void;
+  removeOrderData: any;
+  isRemoveOrderFetching: boolean;
+  updateDataIdVivoAndConsultorResponsavel: any;
+  changeBandaLargaOrderStatus: any;
+  planBLPFStock: any;
+  statusOptions: string[] | undefined;
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [localData, setLocalData] = useState<OrderBandaLargaPF | null>(null);
+  const [form] = Form.useForm();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [consultor, setConsultor] = useState<string>("");
+  const [idVivo, setIdVivo] = useState<string>("");
+  const [idCRM, setIdCRM] = useState<number>(0);
+  const [credito, setCredito] = useState<number | string>(0);
+
+  useEffect(() => {
+    if (selectedId) {
+      setLocalData(selectedId);
+    }
+  }, [selectedId]);
+
+  const planOptions = Array.isArray(planBLPFStock)
+    ? planBLPFStock.map((plan: any) => ({
+        value: plan.id,
+        label: `${plan.plan_name} ${
+          plan.plan_speed ? "- " + plan.plan_speed : ""
+        } - R$ ${plan.plan_price_to}`,
+        name: plan.plan_name,
+        price: plan.plan_price_to,
+        speed: plan.plan_speed,
+      }))
+    : [];
+
+  const handlePlanChange = (planId: number) => {
+    const selectedPlan = planOptions.find((plan) => plan.value === planId);
+    if (selectedPlan) {
+      form.setFieldsValue({
+        plan_name: selectedPlan.name,
+        plan_price: selectedPlan.price,
+        id: localData?.plan?.id || "",
+      });
+
+      setLocalData((prev) =>
+        prev
+          ? {
+              ...prev,
+              plan: {
+                name: selectedPlan.name,
+                price: parseFloat(selectedPlan.price),
+                speed: selectedPlan.speed,
+                id: selectedPlan.value,
+              },
+            }
+          : null,
+      );
+    }
+  };
+
+  useEffect(() => {
+    setConsultor(localData?.consultor_responsavel || "");
+    setIdVivo(localData?.id_vivo_corp || "");
+    setIdCRM(localData?.id_crm || 0);
+    setCredito(localData?.credito || 0);
+  }, [selectedId, localData]);
+
+  useEffect(() => {
+    if (localData && isEditing) {
+      form.setFieldsValue({
+        plan_id: localData.plan?.id || "",
+        plan_name: localData.plan?.name || "",
+        plan_price: localData.plan?.price?.toString() || "",
+        fullname: localData.fullname,
+        cpf: localData.cpf,
+        birthdate: localData.birthdate,
+        motherfullname: localData.motherfullname,
+        phone: localData.phone,
+        phoneAdditional: localData.phoneAdditional,
+        email: localData.email,
+        address: localData.address,
+        addressnumber: localData.addressnumber,
+        addresscomplement: localData.addresscomplement,
+        addresslot: localData.addresslot,
+        addressFloor: localData.addressFloor,
+        addressblock: localData.addressblock,
+        buildingorhouse: localData.buildingorhouse,
+        district: localData.district,
+        city: localData.city,
+        state: localData.state,
+        cep: localData.cep,
+        addressreferencepoint: localData.addressreferencepoint,
+        cep_unico: localData.cep_unico,
+        installation_preferred_date_one:
+          localData.installation_preferred_date_one
+            ? dayjs(localData.installation_preferred_date_one, "DD/MM/YYYY")
+            : null,
+
+        installation_preferred_date_two:
+          localData.installation_preferred_date_two
+            ? dayjs(localData.installation_preferred_date_two, "DD/MM/YYYY")
+            : null,
+
+        installation_preferred_period_one:
+          localData.installation_preferred_period_one,
+
+        installation_preferred_period_two:
+          localData.installation_preferred_period_two,
+
+        dueday: localData.dueday,
+        accept_offers: localData.accept_offers,
+        terms_accepted: localData.terms_accepted,
+        url: localData.url,
+        status: localData.status,
+      });
+    }
+  }, [localData, isEditing, form]);
+
+  const handleSave = async () => {
+    try {
+      setLoading(true);
+      const values = await form.validateFields();
+
+      let selectedPlan = planBLPFStock.find(
+        (plan: any) => plan.id === values.plan_id,
+      );
+      if (!selectedPlan && localData?.plan) {
+        selectedPlan = localData.plan;
+      }
+      if (values.installation_preferred_date_one) {
+        values.installation_preferred_date_one = dayjs(
+          values.installation_preferred_date_one,
+        ).format("DD/MM/YYYY");
+      }
+      if (values.installation_preferred_date_two) {
+        values.installation_preferred_date_two = dayjs(
+          values.installation_preferred_date_two,
+        ).format("DD/MM/YYYY");
+      }
+      const formattedData: any = {
+        pedido: {
+          ...values,
+        },
+      };
+
+      if (selectedPlan && selectedPlan.id) {
+        formattedData.itens = [
+          {
+            plan: {
+              id: selectedPlan.id,
+              name: selectedPlan.plan_name || selectedPlan.name,
+              price: selectedPlan.plan_price_to || selectedPlan.price,
+              speed: selectedPlan.plan_speed || selectedPlan.speed,
+            },
+          },
+        ];
+      }
+
+      if (updateOrderData && localData && localData.id) {
+        await updateOrderData({
+          id: localData.id,
+          data: formattedData,
+        });
+
+        setLocalData((prev) => (prev ? { ...prev, ...values } : null));
+        setIsEditing(false);
+      }
+    } catch (error) {
+      console.error("Erro ao validar campos:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    form.resetFields();
+  };
+
+  if (!localData) return null;
+
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Input: {
+            hoverBorderColor: "#660099",
+            activeBorderColor: "#660099",
+            activeShadow: "none",
+            colorBorder: "#bfbfbf",
+            colorTextPlaceholder: "#666666",
+          },
+          Select: {
+            hoverBorderColor: "#660099",
+            activeBorderColor: "#660099",
+            activeOutlineColor: "none",
+            colorBorder: "#bfbfbf",
+            colorTextPlaceholder: "#666666",
+          },
+          Button: {
+            colorBorder: "#660099",
+            colorText: "#660099",
+            colorPrimary: "#660099",
+            colorPrimaryHover: "#883fa2",
+          },
+        },
+      }}
+    >
+      <Modal
+        centered
+        title={
+          <HeaderInputs
+            updateOrderData={updateOrderData}
+            localData={localData}
+            setLocalData={setLocalData}
+            selectedId={selectedId}
+            updateDataIdVivoAndConsultorResponsavel={
+              updateDataIdVivoAndConsultorResponsavel
+            }
+            statusOptions={statusOptions}
+            changeBandaLargaOrderStatus={changeBandaLargaOrderStatus}
+            consultor={consultor}
+            setConsultor={setConsultor}
+            idVivo={idVivo}
+            setIdVivo={setIdVivo}
+            idCRM={idCRM}
+            setIdCRM={setIdCRM}
+            credito={credito}
+            setCredito={setCredito}
+          />
+        }
+        open={isModalOpen}
+        onCancel={closeModal}
+        footer={null}
+        width={1200}
+      >
+        <div className="text-[#666666] mt-4 h-[460px] overflow-y-auto scrollbar-thin">
+          {isEditing ? (
+            <OrderBandaLargaPFEdit
+              localData={localData}
+              form={form}
+              onPlanChange={handlePlanChange}
+              planOptions={planOptions}
+              handleSave={handleSave}
+              handleCancel={handleCancel}
+              loading={loading}
+            />
+          ) : (
+            <OrderBandaLargaPFDisplay
+              localData={localData}
+              updateOrderData={updateOrderData}
+            />
+          )}
+        </div>
+        <div className="mt-4 flex gap-4 justify-end">
+          {!isEditing && (
+            <FooterButtons
+              onGeneratePDF={() => generatePDF(localData)}
+              onEdit={() => setIsEditing(true)}
+              onDelete={() => setShowDeleteModal(true)}
+            />
+          )}
+        </div>
+      </Modal>
+      <ConfirmDeleteModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={() => {
+          removeOrderData({ id: selectedId?.id });
+          closeModal();
+        }}
+        isLoading={isRemoveOrderFetching}
+        message="Tem certeza que deseja excluir o pedido"
+        itemToDelete={selectedId?.ordernumber || selectedId?.id}
+      />
+    </ConfigProvider>
+  );
+}
