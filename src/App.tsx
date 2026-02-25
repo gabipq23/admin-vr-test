@@ -15,10 +15,9 @@ import { useAuthContext } from "./pages/login/context";
 import { Login } from "./pages/login/login";
 import NotFound from "./pages/notFound/notFound";
 
-import AllOrders from "./pages/orders/allOrders/allOrders";
 
 import Prospects from "./pages/prospects/prospectsPJ/prospects";
-import OrdersBandaLargaPF from "./pages/orders/ordersBandaLargaPF/ordersBandaLargaPF";
+import OrdersRH from "./pages/orders/ordersRH/ordersRH";
 
 import Contacts from "./pages/messages/contacts";
 import ProspectsPF from "./pages/prospects/prospectsPF/prospectsPF";
@@ -49,7 +48,7 @@ export default function App() {
           path="/admin"
           element={
             user ? (
-              <Navigate to="/admin/pedidos-aparelhos-pj" replace />
+              <Navigate to="/admin/pedidos-rh" replace />
             ) : (
               <Login />
             )
@@ -68,14 +67,13 @@ export default function App() {
             <Route path="/admin/base2b-socio" element={<Base2bSocio />} />
             <Route path="/admin/base2b-empresa" element={<Base2bEmpresa />} />
 
-            <Route path="/admin/pedidos-aparelhos-pj" element={<AllOrders />} />
             <Route path="/admin/contatos" element={<Contacts />} />
             <Route path="/admin/prospects-pj" element={<Prospects />} />
             <Route path="/admin/prospects-pf" element={<ProspectsPF />} />
 
             <Route
-              path="/admin/pedidos-banda-larga-pf"
-              element={<OrdersBandaLargaPF />}
+              path="/admin/pedidos-rh"
+              element={<OrdersRH />}
             />
 
 
@@ -89,7 +87,7 @@ export default function App() {
           path="*"
           element={
             user ? (
-              <Navigate to="/admin/pedidos-aparelhos-pj" replace />
+              <Navigate to="/admin/pedidos-rh" replace />
             ) : (
               <NotFound />
             )

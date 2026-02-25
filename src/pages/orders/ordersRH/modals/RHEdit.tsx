@@ -8,11 +8,10 @@ import {
   ConfigProvider,
 } from "antd";
 import { FormInstance } from "antd/es/form";
-import { OrderBandaLargaPF } from "@/interfaces/bandaLargaPF";
 import InputGenerator from "@/components/inputGenerator";
 
 interface OrderBandaLargaPFEditProps {
-  localData: OrderBandaLargaPF;
+  localData: any;
   form: FormInstance;
   handleSave: () => void;
   handleCancel: () => void;

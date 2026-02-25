@@ -1,4 +1,4 @@
-import { OrderBandaLargaPF } from "@/interfaces/bandaLargaPF";
+
 import { formatBRL } from "@/utils/formatBRL";
 import { formatCEP } from "@/utils/formatCEP";
 import { formatCPF } from "@/utils/formatCPF";
@@ -29,7 +29,7 @@ const getBase64FromImageUrl = (url: string): Promise<string> => {
   });
 };
 
-export const generatePDF = async (order: OrderBandaLargaPF | undefined) => {
+export const generatePDF = async (order: any | undefined) => {
   if (!order) return;
 
   const logoVivo = await getBase64FromImageUrl("/assets/logovivopdf.png");
@@ -97,10 +97,9 @@ export const generatePDF = async (order: OrderBandaLargaPF | undefined) => {
       {
         type: "circle",
         ul: [
-          `Possui Disponibilidade?  ${
-            order.availability
-              ? "Sim"
-              : order.availability === null
+          `Possui Disponibilidade?  ${order.availability
+            ? "Sim"
+            : order.availability === null
               ? "-"
               : "Não"
           }`,
@@ -116,8 +115,7 @@ export const generatePDF = async (order: OrderBandaLargaPF | undefined) => {
           `CPF: ${formatCPF(order.cpf) || "-"}`,
           `Email: ${order.email || "-"}`,
           `Telefone: ${formatPhoneNumber(order.phone) || "-"}`,
-          `Telefone Adicional: ${
-            formatPhoneNumber(order.phoneAdditional || "") || "-"
+          `Telefone Adicional: ${formatPhoneNumber(order.phoneAdditional || "") || "-"
           }`,
 
           `Data de Nascimento: ${order.birthdate}`,
@@ -153,12 +151,10 @@ export const generatePDF = async (order: OrderBandaLargaPF | undefined) => {
         type: "circle",
         ul: [
           `Data Preferida 1: ${order.installation_preferred_date_one}`,
-          `Período Preferido 1: ${
-            order.installation_preferred_period_one || "-"
+          `Período Preferido 1: ${order.installation_preferred_period_one || "-"
           }`,
           `Data Preferida 2: ${order.installation_preferred_date_two}`,
-          `Período Preferido 2: ${
-            order.installation_preferred_period_two || "-"
+          `Período Preferido 2: ${order.installation_preferred_period_two || "-"
           }`,
           `Dia de Vencimento: ${order.dueday || "-"}`,
         ],

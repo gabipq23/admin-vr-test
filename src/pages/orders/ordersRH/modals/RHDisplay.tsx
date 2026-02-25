@@ -1,7 +1,6 @@
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { formatCEP } from "@/utils/formatCEP";
 import { formatCPF } from "@/utils/formatCPF";
-import { OrderBandaLargaPF } from "@/interfaces/bandaLargaPF";
 import { formatBRL } from "@/utils/formatBRL";
 import {
   formatBrowserDisplay,
@@ -15,7 +14,7 @@ import { EmpresasDisplay } from "@/components/empresasDisplay";
 import { convertData } from "@/utils/convertData";
 
 interface OrderBandaLargaPFDisplayProps {
-  localData: OrderBandaLargaPF;
+  localData: any;
   updateOrderData: any;
 }
 

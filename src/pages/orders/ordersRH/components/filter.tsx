@@ -1,4 +1,4 @@
-import { Controller, Control, UseFormHandleSubmit } from "react-hook-form";
+import { Controller, Control, } from "react-hook-form";
 import {
   Input,
   Button,
@@ -13,22 +13,20 @@ import ptBR from "antd/es/locale/pt_BR";
 import { DatePicker } from "antd";
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 import dayjs from "dayjs";
-import { handleExportXLSX } from "../controllers/exportXLSX";
-import { BandaLargaFilters } from "@/interfaces/bandaLargaPF";
 import { customLocale } from "@/utils/customLocale";
 
 interface FiltroPedidosFormProps {
-  control: Control<BandaLargaFilters>;
-  handleSubmit: UseFormHandleSubmit<BandaLargaFilters>;
-  onSubmit: (data: BandaLargaFilters) => void;
-  onClear: () => void;
-  selectedRowKeys: any;
-  statusOptions?: string[];
-  orderBandaLargaPF: any;
-  allColumnOptions: any[];
-  visibleColumns: string[];
-  handleColumnsChange: (checked: string[]) => void;
-  tableColumns: any;
+  control: Control<any>;
+  // handleSubmit: UseFormHandleSubmit<any>;
+  // onSubmit: (data: any) => void;
+  // onClear: () => void;
+  // selectedRowKeys: any;
+  // statusOptions?: string[];
+  // orderRH: any;
+  // allColumnOptions: any[];
+  // visibleColumns: string[];
+  // handleColumnsChange: (checked: string[]) => void;
+  // tableColumns: any;
 }
 
 const CPFInput = (props: PatternFormatProps) => (
@@ -40,26 +38,26 @@ const CPFInput = (props: PatternFormatProps) => (
     size="middle"
   />
 );
-export function FiltroOrdersBandaLargaPFForm({
+export function FiltroOrdersRHForm({
   control,
-  handleSubmit,
-  onSubmit,
-  onClear,
-  statusOptions,
-  selectedRowKeys,
-  orderBandaLargaPF,
+  // handleSubmit,
+  // onSubmit,
+  // onClear,
+  // statusOptions,
+  // selectedRowKeys,
+  // orderRH,
 
-  allColumnOptions,
-  visibleColumns,
-  handleColumnsChange,
+  // allColumnOptions,
+  // visibleColumns,
+  // handleColumnsChange,
 }: FiltroPedidosFormProps) {
   const { RangePicker } = DatePicker;
 
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      onReset={onClear}
+      // onSubmit={handleSubmit(onSubmit)}
+      // onReset={onClear}
       className="flex justify-between items-center  min-w-[200px] flex-wrap  gap-2 "
     >
       <div className="flex gap-2 items-center flex-wrap ">
@@ -122,41 +120,7 @@ export function FiltroOrdersBandaLargaPFForm({
                 />
               )}
             />
-            <Controller
-              control={control}
-              name="initial_status"
-              render={({ field }) => (
-                <Select
-                  mode="multiple"
-                  style={{ minWidth: "130px" }}
-                  placeholder="Status inicial"
-                  value={field.value?.length ? field.value : []}
-                  onChange={field.onChange}
-                  options={[
-                    { value: "consulta", label: "Consulta" },
-                    { value: "pedido", label: "Pedido" },
-                  ]}
-                  allowClear
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="availability"
-              render={({ field }) => (
-                <Select
-                  style={{ minWidth: "120px" }}
-                  placeholder="Disponibilidade"
-                  value={field.value || undefined}
-                  onChange={field.onChange}
-                  options={[
-                    { value: true, label: "Disponível" },
-                    { value: false, label: "Indisponível" },
-                  ]}
-                  allowClear
-                />
-              )}
-            />
+
             <Controller
               control={control}
               name="cpf"
@@ -187,25 +151,6 @@ export function FiltroOrdersBandaLargaPFForm({
               )}
             />
 
-            <Controller
-              control={control}
-              name="status_pos_venda"
-              render={({ field }) => (
-                <Select
-                  style={{
-                    width: "300px",
-                  }}
-                  placeholder="Status do Pedido"
-                  value={field.value || undefined}
-                  onChange={field.onChange}
-                  options={statusOptions?.map((status: string) => ({
-                    value: status,
-                    label: status,
-                  }))}
-                  allowClear
-                />
-              )}
-            />
             {/* Período de datas: data_de (início) e data_ate (fim) */}
             <Controller
               control={control}
@@ -284,7 +229,7 @@ export function FiltroOrdersBandaLargaPFForm({
               <Button
                 variant="outlined"
                 color="green"
-                onClick={onClear}
+                // onClick={onClear}
                 style={{ width: "24px", height: "28px", color: "#029d23" }}
               >
                 X
@@ -299,9 +244,9 @@ export function FiltroOrdersBandaLargaPFForm({
                 variant="outlined"
                 color="green"
                 style={{ width: "24px", height: "28px", color: "#029d23" }}
-                onClick={() =>
-                  handleExportXLSX(orderBandaLargaPF, selectedRowKeys)
-                }
+              // onClick={() =>
+              //   handleExportXLSX(orderRH, selectedRowKeys)
+              // }
               >
                 <DownloadOutlined />
               </Button>
@@ -353,9 +298,9 @@ export function FiltroOrdersBandaLargaPFForm({
                   <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
                   <div className="hide-scrollbar">
                     <Checkbox.Group
-                      options={allColumnOptions}
-                      value={visibleColumns}
-                      onChange={handleColumnsChange}
+                      // options={allColumnOptions}
+                      // value={visibleColumns}
+                      // onChange={handleColumnsChange}
                       style={{
                         display: "flex",
                         flexDirection: "column",

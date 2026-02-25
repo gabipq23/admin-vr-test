@@ -185,28 +185,40 @@ export default function SubHeader() {
 
   const ordersMenuItems: MenuProps["items"] = [
     {
-      key: "pedidos-aparelhos-pj",
+      key: "pedidos-rh",
       label: (
         <span
           onClick={() => {
-            setSelectedLink("pedidos-aparelhos-pj");
-            navigate(`/admin/pedidos-aparelhos-pj`);
+            setSelectedLink("pedidos-rh");
+            navigate(`/admin/pedidos-rh`);
           }}
         >
-          Aparelhos
+          RH
         </span>
       ),
     },
     {
-      key: "pedidos-banda-larga-pf",
+      key: "pedidos-beneficios",
       label: (
         <span
           onClick={() => {
-            setSelectedLink("pedidos-banda-larga-pf");
-            navigate(`/admin/pedidos-banda-larga-pf`);
+            setSelectedLink("pedidos-beneficios");
+            navigate(`/admin/pedidos-beneficios`);
           }}
         >
-          Banda Larga PF
+          Benefícios
+        </span>
+      ),
+    }, {
+      key: "pedidos-mobilidade",
+      label: (
+        <span
+          onClick={() => {
+            setSelectedLink("pedidos-mobilidade");
+            navigate(`/admin/pedidos-mobilidade`);
+          }}
+        >
+          Mobilidade
         </span>
       ),
     },

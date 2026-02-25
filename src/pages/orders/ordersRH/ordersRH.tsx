@@ -2,51 +2,35 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { ConfigProvider, Table } from "antd";
 import { customLocale } from "@/utils/customLocale";
-import { useAllOrdersController } from "./controllers/dataController";
 import { useAllOrdersFilterController } from "./controllers/filterController";
 import { useNavigate } from "react-router-dom";
-import { OrderBandaLargaPFDetailsModal } from "./modals/orderBandaLargaPFDetails";
-import { FiltroOrdersBandaLargaPFForm } from "./components/filter";
-import { OrderBandaLargaPF } from "@/interfaces/bandaLargaPF";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
+import { FiltroOrdersRHForm } from "./components/filter";
 
-export default function OrdersBandaLargaPF() {
+export default function OrdersRH() {
   const queryClient = new QueryClient();
-  const {
-    ordersBandaLarga,
 
-    showModal,
-    closeModal,
-    isModalOpen,
-    isLoading,
-    orderBandaLargaPF,
-    updateBandaLargaOrder,
-    removeBandaLargaOrder,
-    isRemoveBandaLargaOrderFetching,
-    updateDataIdVivoAndConsultorResponsavel,
-    changeBandaLargaOrderStatus,
-  } = useAllOrdersController();
   const navigate = useNavigate();
   const {
     control,
-    onSubmit,
-    handleSubmit,
-    clearFilters,
-    selectedBLOrder,
+    // onSubmit,
+    // handleSubmit,
+    // clearFilters,
+    // selectedBLOrder,
     setSelectedBLOrder,
     currentPage,
     pageSize,
     columns,
     styles,
-    allColumnOptions,
-    visibleColumns,
-    handleColumnsChange,
+    // allColumnOptions,
+    // visibleColumns,
+    // handleColumnsChange,
   } = useAllOrdersFilterController();
 
   const totalItems = 0;
 
-  const rowClassName = (record: OrderBandaLargaPF) => {
+  const rowClassName = (record: any) => {
     const hasAvaiability = record?.availability;
     const isCoveredByRange = record?.encontrado_via_range;
     const hasUnicCep = record?.cep_unico;
@@ -81,22 +65,22 @@ export default function OrdersBandaLargaPF() {
           <div className="flex justify-between mt-6 mb-4 items-center">
             <div>
               <div className="flex gap-8 justify-between pb-2">
-                <h1 className="text-[22px] pl-16 ">Pedidos Benefícios</h1>
+                <h1 className="text-[22px] pl-16 ">Pedidos RH</h1>
               </div>
               {/* Filtro */}
-              <FiltroOrdersBandaLargaPFForm
+              <FiltroOrdersRHForm
                 control={control}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                selectedRowKeys={selectedRowKeys}
-                onClear={clearFilters}
-                statusOptions={ordersBandaLarga?.status_pos_venda_enum}
-                orderBandaLargaPF={orderBandaLargaPF}
+              // handleSubmit={handleSubmit}
+              // onSubmit={onSubmit}
+              // selectedRowKeys={selectedRowKeys}
+              // onClear={clearFilters}
+              // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
+              // orderBandaLargaPF={orderBandaLargaPF}
 
-                allColumnOptions={allColumnOptions}
-                visibleColumns={visibleColumns}
-                handleColumnsChange={handleColumnsChange}
-                tableColumns={columns}
+              // allColumnOptions={allColumnOptions}
+              // visibleColumns={visibleColumns}
+              // handleColumnsChange={handleColumnsChange}
+              // tableColumns={columns}
               />
             </div>
           </div>
@@ -124,17 +108,17 @@ export default function OrdersBandaLargaPF() {
             <div className="overflow-y-auto ">
               <Table<any>
                 rowKey="id"
-                loading={isLoading}
+                // loading={isLoading}
                 scroll={{ y: 800 }}
                 rowSelection={rowSelection}
                 className={styles.customTable}
-                dataSource={orderBandaLargaPF}
+                dataSource={[]}
                 rowClassName={(record) => rowClassName(record) ?? ""}
                 columns={columns}
                 onRow={(record) => ({
                   onClick: () => {
                     setSelectedBLOrder(record);
-                    showModal();
+                    // showModal();
                   },
                   style: { cursor: "pointer" },
                 })}
@@ -158,7 +142,7 @@ export default function OrdersBandaLargaPF() {
           </ConfigProvider>
 
           {/* Modal */}
-          <OrderBandaLargaPFDetailsModal
+          {/* <OrdersRHDetailsModal
             statusOptions={ordersBandaLarga?.status_pos_venda_enum}
 
             updateOrderData={updateBandaLargaOrder}
@@ -171,7 +155,7 @@ export default function OrdersBandaLargaPF() {
               updateDataIdVivoAndConsultorResponsavel
             }
             changeBandaLargaOrderStatus={changeBandaLargaOrderStatus}
-          />
+          /> */}
         </div>
       </QueryClientProvider>
     </>
