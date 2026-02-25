@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
 import { FiltroOrdersRHForm } from "./components/filter";
+import { VROrder } from "@/interfaces/VROrder";
 
 export default function OrdersRH() {
   const queryClient = new QueryClient();
@@ -23,9 +24,9 @@ export default function OrdersRH() {
     pageSize,
     columns,
     styles,
-    // allColumnOptions,
-    // visibleColumns,
-    // handleColumnsChange,
+    allColumnOptions,
+    visibleColumns,
+    handleColumnsChange,
   } = useAllOrdersFilterController();
 
   const totalItems = 0;
@@ -58,6 +59,128 @@ export default function OrdersRH() {
     },
   };
 
+  const RHOrder: VROrder[] = [{
+    additional_operator: "Claro S.A.",
+    additional_phone: "48999887766",
+    additional_phone_ported: false,
+    additional_phone_porting_date: null,
+    additional_phone_valid: true,
+    address_info: {
+      address: "Rua das Flores",
+      block: "B",
+      building_or_house: "building",
+      city: "São Paulo",
+      complement: "Sala 402",
+      district: "Centro",
+      floor: "4",
+      lot: null,
+      number: "1200",
+      reference_point: "Próximo ao metrô",
+      single_zip_code: 0,
+      state: "SP",
+      zip_code: "01001000",
+      zip_code_type: "logradouro",
+    },
+    after_sales_status: "Em andamento",
+    capital_social: "50000.00",
+    client_ip: "189.45.22.180",
+    cnpj: "11222333000181",
+    company_name: "Empresa Exemplo LTDA",
+    company_size: "Médio",
+    cpf: "14720194907",
+    created_at: "16/03/2026 17:30:00",
+    email: "contato@empresaexemplo.com.br",
+    fingerprint: {
+      browser: {
+        name: "Chrome",
+        version: "122.0.0.0",
+      },
+      device: "desktop",
+      os: {
+        name: "Windows",
+        version: "11",
+      },
+      resolution: {
+        dpr: 1,
+        height: 1080,
+        width: 1920,
+      },
+      timezone: "America/Sao_Paulo",
+      timezone_name: "BRT",
+      timezone_offset: 180,
+    },
+    fingerprint_id: "fp-abc-123",
+    full_name: "Carlos Eduardo da Silva",
+    geolocation: {
+      formatted_address: "Rua das Flores, 1200 - Centro, São Paulo - SP",
+      latitude: "-23.55052",
+      longitude: "-46.633308",
+      maps_link: "https://maps.google.com/?q=-23.55052,-46.633308",
+      precision: "ROOFTOP",
+      queried_at: "2026-02-25T20:38:16.282Z",
+      street_view_link:
+        "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=-23.55052,-46.633308",
+      success: true,
+    },
+    id: 5,
+    id_order: null,
+    ip_access_type: "fixo",
+    ip_as: "AS12345",
+    ip_isp: "Vivo Fibra",
+    ip_org: "Telefonica Brasil S.A.",
+    is_email_valid: true,
+    is_mei: false,
+    is_socio: true,
+    obs: "Lead validado e com documentação completa",
+    operator: "TIM S/A",
+    order_number: 96248817,
+    order_type: "RH",
+    phone: "48999202542",
+    phone_ported: "Não",
+    phone_porting_date: null,
+    phone_valid: true,
+    responsible_name: "Ana Paula",
+    rfb_birth_date: "2004-03-16T00:00:00.000Z",
+    rfb_gender: "M",
+    rfb_name: "CARLOS EDUARDO DA SILVA",
+    rfb_status: "Ativa",
+    socios_empresas: [
+      {
+        cpf: "12345678901",
+        is_admin: "1",
+        name: "João Pedro Souza",
+      },
+      {
+        cpf: "98765432100",
+        is_admin: "0",
+        name: "Mariana Costa Lima",
+      },
+    ],
+    status: "aberto",
+    temperature: 7,
+    updated_at: "2026-02-25T21:10:10.000Z",
+    url: "https://portal.exemplo.com/pedido/96248817",
+    vr_order: {
+      already_has_point_solution: true,
+      number_of_employees_home: 10,
+      number_of_employees_office: 25,
+      point_solution_name: "PontoTel",
+      whats_rh_digital: true,
+    },
+    whatsapp: {
+      address: null,
+      avatar: "",
+      category: "Serviços empresariais",
+      exists_on_whatsapp: true,
+      is_commercial: true,
+      links: ["https://wa.me/5548999202542"],
+      number: "5548999202542",
+      status_message: "Atendimento comercial",
+      success: true,
+      verified_at: "2026-02-25T20:40:00.000Z",
+    },
+  }];
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -70,16 +193,16 @@ export default function OrdersRH() {
               {/* Filtro */}
               <FiltroOrdersRHForm
                 control={control}
-              // handleSubmit={handleSubmit}
-              // onSubmit={onSubmit}
-              // selectedRowKeys={selectedRowKeys}
-              // onClear={clearFilters}
-              // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
-              // orderBandaLargaPF={orderBandaLargaPF}
+                // handleSubmit={handleSubmit}
+                // onSubmit={onSubmit}
+                // selectedRowKeys={selectedRowKeys}
+                // onClear={clearFilters}
+                // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
+                // orderBandaLargaPF={orderBandaLargaPF}
 
-              // allColumnOptions={allColumnOptions}
-              // visibleColumns={visibleColumns}
-              // handleColumnsChange={handleColumnsChange}
+                allColumnOptions={allColumnOptions}
+                visibleColumns={visibleColumns}
+                handleColumnsChange={handleColumnsChange}
               // tableColumns={columns}
               />
             </div>
@@ -112,7 +235,7 @@ export default function OrdersRH() {
                 scroll={{ y: 800 }}
                 rowSelection={rowSelection}
                 className={styles.customTable}
-                dataSource={[]}
+                dataSource={RHOrder}
                 rowClassName={(record) => rowClassName(record) ?? ""}
                 columns={columns}
                 onRow={(record) => ({

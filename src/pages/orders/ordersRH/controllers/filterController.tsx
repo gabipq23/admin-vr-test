@@ -136,7 +136,7 @@ export function useAllOrdersFilterController() {
 
   const { styles } = useStyle();
 
-  const alwaysVisibleKeys = ["observacao_consultor", "whatsapp,avatar"];
+  const alwaysVisibleKeys = ["obs", "whatsapp,avatar"];
   const allTableColumns = useRHTableColumns();
 
   const allColumnOptions = allTableColumns

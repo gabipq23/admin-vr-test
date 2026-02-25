@@ -23,9 +23,9 @@ interface FiltroPedidosFormProps {
   // selectedRowKeys: any;
   // statusOptions?: string[];
   // orderRH: any;
-  // allColumnOptions: any[];
-  // visibleColumns: string[];
-  // handleColumnsChange: (checked: string[]) => void;
+  allColumnOptions: any[];
+  visibleColumns: string[];
+  handleColumnsChange: (checked: string[]) => void;
   // tableColumns: any;
 }
 
@@ -46,10 +46,9 @@ export function FiltroOrdersRHForm({
   // statusOptions,
   // selectedRowKeys,
   // orderRH,
-
-  // allColumnOptions,
-  // visibleColumns,
-  // handleColumnsChange,
+  allColumnOptions,
+  visibleColumns,
+  handleColumnsChange,
 }: FiltroPedidosFormProps) {
   const { RangePicker } = DatePicker;
 
@@ -270,8 +269,8 @@ export function FiltroOrdersRHForm({
               Button: {
                 colorBorder: "#029d23",
                 colorText: "#029d23",
-                colorPrimaryHover: "#cb1ef5",
-                colorPrimaryBorderHover: "#cb1ef5",
+                colorPrimaryHover: "#029d23",
+                colorPrimaryBorderHover: "#029d23",
               },
             },
           }}
@@ -298,9 +297,9 @@ export function FiltroOrdersRHForm({
                   <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
                   <div className="hide-scrollbar">
                     <Checkbox.Group
-                      // options={allColumnOptions}
-                      // value={visibleColumns}
-                      // onChange={handleColumnsChange}
+                      options={allColumnOptions}
+                      value={visibleColumns}
+                      onChange={handleColumnsChange}
                       style={{
                         display: "flex",
                         flexDirection: "column",
