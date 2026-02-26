@@ -1,12 +1,11 @@
 import { Controller, Control, UseFormHandleSubmit } from "react-hook-form";
 import { Input, Button, Tooltip, ConfigProvider, Select } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
-import { IFilters } from "src/interfaces/purchase";
 import ptBR from "antd/es/locale/pt_BR";
 interface FiltroPedidosFormProps {
-  control: Control<IFilters>;
-  handleSubmit: UseFormHandleSubmit<IFilters>;
-  onSubmit: (data: IFilters) => void;
+  control: Control<any>;
+  handleSubmit: UseFormHandleSubmit<any>;
+  onSubmit: (data: any) => void;
   onClear: () => void;
 
   statusOptions?: string[];

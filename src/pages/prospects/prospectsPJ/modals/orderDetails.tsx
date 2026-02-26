@@ -1,6 +1,4 @@
 import { Button, ConfigProvider, Modal } from "antd";
-import { IPurchase, IPurchaseItens } from "src/interfaces/purchase";
-import { DataType } from "src/interfaces/orderModal";
 import { formatCNPJ } from "@/utils/formatCNPJ";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { formatCEP } from "@/utils/formatCEP";
@@ -15,8 +13,8 @@ export function OrderDetailsModal({
 }: {
   isModalOpen: boolean;
   closeModal: () => void;
-  dataSource: IPurchase[] | undefined;
-  selectedId: DataType | null;
+  dataSource: any | undefined;
+  selectedId: any | null;
 }) {
   return (
     <ConfigProvider
@@ -46,8 +44,8 @@ export function OrderDetailsModal({
         <div className="flex items-center justify-center gap-2 h-auto md:h-[460px] overflow-y-auto scrollbar-thin">
           <div className="text-[#666666] min-w-[320px] max-w-[1120px] h-[460px] ">
             {dataSource
-              ?.filter((item: IPurchase) => item?.id === selectedId?.id)
-              .map((item: IPurchase, index: number) => (
+              ?.filter((item: any) => item?.id === selectedId?.id)
+              .map((item: any, index: number) => (
                 <div
                   key={index}
                   className="flex flex-col min-w-[320px] max-w-[1120px] gap-2 p-1 "
@@ -97,7 +95,7 @@ export function OrderDetailsModal({
                             {[...(item?.itens ?? [])]
                               .slice()
                               .reverse()
-                              .map((product: IPurchaseItens) => {
+                              .map((product: any) => {
                                 return (
                                   <React.Fragment key={product.id}>
                                     <React.Fragment key={product.id}>
@@ -325,10 +323,10 @@ export function OrderDetailsModal({
                             </div>
                             {item?.itens
                               .filter(
-                                (item: IPurchaseItens) =>
+                                (item: any) =>
                                   item.seguro_tipo !== null
                               )
-                              .map((item: IPurchaseItens, idx: number, arr) => (
+                              .map((item: any, idx: number, arr) => (
                                 <div key={idx} className="w-full">
                                   <div className="flex w-full justify-between px-2">
                                     <p className="text-[14px] text-[#666666]">
@@ -364,7 +362,7 @@ export function OrderDetailsModal({
                               </p>
                               <p>
                                 {item?.itens.reduce(
-                                  (total: number, item: IPurchaseItens) =>
+                                  (total: number, item: any) =>
                                     total + Number(item.quantidade),
                                   0
                                 )}
@@ -434,10 +432,10 @@ export function OrderDetailsModal({
                                 R${" "}
                                 {item?.itens
                                   .filter(
-                                    (item: IPurchaseItens) => item.seguro_valor
+                                    (item: any) => item.seguro_valor
                                   )
                                   .reduce(
-                                    (total: number, item: IPurchaseItens) =>
+                                    (total: number, item: any) =>
                                       total + Number(item.seguro_valor ?? 0),
                                     0
                                   )

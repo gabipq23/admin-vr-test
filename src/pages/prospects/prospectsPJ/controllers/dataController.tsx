@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { IProduct } from "src/interfaces/product";
 
-import { IProspectsResponse, IPurchase } from "src/interfaces/purchase";
 import { formatCNPJ } from "@/utils/formatCNPJ";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
-import { DataType } from "@/interfaces/orderModal";
+
 import { useState } from "react";
 import { ProspectsService } from "@/services/prospects";
 import { PurchaseService } from "@/services/purchase";
@@ -16,7 +14,7 @@ export function useAllOrdersController() {
   const filters = Object.fromEntries(params.entries());
 
   const { data: productsQuery, isFetching: isProspectsFetching } =
-    useQuery<IProspectsResponse>({
+    useQuery<any>({
       refetchOnWindowFocus: false,
       queryKey: [
         "prospects",
@@ -30,7 +28,7 @@ export function useAllOrdersController() {
         filters.possivel_prospect_nova_linha || undefined,
         filters.possivel_prospect_iphone_17 || undefined,
       ],
-      queryFn: async (): Promise<IProspectsResponse> => {
+      queryFn: async (): Promise<any> => {
         const params: any = {
           page: Number(filters.page) || 1,
           limit: Number(filters.limit) || 100,
@@ -70,10 +68,10 @@ export function useAllOrdersController() {
       },
     });
 
-  const devicesQuery = useQuery<IProduct[]>({
+  const devicesQuery = useQuery<any[]>({
     refetchOnWindowFocus: false,
     queryKey: ["devices"],
-    queryFn: async (): Promise<IProduct[]> => {
+    queryFn: async (): Promise<any[]> => {
       const response = await purchaseService.allProducts();
       return response;
     },
@@ -86,7 +84,7 @@ export function useAllOrdersController() {
 
   const prospectsFilteredQuery = productsQuery?.prospects;
 
-  const mapBase = (item: IPurchase) => ({
+  const mapBase = (item: any) => ({
     cliente_gold: item.cliente_gold ?? 1,
     telefone_foi_editado: item.telefone_foi_editado ?? false,
     email_foi_editado: item.email_foi_editado ?? false,
@@ -96,8 +94,8 @@ export function useAllOrdersController() {
     credito_disponivel:
       item.credito_cliente?.credito != null
         ? `R$ ${Number(item.credito_cliente?.credito).toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-          })}`
+          minimumFractionDigits: 2,
+        })}`
         : "R$ 0,00",
     nome: item.nome ?? "",
     email_alterado: item.email_alterado ?? "",
@@ -116,10 +114,10 @@ export function useAllOrdersController() {
       sfa: item.credito_cliente?.sfa ?? "",
       telefones: Array.isArray(item.credito_cliente?.telefones)
         ? item.credito_cliente.telefones.map((tel: any) => ({
-            telefone: tel.telefone ?? "",
-            M: tel.M ?? 0,
-            elegiveis: tel.elegiveis ?? false,
-          }))
+          telefone: tel.telefone ?? "",
+          M: tel.M ?? 0,
+          elegiveis: tel.elegiveis ?? false,
+        }))
         : [],
     },
     M: item.M ?? "",
@@ -145,76 +143,76 @@ export function useAllOrdersController() {
     razao_social: item.razao_social ?? "",
     data_criacao: item.data_criacao
       ? new Date(
-          new Date(item.data_criacao).getTime() + 3 * 60 * 60 * 1000
-        ).toLocaleString("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })
+        new Date(item.data_criacao).getTime() + 3 * 60 * 60 * 1000
+      ).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
       : "-",
     data_fechamento: item.data_fechamento
       ? new Date(item.data_fechamento).toLocaleString("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
       : "-",
 
     valor_parcela_total:
       item.valor_parcela_total != null
         ? `${item.parcelamento}x de R$ ${Number(
-            item.valor_parcela_total
-          ).toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-          })}`
+          item.valor_parcela_total
+        ).toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+        })}`
         : "",
     total:
       item?.total != null
         ? `R$ ${Number(item.total).toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-          })}`
+          minimumFractionDigits: 2,
+        })}`
         : "",
     status:
       item.status === "aberto"
         ? "Aberto"
         : item.status === "fechado"
-        ? "Fechado"
-        : item.status === "cancelado"
-        ? "Cancelado"
-        : item.status ?? "",
+          ? "Fechado"
+          : item.status === "cancelado"
+            ? "Cancelado"
+            : item.status ?? "",
 
     itens: Array.isArray(item.itens)
       ? item.itens.map((it: any) => ({
-          id: it.id,
-          pedido_id: it.pedido_id,
-          aparelho_id: it.aparelho_id,
-          quantidade: it.quantidade,
-          valor_unitario: it.valor_unitario,
-          valor_parcela: it.valor_parcela,
-          valor_parcelado: it.valor_parcelado,
-          marca: it.marca,
-          modelo: it.modelo,
-          cores: it.cores,
-          cor_escolhida: it.cor_escolhida,
-          parcelamento: it.parcelamento,
-          tipo: it.tipo,
-          subtotal: it.subtotal,
-          cod_sap: it.cod_sap,
-          seguro_tipo: it.seguro_tipo,
-          seguro_valor: it.seguro_valor,
-        }))
+        id: it.id,
+        pedido_id: it.pedido_id,
+        aparelho_id: it.aparelho_id,
+        quantidade: it.quantidade,
+        valor_unitario: it.valor_unitario,
+        valor_parcela: it.valor_parcela,
+        valor_parcelado: it.valor_parcelado,
+        marca: it.marca,
+        modelo: it.modelo,
+        cores: it.cores,
+        cor_escolhida: it.cor_escolhida,
+        parcelamento: it.parcelamento,
+        tipo: it.tipo,
+        subtotal: it.subtotal,
+        cod_sap: it.cod_sap,
+        seguro_tipo: it.seguro_tipo,
+        seguro_valor: it.seguro_valor,
+      }))
       : [],
   });
 
-  const dataSource: DataType[] =
-    prospectsFilteredQuery?.flatMap((item: IPurchase) => {
-      const rows: DataType[] = [];
+  const dataSource: any[] =
+    prospectsFilteredQuery?.flatMap((item: any) => {
+      const rows: any[] = [];
       const novaLinha = item.possivel_prospect_nova_linha === 1;
       const seguro = item.possivel_prospect_seguro === 1;
       const reserva_iphone_17 = item.possivel_prospect_iphone_17 === 1;

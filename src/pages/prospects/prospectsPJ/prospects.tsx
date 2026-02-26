@@ -4,7 +4,6 @@ import { FiltroProspectsForm } from "./components/filter";
 import { useAllOrdersController } from "./controllers/dataController";
 
 import { ConfigProvider, Table } from "antd";
-import { DataType } from "src/interfaces/orderModal";
 import { useNavigate } from "react-router-dom";
 import { OrderDetailsModal } from "./modals/orderDetails";
 import { customLocale } from "@/utils/customLocale";
@@ -69,7 +68,7 @@ function Prospects() {
           >
             {/* Tabela */}
             <div className="overflow-y-auto ">
-              <Table<DataType>
+              <Table<any>
                 className={styles.customTable}
                 columns={columns}
                 // rowClassName={rowClassName}

@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { StatusType, IFilters, IPurchase } from "src/interfaces/purchase";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { DataType } from "@/interfaces/orderModal";
 import { TableColumnsType, Tooltip } from "antd";
 import { createStyles } from "antd-style";
 
 function getFiltersFromURL(): {
-  status: StatusType | null;
+  status: any | null;
   telefone: string | null;
   cnpj: string | null;
   razao_social?: string | null;
@@ -23,9 +21,9 @@ function getFiltersFromURL(): {
   const params = new URLSearchParams(window.location.search);
 
   const rawStatus = params.get("status");
-  const allowedStatus: StatusType[] = ["aberto", "fechado", "cancelado"];
-  const status = allowedStatus.includes(rawStatus as StatusType)
-    ? (rawStatus as StatusType)
+  const allowedStatus: any[] = ["aberto", "fechado", "cancelado"];
+  const status = allowedStatus.includes(rawStatus as any)
+    ? (rawStatus as any)
     : null;
   const razao_social = params.get("razao_social") || null;
   const id = params.get("id") || null;
@@ -57,7 +55,7 @@ function getFiltersFromURL(): {
 }
 
 interface IAllOrdersFilterControllerProps {
-  prospectsFilteredQuery: IPurchase[] | undefined;
+  prospectsFilteredQuery: any[] | undefined;
 }
 
 const useStyle = createStyles(({ css }) => {
@@ -114,7 +112,7 @@ export function useAllOrdersFilterController({
   const navigate = useNavigate();
   const filters = getFiltersFromURL();
 
-  const [selectedProspect, setSelectedProspect] = useState<DataType | null>(
+  const [selectedProspect, setSelectedProspect] = useState<any | null>(
     null
   );
 
@@ -123,7 +121,7 @@ export function useAllOrdersFilterController({
 
   const totalItems = prospectsFilteredQuery?.length || 0;
 
-  const { handleSubmit, reset, control } = useForm<IFilters>({
+  const { handleSubmit, reset, control } = useForm<any>({
     defaultValues: {
       status: null,
       telefone: "",
@@ -138,7 +136,7 @@ export function useAllOrdersFilterController({
     },
   });
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
-  const onSubmit = (data: IFilters) => {
+  const onSubmit = (data: any) => {
     const params = new URLSearchParams();
 
     if (data.status) params.set("status", data.status);
@@ -196,7 +194,7 @@ export function useAllOrdersFilterController({
   const capitalizeWords = (text: string) => {
     return text.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   };
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<any> = [
     {
       title: "ID do Pedido",
       dataIndex: "id",
@@ -242,7 +240,7 @@ export function useAllOrdersFilterController({
       ellipsis: {
         showTitle: false,
       },
-      render: (_: any, record: DataType) => (
+      render: (_: any, record: any) => (
         <Tooltip
           placement="topLeft"
           title={capitalizeWords(record.empresa?.nm_cliente || "")}
