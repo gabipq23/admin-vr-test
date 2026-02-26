@@ -2,7 +2,43 @@ import { CopyOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { useState } from "react";
 
-export const EmpresasDisplay = ({ empresas }: { empresas: any }) => {
+type SocioEmpresa = {
+  cpf: string;
+  name: string;
+  is_admin: string;
+};
+
+type LegacyEmpresa = {
+  cnpj: string;
+  nome: string;
+  porte: string;
+};
+
+type EmpresasProp = SocioEmpresa[] | LegacyEmpresa[] | null | undefined;
+
+const isSocioEmpresa = (empresa: unknown): empresa is SocioEmpresa => {
+  if (!empresa || typeof empresa !== "object") return false;
+
+  const candidate = empresa as Record<string, unknown>;
+  return (
+    typeof candidate.cpf === "string" &&
+    typeof candidate.name === "string" &&
+    typeof candidate.is_admin === "string"
+  );
+};
+
+const isLegacyEmpresa = (empresa: unknown): empresa is LegacyEmpresa => {
+  if (!empresa || typeof empresa !== "object") return false;
+
+  const candidate = empresa as Record<string, unknown>;
+  return (
+    typeof candidate.cnpj === "string" &&
+    typeof candidate.nome === "string" &&
+    typeof candidate.porte === "string"
+  );
+};
+
+export const EmpresasDisplay = ({ empresas }: { empresas: EmpresasProp }) => {
   const [tooltipTitle, setTooltipTitle] = useState("Copiar");
 
   const handleCopy = (code: string) => {
@@ -39,10 +75,18 @@ export const EmpresasDisplay = ({ empresas }: { empresas: any }) => {
   }
 
   const empresasFormatadas = empresas
-    .map(
-      (empresa: { cnpj: string; nome: string; porte: string }) =>
-        `${empresa.cnpj}, ${empresa.nome}, ${empresa.porte}`,
-    )
+    .map((empresa) => {
+      if (isSocioEmpresa(empresa)) {
+        const adminLabel = empresa.is_admin === "1" ? "Sim" : "Não";
+        return `${empresa.cpf}, ${empresa.name}, Admin: ${adminLabel}`;
+      }
+
+      if (isLegacyEmpresa(empresa)) {
+        return `${empresa.cnpj}, ${empresa.nome}, ${empresa.porte}`;
+      }
+
+      return "-";
+    })
     .join("; \n");
 
   const copyComponent = (

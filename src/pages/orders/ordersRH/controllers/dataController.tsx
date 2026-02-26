@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 
 export function useRHOrdersController() {
@@ -5,7 +6,9 @@ export function useRHOrdersController() {
   //   const queryClient = useQueryClient();
   //   const params = new URLSearchParams(window.location.search);
   //   const filters = Object.fromEntries(params.entries());
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   //   // Modal
   //   const [isModalOpen, setIsModalOpen] = useState(false);
   //   const showModal = () => setIsModalOpen(true);
@@ -168,9 +171,9 @@ export function useRHOrdersController() {
 
   return {
     // ordersBandaLarga,
-    // showModal,
-    // closeModal,
-    // isModalOpen,
+    showModal,
+    closeModal,
+    isModalOpen,
     // orderBandaLargaPF,
     // isLoading,
     // updateBandaLargaOrder,

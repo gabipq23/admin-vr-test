@@ -1,28 +1,191 @@
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { formatCEP } from "@/utils/formatCEP";
 import { formatCPF } from "@/utils/formatCPF";
-import { formatBRL } from "@/utils/formatBRL";
 import {
   formatBrowserDisplay,
+  type FingerprintNameVersion,
   formatOSDisplay,
 } from "@/utils/formatClientEnvironment";
 import DisplayGenerator from "@/components/displayGenerator";
-import { Button, ConfigProvider, Form, Input, Tooltip } from "antd";
+import { Button, ConfigProvider, Form, Input } from "antd";
 import { useEffect } from "react";
-import { ExclamationOutlined } from "@ant-design/icons";
+// import { ExclamationOutlined } from "@ant-design/icons";
 import { EmpresasDisplay } from "@/components/empresasDisplay";
 import { convertData } from "@/utils/convertData";
 
-interface OrderBandaLargaPFDisplayProps {
-  localData: any;
-  updateOrderData: any;
-}
+// interface OrderBandaLargaPFDisplayProps {
+// localData: RHDisplayData;
+// updateOrderData: (payload: {
+//   id: number | undefined;
+//   data: { pedido: { obs: string } };
+// }) => void;
+// }
 
-export function OrderBandaLargaPFDisplay({
-  localData,
-  updateOrderData,
-}: OrderBandaLargaPFDisplayProps) {
+const localData = {
+  order_type: "RH",
+  additional_operator: "Claro S.A.",
+  additional_phone: "48999887766",
+  additional_phone_ported: false,
+  additional_phone_porting_date: null,
+  additional_phone_valid: true,
+  address_info: {
+    address: "Rua das Flores",
+    block: "B",
+    building_or_house: "building",
+    city: "São Paulo",
+    complement: "Sala 402",
+    district: "Centro",
+    floor: "4",
+    lot: null,
+    number: "1200",
+    reference_point: "Próximo ao metrô",
+    single_zip_code: 0,
+    state: "SP",
+    zip_code: "01001000",
+    zip_code_type: "logradouro",
+  },
+  after_sales_status: "Em andamento",
+  capital_social: "50000.00",
+  client_ip: "189.45.22.180",
+  cnpj: "11222333000181",
+  company_name: "Empresa Exemplo LTDA",
+  company_size: "Médio",
+  cpf: "14720194907",
+  created_at: "16/03/2026 17:30:00",
+  email: "contato@empresaexemplo.com.br",
+  fingerprint: {
+    browser: {
+      name: "Chrome",
+      version: "122.0.0.0",
+    },
+    device: "desktop",
+    os: {
+      name: "Windows",
+      version: "11",
+    },
+    resolution: {
+      dpr: 1,
+      height: 1080,
+      width: 1920,
+    },
+    timezone: "America/Sao_Paulo",
+    timezone_name: "BRT",
+    timezone_offset: 180,
+  },
+  fingerprint_id: "fp-abc-123",
+  full_name: "Carlos Eduardo da Silva",
+  geolocation: {
+    formatted_address: "Rua das Flores, 1200 - Centro, São Paulo - SP",
+    latitude: "-23.55052",
+    longitude: "-46.633308",
+    maps_link: "https://maps.google.com/?q=-23.55052,-46.633308",
+    precision: "ROOFTOP",
+    queried_at: "2026-02-25T20:38:16.282Z",
+    street_view_link:
+      "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=-23.55052,-46.633308",
+    success: true,
+  },
+  id: 5,
+  id_order: null,
+  ip_access_type: "fixo",
+  ip_as: "AS12345",
+  ip_isp: "Vivo Fibra",
+  ip_org: "Telefonica Brasil S.A.",
+  is_email_valid: true,
+  is_mei: false,
+  is_socio: true,
+  obs: "Lead validado e com documentação completa",
+  operator: "TIM S/A",
+  order_number: 96248817,
+
+  phone: "48999202542",
+  phone_ported: "Não",
+  phone_porting_date: null,
+  phone_valid: true,
+  responsible_name: "Ana Paula",
+  rfb_birth_date: "2004-03-16T00:00:00.000Z",
+  rfb_gender: "M",
+  rfb_name: "CARLOS EDUARDO DA SILVA",
+  rfb_status: "Ativa",
+  socios_empresas: [
+    {
+      cpf: "12345678901",
+      is_admin: "1",
+      name: "João Pedro Souza",
+    },
+    {
+      cpf: "98765432100",
+      is_admin: "0",
+      name: "Mariana Costa Lima",
+    },
+  ],
+  status: "aberto",
+  temperature: 7,
+  updated_at: "2026-02-25T21:10:10.000Z",
+  url: "https://portal.exemplo.com/pedido/96248817",
+  vr_order: {
+    already_has_point_solution: true,
+    number_of_employees_home: 10,
+    number_of_employees_office: 25,
+    point_solution_name: "PontoTel",
+    whats_rh_digital: true,
+  },
+  whatsapp: {
+    address: null,
+    avatar: "",
+    category: "Serviços empresariais",
+    exists_on_whatsapp: true,
+    is_commercial: true,
+    links: ["https://wa.me/5548999202542"],
+    number: "5548999202542",
+    status_message: "Atendimento comercial",
+    success: true,
+    verified_at: "2026-02-25T20:40:00.000Z",
+  },
+};
+
+
+export function OrdersRHDisplayModal(
+  // {
+  //  localData,
+  // updateOrderData,
+  // }: OrderBandaLargaPFDisplayProps) 
+) {
   const [form] = Form.useForm();
+
+
+  const addressInfo = localData?.address_info;
+  const geolocation = localData?.geolocation
+  const fingerprint = localData?.fingerprint
+  const vrOrder = localData?.vr_order as Record<string, unknown> | undefined;
+  const mapsLink =
+    (geolocation as { maps_link?: string; link_maps?: string } | undefined)
+      ?.maps_link ||
+    (geolocation as { maps_link?: string; link_maps?: string } | undefined)
+      ?.link_maps;
+  const streetViewLink =
+    (
+      geolocation as
+      | { street_view_link?: string; link_street_view?: string }
+      | undefined
+    )?.street_view_link ||
+    (
+      geolocation as
+      | { street_view_link?: string; link_street_view?: string }
+      | undefined
+    )?.link_street_view;
+  const mainPhonePortingDate =
+    localData.phone_porting_date
+  const additionalPhonePortingDate =
+    localData.additional_phone_porting_date
+
+  const formatYesNo = (value: unknown) => {
+    if (value === true || value === 1 || value === "Sim") return "Sim";
+    if (value === false || value === 0 || value === "Não" || value === "Nao") {
+      return "Não";
+    }
+    return "-";
+  };
 
   const formatDevice = (device: string) => {
     if (!device) return "-";
@@ -35,186 +198,89 @@ export function OrderBandaLargaPFDisplay({
           : device.charAt(0).toUpperCase() + device.slice(1);
   };
 
-  const formatResolution = (resolution: any) => {
-    if (resolution && resolution.width && resolution.height) {
+  const formatResolution = (
+    resolution?: { width?: number; height?: number } | string,
+  ) => {
+    if (
+      resolution &&
+      typeof resolution !== "string" &&
+      resolution.width &&
+      resolution.height
+    ) {
       return `${resolution.width} x ${resolution.height}`;
     }
     return "-";
   };
 
-  const AvailabilityStatus = () => {
-    if (
-      localData.availability === null ||
-      localData.availability === undefined
-    ) {
-      return (
-        <div className="flex flex-col items-center mt-2">
-          <div className="flex items-center justify-center">-</div>
-        </div>
-      );
-    }
 
-    if (localData.availability) {
-      if (localData.encontrado_via_range === 1) {
-        return (
-          <div className="flex flex-col items-center mt-2">
-            <div className="flex items-center justify-center mb-2">
-              <Tooltip
-                title="Disponibilidade - Disponível (via range numérico)"
-                placement="top"
-                styles={{ body: { fontSize: "12px" } }}
-              >
-                <div className="h-2 w-2 bg-yellow-500 rounded-full cursor-pointer"></div>
-              </Tooltip>
-            </div>
-            <div className="text-center text-[11px] text-neutral-600 bg-yellow-50 px-2 py-1 rounded">
-              <strong>Range numérico:</strong> {localData.range_min} -{" "}
-              {localData.range_max}
-            </div>
-          </div>
-        );
-      } else {
-        return (
-          <div className="flex flex-col items-center mt-2">
-            <div className="flex items-center justify-center">
-              <Tooltip
-                title="Disponibilidade - Disponível"
-                placement="top"
-                styles={{ body: { fontSize: "12px" } }}
-              >
-                <div className="h-2 w-2 bg-green-500 rounded-full cursor-pointer"></div>
-              </Tooltip>
-            </div>
-          </div>
-        );
-      }
-    }
-
-    return (
-      <div className="flex flex-col items-center mt-2">
-        <div className="flex items-center justify-center">
-          <Tooltip
-            title="Disponibilidade - Indisponível"
-            placement="top"
-            styles={{ body: { fontSize: "12px" } }}
-          >
-            <div className="h-2 w-2 bg-red-500 rounded-full"></div>
-          </Tooltip>
-        </div>
-      </div>
-    );
-  };
-
-  const PAPStatus = () => {
-    if (
-      localData.availability_pap === null ||
-      localData.availability_pap === undefined
-    ) {
-      return (
-        <div className="flex flex-col items-center">
-          <div className="flex items-center justify-center">-</div>
-        </div>
-      );
-    }
-
-    if (localData.availability_pap) {
-      return (
-        <div className="flex flex-col items-center mt-2">
-          <div className="flex items-center justify-center">
-            <Tooltip
-              title="PAP - Disponível"
-              placement="top"
-              styles={{ body: { fontSize: "12px" } }}
-            >
-              <div className="h-2 w-2 bg-green-500 rounded-full"></div>
-            </Tooltip>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="flex flex-col items-center mt-2">
-        <div className="flex items-center justify-center">
-          <Tooltip
-            title="PAP - Indisponível"
-            placement="top"
-            styles={{ body: { fontSize: "12px" } }}
-          >
-            <div className="h-2 w-2 bg-red-500 rounded-full"></div>
-          </Tooltip>
-        </div>
-      </div>
-    );
-  };
   useEffect(() => {
     if (localData) {
       form.setFieldsValue({
-        observacao_consultor: localData.observacao_consultor || "",
+        obs: localData.obs || "",
       });
     }
-  }, [localData, form]);
+  }, [form]);
 
-  const getAlertScenarios = (
-    availability?: boolean | number,
-    encontrado_via_range?: number,
-    cep_unico?: number,
-    status?: string,
-  ) => {
-    const scenarios: { color: string; content: React.ReactNode }[] = [];
-    const noAvailability =
-      availability === false || availability === null || availability === 0;
-    const isCoveredByRange = encontrado_via_range === 1;
-    const hasUnicCep = cep_unico === 1;
+  // const getAlertScenarios = (
+  //   availability?: boolean | number,
+  //   encontrado_via_range?: number,
+  //   cep_unico?: number,
+  //   status?: string,
+  // ) => {
+  //   const scenarios: { color: string; content: React.ReactNode }[] = [];
+  //   const noAvailability =
+  //     availability === false || availability === null || availability === 0;
+  //   const isCoveredByRange = encontrado_via_range === 1;
+  //   const hasUnicCep = cep_unico === 1;
 
-    if (status === "fechado") {
-      if (noAvailability) {
-        scenarios.push({
-          color: "#ffeaea",
-          content:
-            "Não foi identificada disponibilidade no endereço fornecido.",
-        });
-      } else if (isCoveredByRange) {
-        scenarios.push({
-          color: "#fff6c7",
-          content:
-            "O número fornecido esta dentro de um range com disponibilidade.",
-        });
-      } else if (hasUnicCep) {
-        scenarios.push({
-          color: "#fff6c7",
-          content: "CEP Único",
-        });
-      }
-    }
+  //   if (status === "fechado") {
+  //     if (noAvailability) {
+  //       scenarios.push({
+  //         color: "#ffeaea",
+  //         content:
+  //           "Não foi identificada disponibilidade no endereço fornecido.",
+  //       });
+  //     } else if (isCoveredByRange) {
+  //       scenarios.push({
+  //         color: "#fff6c7",
+  //         content:
+  //           "O número fornecido esta dentro de um range com disponibilidade.",
+  //       });
+  //     } else if (hasUnicCep) {
+  //       scenarios.push({
+  //         color: "#fff6c7",
+  //         content: "CEP Único",
+  //       });
+  //     }
+  //   }
 
-    if (
-      status === "fechado" &&
-      !hasUnicCep &&
-      !isCoveredByRange &&
-      !noAvailability
-    ) {
-      scenarios.push({
-        color: "#e6ffed",
-        content: "Esse pedido não possui travas",
-      });
-    }
-    return scenarios;
-  };
+  //   if (
+  //     status === "fechado" &&
+  //     !hasUnicCep &&
+  //     !isCoveredByRange &&
+  //     !noAvailability
+  //   ) {
+  //     scenarios.push({
+  //       color: "#e6ffed",
+  //       content: "Esse pedido não possui travas",
+  //     });
+  //   }
+  //   return scenarios;
+  // };
 
-  const handleSaveObservacao = async () => {
-    const values = await form.validateFields();
+  // const handleSaveObservacao = async () => {
+  //   const values = await form.validateFields();
 
-    if (
-      values.observacao_consultor &&
-      values.observacao_consultor.trim() !== ""
-    ) {
-      updateOrderData({
-        id: localData?.id,
-        data: { pedido: { observacao_consultor: values.observacao_consultor } },
-      });
-    }
-  };
+  //   if (
+  //     values.obs &&
+  //     values.obs.trim() !== ""
+  //   ) {
+  //     updateOrderData({
+  //       id: localData?.id,
+  //       data: { pedido: { obs: values.obs } },
+  //     });
+  //   }
+  // };
   return (
     <div className="flex flex-col w-full gap-2">
       {/* Detalhes dos Planos */}
@@ -224,63 +290,39 @@ export function OrderBandaLargaPFDisplay({
         </div>
 
         <div className="mt-4 text-neutral-700">
-          {/* Header da tabela */}
-          <div className="flex items-center font-semibold text-[#666666] text-[14px]">
-            <p className="w-48 text-center">Plano</p>
-            <p className="w-32 text-center">Valor (R$)</p>
-            <p className="w-40 text-center">Data Instalação 1</p>
-            <p className="w-32 text-center">Período 1</p>
-            <p className="w-40 text-center">Data Instalação 2</p>
-            <p className="w-32 text-center">Período 2</p>
-            <p className="w-32 text-center">Vencimento</p>
-          </div>
-          <hr className="border-t border-neutral-300 mx-2" />
-          <div>
-            <div className="flex items-center py-4 text-[14px] text-neutral-700">
-              <p className="text-[14px] font-semibold w-48 text-center">
-                {localData.plan?.name + " - " + localData.plan?.speed || "-"}
-              </p>
-              <p className="text-[14px] font-semibold w-32 text-center">
-                {localData.plan?.price
-                  ? ` ${formatBRL(localData.plan.price)}`
-                  : "-"}
-              </p>
-              <p className="text-[14px] w-40 text-center">
-                {localData.installation_preferred_date_one || "-"}
-              </p>
-              <p className="text-[14px] w-32 text-center">
-                {localData.installation_preferred_period_one || "-"}
-              </p>
-              <p className="text-[14px] w-40 text-center">
-                {localData.installation_preferred_date_two || "-"}
-              </p>
-              <p className="text-[14px] w-32 text-center">
-                {localData.installation_preferred_period_two || "-"}
-              </p>
-              <p className="text-[14px] font-semibold w-32 text-center">
-                {localData.dueday?.toString() || "-"}
-              </p>
+          <div className="bg-white rounded-md p-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {localData.order_type === "RH" &&
+                vrOrder?.["whats_rh_digital"] !== undefined && (
+                  <>
+                    <DisplayGenerator
+                      title="RH Digital:"
+                      value={formatYesNo(vrOrder?.["whats_rh_digital"])}
+                    />
+                    <DisplayGenerator
+                      title="Funcionários no escritório:"
+                      value={String(vrOrder?.["number_of_employees_office"] ?? "-")}
+                    />
+                    <DisplayGenerator
+                      title="Funcionários em home office:"
+                      value={String(vrOrder?.["number_of_employees_home"] ?? "-")}
+                    />
+                    <DisplayGenerator
+                      title="Já possui solução de ponto:"
+                      value={formatYesNo(vrOrder?.["already_has_point_solution"])}
+                    />
+                    <DisplayGenerator
+                      title="Nome da solução:"
+                      value={(vrOrder?.["point_solution_name"] as string) || "-"}
+                    />
+                  </>
+                )}
             </div>
-            <hr className="border-t border-neutral-300 mx-2" />
           </div>
         </div>
       </div>
 
-      {/* Seção de Disponibilidade */}
-      <div className="flex flex-col bg-neutral-100 mb-3 rounded-[4px] p-3 w-full">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white rounded-md p-4 flex flex-col items-center">
-            <p className="text-[14px] font-medium text-neutral-700 ">
-              Disponibilidade
-            </p>
-            <AvailabilityStatus />
-          </div>
-          <div className="bg-white rounded-md p-4 flex flex-col items-center">
-            <p className="text-[14px] font-medium text-neutral-700 mb-2">PAP</p>
-            <PAPStatus />
-          </div>
-        </div>
-      </div>
+
 
       {/* Informações do Cliente */}
       <div className="flex flex-col bg-neutral-100 mb-3 rounded-[4px] p-3 w-full">
@@ -293,7 +335,7 @@ export function OrderBandaLargaPFDisplay({
         <div className="flex flex-col text-neutral-800 gap-4 rounded-lg">
           {/* Dados Pessoais */}
           <div className="bg-white rounded-md p-2">
-            {localData.temperatura_pf === 10 ? (
+            {localData.temperature === 10 ? (
               <div className="flex bg-[#d63535] rounded-full w-10 h-10 items-center justify-center relative mr-3">
                 <img
                   src={
@@ -314,39 +356,29 @@ export function OrderBandaLargaPFDisplay({
               />
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <DisplayGenerator title="Nome:" value={localData.fullname} />
+              <DisplayGenerator title="Nome:" value={localData.full_name} />
               <DisplayGenerator
                 title="Nome (RFB):"
-                value={localData.nome_receita}
+                value={localData.rfb_name}
               />
               <DisplayGenerator
                 title="Gênero:"
                 value={
-                  localData.genero_receita === "M"
+                  (localData.rfb_gender) === "M"
                     ? "Masculino"
-                    : localData.genero_receita === "F"
+                    : (localData.rfb_gender) === "F"
                       ? "Feminino"
                       : "-"
                 }
               />
-              <DisplayGenerator title="CPF:" value={formatCPF(localData.cpf)} />
+              <DisplayGenerator title="CPF:" value={formatCPF(localData.cpf || "")} />
+
 
               <DisplayGenerator
-                title="Data de Nascimento:"
-                value={localData.birthdate}
-              />
-              <DisplayGenerator
                 title="Data Nascimento (RFB):"
-                value={localData.data_de_nascimento_receita}
+                value={localData.rfb_birth_date ? convertData(localData.rfb_birth_date) : "-"}
               />
-              <DisplayGenerator
-                title="Nome da Mãe:"
-                value={localData.motherfullname}
-              />
-              <DisplayGenerator
-                title="Nome Mãe (RFB):"
-                value={localData.nome_da_mae_receita}
-              />
+
               <DisplayGenerator title="Email:" value={localData.email} />
             </div>
           </div>
@@ -362,32 +394,29 @@ export function OrderBandaLargaPFDisplay({
                 <div className="p-1 space-y-1">
                   <DisplayGenerator
                     title="Número:"
-                    value={formatPhoneNumber(localData.phone)}
+                    value={formatPhoneNumber(localData.phone || "")}
                   />
                   <DisplayGenerator
                     title="Anatel:"
-                    value={
-                      localData.numero_valido
-                        ? "Sim"
-                        : localData.numero_valido === null ||
-                          localData.numero_valido === undefined
-                          ? "-"
-                          : "Não"
-                    }
+                    value={formatYesNo(localData.phone_valid)}
                   />
                   <DisplayGenerator
                     title="Operadora:"
-                    value={localData.operadora}
+                    value={localData.operator}
                   />
                   <DisplayGenerator
                     title="Portado:"
-                    value={localData.portabilidade}
+                    value={
+                      localData.phone_ported === "Sim" || localData.phone_ported === "Não"
+                        ? localData.phone_ported
+                        : formatYesNo(localData.phone_ported)
+                    }
                   />
                   <DisplayGenerator
                     title="Data da Portabilidade:"
                     value={
-                      localData.data_portabilidade
-                        ? convertData(localData.data_portabilidade)
+                      mainPhonePortingDate
+                        ? convertData(mainPhonePortingDate)
                         : "-"
                     }
                   />
@@ -411,31 +440,25 @@ export function OrderBandaLargaPFDisplay({
                 <div className="rounded p-1 space-y-1">
                   <DisplayGenerator
                     title="Número:"
-                    value={formatPhoneNumber(localData.phoneAdditional || "")}
+                    value={formatPhoneNumber(localData.additional_phone || "")}
                   />
                   <DisplayGenerator
                     title="Anatel:"
-                    value={
-                      localData.numero_adicional_valido
-                        ? "Sim"
-                        : localData.numero_adicional_valido === null
-                          ? "-"
-                          : "Não"
-                    }
+                    value={formatYesNo(localData.additional_phone_valid)}
                   />
                   <DisplayGenerator
                     title="Operadora:"
-                    value={localData.operadora_adicional}
+                    value={localData.additional_operator}
                   />{" "}
                   <DisplayGenerator
                     title="Portado:"
-                    value={localData.portabilidade_adicional}
+                    value={formatYesNo(localData.additional_phone_ported)}
                   />
                   <DisplayGenerator
                     title="Data da Portabilidade:"
                     value={
-                      localData.data_portabilidade_adicional
-                        ? convertData(localData.data_portabilidade_adicional)
+                      additionalPhonePortingDate
+                        ? convertData(additionalPhonePortingDate)
                         : "-"
                     }
                   />
@@ -459,13 +482,13 @@ export function OrderBandaLargaPFDisplay({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <DisplayGenerator
                 title="Sócio:"
-                value={localData.socio ? "Sim" : "Não"}
+                value={formatYesNo(localData.is_socio)}
               />{" "}
               <EmpresasDisplay empresas={localData.socios_empresas} />
               <div className="md:col-span-2">
                 <DisplayGenerator
                   title="MEI:"
-                  value={localData.is_mei ? "Sim" : "Não"}
+                  value={formatYesNo(localData.is_mei)}
                 />
               </div>
             </div>
@@ -483,18 +506,18 @@ export function OrderBandaLargaPFDisplay({
           {/* Dados do Endereço */}
           <div className="bg-white rounded-md p-2">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              <DisplayGenerator title="Rua:" value={localData.address} />
+              <DisplayGenerator title="Rua:" value={addressInfo?.address} />
               <DisplayGenerator
                 title="Número:"
-                value={localData.addressnumber}
+                value={addressInfo?.number}
               />
               <DisplayGenerator
                 title="Complemento:"
-                value={localData.addresscomplement}
+                value={addressInfo?.complement}
               />
-              <DisplayGenerator title="Bairro:" value={localData.district} />
-              <DisplayGenerator title="Cidade:" value={localData.city} />
-              <DisplayGenerator title="UF:" value={localData.state} />
+              <DisplayGenerator title="Bairro:" value={addressInfo?.district} />
+              <DisplayGenerator title="Cidade:" value={addressInfo?.city} />
+              <DisplayGenerator title="UF:" value={addressInfo?.state} />
             </div>
           </div>
 
@@ -505,37 +528,37 @@ export function OrderBandaLargaPFDisplay({
                 <DisplayGenerator
                   title="Tipo:"
                   value={
-                    localData.buildingorhouse === "building"
+                    (addressInfo?.building_or_house) === "building"
                       ? "Edifício"
                       : "Casa"
                   }
                 />
                 <DisplayGenerator
                   title="Andar:"
-                  value={localData.addressFloor}
+                  value={addressInfo?.floor}
                 />
               </div>
               <div className="space-y-2">
                 <DisplayGenerator
                   title="CEP:"
-                  value={formatCEP(localData.cep)}
+                  value={formatCEP(addressInfo?.zip_code || "")}
                 />
                 <DisplayGenerator
                   title="CEP único:"
-                  value={localData.cep_unico ? "Sim" : "Não"}
+                  value={formatYesNo(addressInfo?.single_zip_code)}
                 />
               </div>
               <div className="space-y-2">
-                <DisplayGenerator title="Lote:" value={localData.addresslot} />
+                <DisplayGenerator title="Lote:" value={addressInfo?.lot} />
                 <DisplayGenerator
                   title="Quadra:"
-                  value={localData.addressblock}
+                  value={addressInfo?.block}
                 />
               </div>
               <div className="md:col-span-3">
                 <DisplayGenerator
                   title="Ponto de Referência:"
-                  value={localData.addressreferencepoint}
+                  value={addressInfo?.reference_point}
                 />
               </div>
             </div>
@@ -543,18 +566,10 @@ export function OrderBandaLargaPFDisplay({
           {/* Detalhes Técnicos */}
           <div className="bg-white rounded-md p-2">
             <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-2">
-              <DisplayGenerator
-                title="Coordenadas:"
-                value={
-                  localData.geolocalizacao?.latitude &&
-                    localData.geolocalizacao?.longitude
-                    ? `${localData.geolocalizacao.latitude}, ${localData.geolocalizacao.longitude}`
-                    : "-"
-                }
-              />
+
 
               <a
-                href={localData.geolocalizacao?.link_maps}
+                href={mapsLink}
                 target="_blank"
                 style={{ color: "#029d23", textDecoration: "underline" }}
                 rel="noopener noreferrer"
@@ -563,7 +578,7 @@ export function OrderBandaLargaPFDisplay({
               </a>
 
               <a
-                href={localData.geolocalizacao?.link_street_view}
+                href={streetViewLink}
                 target="_blank"
                 style={{ color: "#029d23", textDecoration: "underline" }}
                 rel="noopener noreferrer"
@@ -592,17 +607,17 @@ export function OrderBandaLargaPFDisplay({
               <DisplayGenerator
                 title="Tipo de acesso:"
                 value={
-                  localData.ip_tipo_acesso === "movel"
+                  (localData.ip_access_type) === "movel"
                     ? "Móvel"
-                    : localData.ip_tipo_acesso === "fixo"
+                    : (localData.ip_access_type) === "fixo"
                       ? "Fixo"
-                      : localData.ip_tipo_acesso === "hosting"
+                      : (localData.ip_access_type) === "hosting"
                         ? "Hosting"
-                        : localData.ip_tipo_acesso === "proxy"
+                        : (localData.ip_access_type) === "proxy"
                           ? "Proxy"
-                          : localData.ip_tipo_acesso === "local"
+                          : (localData.ip_access_type) === "local"
                             ? "Local"
-                            : localData.ip_tipo_acesso === "desconhecido"
+                            : (localData.ip_access_type) === "desconhecido"
                               ? "Desconhecido"
                               : "-"
                 }
@@ -620,35 +635,37 @@ export function OrderBandaLargaPFDisplay({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <DisplayGenerator
                 title="Plataforma:"
-                value={formatOSDisplay(localData.finger_print?.os)}
+                value={formatOSDisplay(fingerprint?.os as FingerprintNameVersion)}
               />
               <DisplayGenerator
                 title="Dispositivo:"
-                value={formatDevice(localData.finger_print?.device || "-")}
+                value={formatDevice(fingerprint?.device || "-")}
               />
               <DisplayGenerator
                 title="Browser:"
-                value={formatBrowserDisplay(localData.finger_print?.browser)}
+                value={formatBrowserDisplay(
+                  fingerprint?.browser as FingerprintNameVersion,
+                )}
               />
               <DisplayGenerator
                 title="TimeZone:"
-                value={localData.finger_print?.timezone || "-"}
+                value={fingerprint?.timezone || "-"}
               />
               <DisplayGenerator
                 title="Resolução:"
                 value={formatResolution(
-                  localData.finger_print?.resolution || "-",
+                  fingerprint?.resolution || "-",
                 )}
               />
               <DisplayGenerator
                 title="ID Fingerprint:"
-                value={localData.fingerprintId || "-"}
+                value={localData.fingerprint_id || "-"}
               />
             </div>
           </div>
         </div>
       </div>
-      {localData?.status === "fechado" &&
+      {/* {localData?.status === "fechado" &&
         getAlertScenarios(
           localData?.availability,
           localData?.encontrado_via_range,
@@ -674,7 +691,7 @@ export function OrderBandaLargaPFDisplay({
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
 
       <ConfigProvider
         theme={{
@@ -708,7 +725,7 @@ export function OrderBandaLargaPFDisplay({
                 {" "}
                 <Form.Item
                   className="w-full "
-                  name="observacao_consultor"
+                  name="obs"
                   style={{ marginBottom: 8 }}
                 >
                   <Input.TextArea
@@ -724,7 +741,7 @@ export function OrderBandaLargaPFDisplay({
                   fontSize: "12px",
                   height: "25px",
                 }}
-                onClick={handleSaveObservacao}
+              // onClick={handleSaveObservacao}
               >
                 Salvar
               </Button>

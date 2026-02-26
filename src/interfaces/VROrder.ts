@@ -1,3 +1,33 @@
+type RHVROrder = {
+  already_has_point_solution: boolean;
+  number_of_employees_home: number;
+  number_of_employees_office: number;
+  point_solution_name: string;
+  whats_rh_digital: boolean;
+};
+
+type BeneficiosVROrder = {
+  already_has_another_benefit: boolean;
+  benefit_name: string;
+  number_of_beneficiaries: number;
+  whats_va: boolean;
+  average_value_per_employee_va: number;
+  whats_vr: boolean;
+  average_value_per_employee_vr: number;
+  whats_vale_auto: boolean;
+  average_value_per_employee_vale_auto: number;
+};
+
+type MobilidadeVROrder = {
+  whats_vt: boolean;
+  already_has_another_solution: boolean;
+  point_solution_name: string;
+  number_of_users: number;
+  average_value_per_employee: number;
+};
+
+type DynamicVrOrder = RHVROrder | BeneficiosVROrder | MobilidadeVROrder;
+
 export interface VROrder {
   additional_operator: string | null;
   additional_phone: string | null;
@@ -93,13 +123,7 @@ export interface VROrder {
   temperature: number | null;
   updated_at: string;
   url: string | null;
-  vr_order: {
-    already_has_point_solution: boolean;
-    number_of_employees_home: number;
-    number_of_employees_office: number;
-    point_solution_name: string;
-    whats_rh_digital: boolean;
-  };
+  vr_order: DynamicVrOrder;
   whatsapp: {
     address: string | null;
     avatar: string;

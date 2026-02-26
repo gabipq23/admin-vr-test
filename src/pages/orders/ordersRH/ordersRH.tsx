@@ -8,17 +8,27 @@ import { TableProps } from "antd/lib";
 import { useState } from "react";
 import { FiltroOrdersRHForm } from "./components/filter";
 import { VROrder } from "@/interfaces/VROrder";
+import { OrdersRHDetailsModal } from "./modals/RHDetails.tsx";
+import { useRHOrdersController } from "./controllers/dataController";
+
+type RHTableRow = VROrder & {
+  availability?: boolean | number | null;
+  encontrado_via_range?: number;
+  cep_unico?: number;
+};
 
 export default function OrdersRH() {
   const queryClient = new QueryClient();
-
+  const { showModal,
+    closeModal,
+    isModalOpen, } = useRHOrdersController();
   const navigate = useNavigate();
   const {
     control,
     // onSubmit,
     // handleSubmit,
     // clearFilters,
-    // selectedBLOrder,
+    selectedBLOrder,
     setSelectedBLOrder,
     currentPage,
     pageSize,
@@ -31,7 +41,7 @@ export default function OrdersRH() {
 
   const totalItems = 0;
 
-  const rowClassName = (record: any) => {
+  const rowClassName = (record: RHTableRow) => {
     const hasAvaiability = record?.availability;
     const isCoveredByRange = record?.encontrado_via_range;
     const hasUnicCep = record?.cep_unico;
@@ -52,14 +62,14 @@ export default function OrdersRH() {
   };
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
-  const rowSelection: TableProps<any>["rowSelection"] = {
+  const rowSelection: TableProps<RHTableRow>["rowSelection"] = {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => {
       setSelectedRowKeys(newSelectedRowKeys);
     },
   };
 
-  const RHOrder: VROrder[] = [{
+  const RHOrder: RHTableRow[] = [{
     additional_operator: "Claro S.A.",
     additional_phone: "48999887766",
     additional_phone_ported: false,
@@ -229,7 +239,7 @@ export default function OrdersRH() {
           >
             {/* Tabela */}
             <div className="overflow-y-auto ">
-              <Table<any>
+              <Table<RHTableRow>
                 rowKey="id"
                 // loading={isLoading}
                 scroll={{ y: 800 }}
@@ -241,7 +251,7 @@ export default function OrdersRH() {
                 onRow={(record) => ({
                   onClick: () => {
                     setSelectedBLOrder(record);
-                    // showModal();
+                    showModal();
                   },
                   style: { cursor: "pointer" },
                 })}
@@ -265,20 +275,20 @@ export default function OrdersRH() {
           </ConfigProvider>
 
           {/* Modal */}
-          {/* <OrdersRHDetailsModal
-            statusOptions={ordersBandaLarga?.status_pos_venda_enum}
+          <OrdersRHDetailsModal
+            // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
 
-            updateOrderData={updateBandaLargaOrder}
+            // updateOrderData={updateBandaLargaOrder}
             isModalOpen={isModalOpen}
             closeModal={closeModal}
-            selectedId={selectedBLOrder}
-            removeOrderData={removeBandaLargaOrder}
-            isRemoveOrderFetching={isRemoveBandaLargaOrderFetching}
-            updateDataIdVivoAndConsultorResponsavel={
-              updateDataIdVivoAndConsultorResponsavel
-            }
-            changeBandaLargaOrderStatus={changeBandaLargaOrderStatus}
-          /> */}
+            selectedOrder={selectedBLOrder}
+          // removeOrderData={removeBandaLargaOrder}
+          // isRemoveOrderFetching={isRemoveBandaLargaOrderFetching}
+          // updateDataIdVivoAndConsultorResponsavel={
+          //   updateDataIdVivoAndConsultorResponsavel
+          // }
+          // changeBandaLargaOrderStatus={changeBandaLargaOrderStatus}
+          />
         </div>
       </QueryClientProvider>
     </>
