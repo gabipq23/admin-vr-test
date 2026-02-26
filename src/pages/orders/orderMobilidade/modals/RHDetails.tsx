@@ -63,8 +63,8 @@ export function OrdersRHDetailsModal({
                 <div className="mt-4 flex gap-4 justify-end">
                     {!isEditing && (
                         <FooterButtons
-                            onGeneratePDF={() => generatePDF(selectedOrder)}
-                            onEdit={() => setIsEditing(true)}
+                            onGeneratePDF={() => generatePDF("")}
+                            onEdit={() => setIsEditing(false)}
                             onDelete={() => setShowDeleteModal(true)}
                         />
                     )}
