@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { StatusType } from "@/interfaces/purchase";
 import { useStyle } from "@/style/tableStyle";
 import { useRHTableColumns } from "../components/tableColumns";
 
@@ -15,9 +14,9 @@ export function getFiltersFromURL(): any {
       : rawInitialStatus === "pedido"
         ? "pedido"
         : "";
-  const allowedStatus: StatusType[] = ["aberto", "fechado", "cancelado"];
-  const status = allowedStatus.includes(rawStatus as StatusType)
-    ? (rawStatus as StatusType)
+  const allowedStatus: any[] = ["aberto", "fechado", "cancelado"];
+  const status = allowedStatus.includes(rawStatus as any)
+    ? (rawStatus as any)
     : null;
   const availability = params.get("availability");
   let availabilityBool: boolean | undefined = undefined;

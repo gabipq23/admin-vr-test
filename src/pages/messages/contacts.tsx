@@ -97,7 +97,7 @@ function Contacts() {
                 className={styles.customTable}
                 loading={isLoading}
                 columns={tableColumns}
-                dataSource={contacts}
+                dataSource={[]}
                 onRow={(record) => ({
                   onClick: () => {
                     setSelectedContact(record);

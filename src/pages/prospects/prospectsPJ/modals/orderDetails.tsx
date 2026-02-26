@@ -328,7 +328,7 @@ export function OrderDetailsModal(
                                 (item: any) =>
                                   item.seguro_tipo !== null
                               )
-                              .map((item: any, idx: number, arr) => (
+                              .map((item: any, idx: number, arr: any) => (
                                 <div key={idx} className="w-full">
                                   <div className="flex w-full justify-between px-2">
                                     <p className="text-[14px] text-[#666666]">

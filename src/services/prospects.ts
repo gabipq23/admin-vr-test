@@ -1,4 +1,3 @@
-import { IProspectsResponse } from "@/interfaces/purchase";
 import { apiPurchase } from "../configs/api";
 
 export class ProspectsService {
@@ -22,7 +21,7 @@ export class ProspectsService {
     possivel_prospect_iphone_17?: number | undefined;
     page?: string | number;
     limit?: string | number;
-  }): Promise<IProspectsResponse> {
+  }): Promise<any> {
     const res = await apiPurchase.get(`/pedidos/prospects`, {
       params: {
         id: id,
