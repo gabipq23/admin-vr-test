@@ -54,7 +54,7 @@ export function Files() {
                     <div className="flex justify-between mt-6 mb-4 items-center">
                         <div>
                             <div className="flex gap-8 justify-between pb-2">
-                                <h1 className="text-[22px] pl-16 ">Pedidos RH</h1>
+                                <h1 className="text-[22px] pl-16 ">Anexos</h1>
                             </div>
                             {/* Filtro */}
                             <FiltroFilesForm

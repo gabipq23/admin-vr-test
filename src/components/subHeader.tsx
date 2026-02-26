@@ -21,7 +21,7 @@ export default function SubHeader() {
     {
       key: "check-operadora",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("check-operadora");
             navigate(`/admin/check-operadora`);
@@ -34,7 +34,7 @@ export default function SubHeader() {
     {
       key: "check-anatel",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("check-anatel");
             navigate(`/admin/check-anatel`);
@@ -47,7 +47,7 @@ export default function SubHeader() {
     {
       key: "zap-checker",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("zap-checker");
             navigate(`/admin/zap-checker`);
@@ -60,7 +60,7 @@ export default function SubHeader() {
     {
       key: "pj-checker",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("pj-checker");
             navigate(`/admin/pj-checker`);
@@ -73,7 +73,7 @@ export default function SubHeader() {
     {
       key: "base2b-socio",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("base2b-socio");
             navigate(`/admin/base2b-socio`);
@@ -86,7 +86,7 @@ export default function SubHeader() {
     {
       key: "base2b-empresa",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("base2b-empresa");
             navigate(`/admin/base2b-empresa`);
@@ -99,7 +99,7 @@ export default function SubHeader() {
     {
       key: "gender-checker",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("gender-checker");
             navigate(`/admin/gender-checker`);
@@ -112,7 +112,7 @@ export default function SubHeader() {
     {
       key: "pf-ou-pj",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("pf-ou-pj");
             navigate(`/admin/pf-ou-pj`);
@@ -125,7 +125,7 @@ export default function SubHeader() {
     {
       key: "mail-checker",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("mail-checker");
             navigate(`/admin/mail-checker`);
@@ -141,7 +141,7 @@ export default function SubHeader() {
     {
       key: "loja-vr",
       label: (
-        <a
+        <a className="text-[#008a1e]"
           href="https://getempresas.com.br/vr/"
           target="_blank"
           rel="noopener noreferrer"
@@ -188,6 +188,7 @@ export default function SubHeader() {
       key: "pedidos-rh",
       label: (
         <span
+          className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("pedidos-rh");
             navigate(`/admin/pedidos-rh`);
@@ -200,7 +201,7 @@ export default function SubHeader() {
     {
       key: "pedidos-beneficios",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("pedidos-beneficios");
             navigate(`/admin/pedidos-beneficios`);
@@ -212,7 +213,7 @@ export default function SubHeader() {
     }, {
       key: "pedidos-mobilidade",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("pedidos-mobilidade");
             navigate(`/admin/pedidos-mobilidade`);
@@ -230,7 +231,7 @@ export default function SubHeader() {
     {
       key: "chats",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("chats");
             navigate(`/admin/chats`);
@@ -243,7 +244,7 @@ export default function SubHeader() {
     {
       key: "evolution",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("evolution");
             navigate(`/admin/evolution`);
@@ -256,7 +257,7 @@ export default function SubHeader() {
     {
       key: "files",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("files");
             navigate(`/admin/files`);
@@ -273,7 +274,7 @@ export default function SubHeader() {
     {
       key: "prospects-pj",
       label: (
-        <span
+        <span className="text-[#008a1e]"
           onClick={() => {
             setSelectedLink("prospects-pj");
             navigate(`/admin/prospects-pj`);
@@ -289,12 +290,13 @@ export default function SubHeader() {
   return (
     <div className="relative z-2">
       <div className="">
+
         <div className="flex  justify-between items-center p-2 bg-[#d4d4d4] px-6 md:px-10 lg:px-14">
           <div className="flex items-center gap-8">
-            <Dropdown menu={{ items: ordersMenuItems }} placement="bottom">
+            <Dropdown menu={{ items: ordersMenuItems }} placement="bottom" overlayClassName="subheader-dropdown">
               <a
                 onClick={(e) => e.preventDefault()}
-                className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "pedidos-aparelhos"
+                className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "pedidos-rh" || selectedLink === "pedidos-beneficios" || selectedLink === "pedidos-mobilidade"
                   ? "font-bold text-[#029d23]"
                   : ""
                   }`}
@@ -329,13 +331,16 @@ export default function SubHeader() {
             </a>
 
             <Dropdown menu={{ items: chatsMenuItems }} placement="bottom">
-              <a className="text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23]">
+              <a className={`text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23] ${selectedLink === "chats" || selectedLink === "evolution" || selectedLink === "files"
+                ? "font-bold text-[#029d23]"
+                : ""
+                }`}>
                 Chatter
               </a>
             </Dropdown>
 
 
-            <Dropdown menu={{ items: lpMenuItems }} placement="bottom">
+            <Dropdown menu={{ items: lpMenuItems }} placement="bottom" overlayClassName="subheader-dropdown">
               <a className="text-[14px] cursor-pointer text-[#008a1e] hover:text-[#029d23]">
                 LPs
               </a>
@@ -397,6 +402,14 @@ export default function SubHeader() {
             </Button>
             <style>
               {`
+              .subheader-dropdown .ant-dropdown-menu-title-content > a {
+                color: #008a1e !important;
+              }
+
+              .subheader-dropdown .ant-dropdown-menu-title-content > a:hover {
+                color: #029d23 !important;
+              }
+
               .logout-btn:hover .anticon {
                 color: #029d23 !important;
                 font-size: 15px;
@@ -407,6 +420,6 @@ export default function SubHeader() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
