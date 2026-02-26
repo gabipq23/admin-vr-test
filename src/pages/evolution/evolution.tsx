@@ -64,7 +64,7 @@ export default function Evolution() {
                           colorBorder: "#029d23",
                           colorText: "#029d23",
                           colorPrimary: "#029d23",
-                          colorPrimaryHover: "#883fa2",
+                          colorPrimaryHover: "#029d23",
                         },
                       },
                     }}
@@ -92,7 +92,7 @@ export default function Evolution() {
             theme={{
               token: {
                 colorPrimary: "#029d23",
-                colorPrimaryHover: "#833baa",
+                colorPrimaryHover: "#029d23",
                 colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },
@@ -218,7 +218,7 @@ export function ModalDelete({
                 colorBorder: "#029d23",
                 colorText: "#029d23",
                 colorPrimary: "#029d23",
-                colorPrimaryHover: "#883fa2",
+                colorPrimaryHover: "#029d23",
               },
             },
           }}
@@ -306,7 +306,7 @@ export function ModalDisconnect({
                 colorBorder: "#029d23",
                 colorText: "#029d23",
                 colorPrimary: "#029d23",
-                colorPrimaryHover: "#883fa2",
+                colorPrimaryHover: "#029d23",
               },
             },
           }}

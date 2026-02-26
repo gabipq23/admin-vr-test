@@ -74,7 +74,7 @@ function Contacts() {
             theme={{
               token: {
                 colorPrimary: "#029d23",
-                colorPrimaryHover: "#833baa",
+                colorPrimaryHover: "#029d23",
                 colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },

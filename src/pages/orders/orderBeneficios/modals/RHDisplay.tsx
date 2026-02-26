@@ -731,7 +731,7 @@ export function OrdersRHDisplayModal(
 
               colorPrimary: "#029d23",
 
-              colorPrimaryHover: "#883fa2",
+              colorPrimaryHover: "#029d23",
             },
           },
         }}

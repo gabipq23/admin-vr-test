@@ -153,7 +153,7 @@ export default function Base2bSocio() {
                           colorBorder: "#029d23",
                           colorText: "#029d23",
                           colorPrimary: "#029d23",
-                          colorPrimaryHover: "#883fa2",
+                          colorPrimaryHover: "#029d23",
                         },
                       },
                     }}
@@ -179,7 +179,7 @@ export default function Base2bSocio() {
             theme={{
               token: {
                 colorPrimary: "#029d23",
-                colorPrimaryHover: "#833baa",
+                colorPrimaryHover: "#029d23",
                 colorLink: "#029d23",
                 colorPrimaryBg: "transparent",
               },

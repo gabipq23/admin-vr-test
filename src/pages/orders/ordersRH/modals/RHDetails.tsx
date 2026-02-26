@@ -44,7 +44,7 @@ export function OrdersRHDetailsModal({
                         colorBorder: "#029d23",
                         colorText: "#029d23",
                         colorPrimary: "#029d23",
-                        colorPrimaryHover: "#883fa2",
+                        colorPrimaryHover: "#029d23",
                     },
                 },
             }}

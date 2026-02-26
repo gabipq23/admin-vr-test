@@ -34,7 +34,7 @@ export const useStyle = createStyles(({ css }) => {
         justify-content: center;
         margin-top: 16px; 
         colorText: "#029d23",
-        colorTextActive: "#550088", 
+        colorTextActive: "#029d23", 
       }
     `,
   };
