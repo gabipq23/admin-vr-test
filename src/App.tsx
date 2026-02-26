@@ -32,6 +32,8 @@ import { Chats } from "./pages/chats/chats";
 import Evolution from "./pages/evolution/evolution";
 import AdminLayout from "./layouts/adminLayout";
 import { Files } from "./pages/files/files";
+import OrdersBeneficios from "./pages/orders/orderBeneficios/ordersBeneficios";
+import OrdersMobilidade from "./pages/orders/orderMobilidade/ordersMobilidade";
 
 export default function App() {
   const { user, checkAuth } = useAuthContext();
@@ -74,6 +76,14 @@ export default function App() {
             <Route
               path="/admin/pedidos-rh"
               element={<OrdersRH />}
+            />
+            <Route
+              path="/admin/pedidos-beneficios"
+              element={<OrdersBeneficios />}
+            />
+            <Route
+              path="/admin/pedidos-mobilidade"
+              element={<OrdersMobilidade />}
             />
 
 
