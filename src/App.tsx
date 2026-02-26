@@ -31,6 +31,7 @@ import Base2bEmpresa from "./pages/tools/base2bEmpresa/base2bEmpresa";
 import { Chats } from "./pages/chats/chats";
 import Evolution from "./pages/evolution/evolution";
 import AdminLayout from "./layouts/adminLayout";
+import { Files } from "./pages/files/files";
 
 export default function App() {
   const { user, checkAuth } = useAuthContext();
@@ -56,6 +57,8 @@ export default function App() {
 
         <Route element={<RequireAuth user={user} />}>
           <Route element={<AdminLayout />}>
+            <Route path="/admin/files" element={<Files />} />
+
             <Route path="/admin/evolution" element={<Evolution />} />
             <Route path="/admin/chats" element={<Chats />} />
             <Route path="/admin/check-operadora" element={<CheckOperadora />} />

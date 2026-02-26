@@ -253,6 +253,19 @@ export default function SubHeader() {
         </span>
       ),
     },
+     {
+      key: "files",
+      label: (
+        <span
+          onClick={() => {
+            setSelectedLink("files");
+            navigate(`/admin/files`);
+          }}
+        >
+          Anexos
+        </span>
+      ),
+    },
   ];
 
 
