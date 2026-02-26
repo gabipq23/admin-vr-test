@@ -3,9 +3,10 @@ import { create } from "zustand";
 import { AuthState, ILoginData } from "@/interfaces/login";
 
 const authService = new AuthService();
+const initialAuth = authService.getAuthToken();
 
 export const useAuthContext = create<AuthState>((set, _get, state) => ({
-  user: null,
+  user: initialAuth?.user ?? null,
   login: async ({ email, senha }: ILoginData) => {
     const res = await authService.login({ email, senha });
     set({ user: res?.user ?? null });

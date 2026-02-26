@@ -289,7 +289,7 @@ export default function SubHeader() {
   return (
     <div className="relative z-2">
       <div className="">
-        <div className="flex  justify-between items-center p-2 bg-[#b3b3b3] px-6 md:px-10 lg:px-14">
+        <div className="flex  justify-between items-center p-2 bg-[#d4d4d4] px-6 md:px-10 lg:px-14">
           <div className="flex items-center gap-8">
             <Dropdown menu={{ items: ordersMenuItems }} placement="bottom">
               <a
