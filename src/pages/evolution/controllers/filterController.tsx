@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StatusType } from "src/interfaces/purchase";
+// import { StatusType } from "src/interfaces/purchase";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
@@ -15,7 +15,7 @@ import { formatDateTimeBR } from "@/utils/formatDateTimeBR";
 import { useStyle } from "@/style/tableStyle";
 
 function getFiltersFromURL(): {
-  status: StatusType | null;
+  // status: StatusType | null;
   telefone: string | null;
   cnpj: string | null;
   company_name?: string | null;
@@ -31,11 +31,11 @@ function getFiltersFromURL(): {
 } {
   const params = new URLSearchParams(window.location.search);
 
-  const rawStatus = params.get("status");
-  const allowedStatus: StatusType[] = ["aberto", "fechado", "cancelado"];
-  const status = allowedStatus.includes(rawStatus as StatusType)
-    ? (rawStatus as StatusType)
-    : null;
+  // const rawStatus = params.get("status");
+  // const allowedStatus: any[] = ["aberto", "fechado", "cancelado"];
+  // const status = allowedStatus.includes(rawStatus as any)
+  //   ? (rawStatus as any)
+  //   : null;
 
   const id = params.get("id") || null;
   const telefone = params.get("telefone");
@@ -51,7 +51,7 @@ function getFiltersFromURL(): {
   const sort = params.get("sort") || null;
 
   return {
-    status,
+    // status,
     id,
     telefone,
     company_name,

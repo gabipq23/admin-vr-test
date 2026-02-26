@@ -20,9 +20,7 @@ import Prospects from "./pages/prospects/prospectsPJ/prospects";
 import OrdersRH from "./pages/orders/ordersRH/ordersRH";
 
 import Contacts from "./pages/messages/contacts";
-import ProspectsPF from "./pages/prospects/prospectsPF/prospectsPF";
 import Users from "./pages/management/users/users";
-import Partners from "./pages/management/partners/partners";
 import UserProfile from "./pages/management/userProfile/userProfile";
 import CheckOperadora from "./pages/tools/checkOperadora/checkOperadora";
 import CheckAnatel from "./pages/tools/checkAnatel/checkAnatel";
@@ -69,7 +67,6 @@ export default function App() {
 
             <Route path="/admin/contatos" element={<Contacts />} />
             <Route path="/admin/prospects-pj" element={<Prospects />} />
-            <Route path="/admin/prospects-pf" element={<ProspectsPF />} />
 
             <Route
               path="/admin/pedidos-rh"
@@ -79,7 +76,6 @@ export default function App() {
 
             <Route path="/admin/usuarios" element={<Users />} />
             <Route path="/admin/perfil-usuario/:id" element={<UserProfile />} />
-            <Route path="/admin/representantes" element={<Partners />} />
           </Route>
         </Route>
 

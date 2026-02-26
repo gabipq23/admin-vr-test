@@ -1,15 +1,15 @@
-import { Controller, Control, UseFormHandleSubmit } from "react-hook-form";
+import { Controller, Control, } from "react-hook-form";
 import { Input, Button, Tooltip, ConfigProvider, Select } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import ptBR from "antd/es/locale/pt_BR";
-interface FiltroPedidosFormProps {
-  control: Control<any>;
-  handleSubmit: UseFormHandleSubmit<any>;
-  onSubmit: (data: any) => void;
-  onClear: () => void;
+// interface FiltroPedidosFormProps {
+//   control: Control<any>;
+//   handleSubmit: UseFormHandleSubmit<any>;
+//   onSubmit: (data: any) => void;
+//   onClear: () => void;
 
-  statusOptions?: string[];
-}
+//   statusOptions?: string[];
+// }
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 
 const CNPJInput = (props: PatternFormatProps) => (
@@ -22,16 +22,19 @@ const CNPJInput = (props: PatternFormatProps) => (
     allowEmptyFormatting
   />
 );
-export function FiltroProspectsForm({
-  control,
-  handleSubmit,
-  onSubmit,
-  onClear,
-}: FiltroPedidosFormProps) {
+export function FiltroProspectsForm(
+  //   {
+  //   control,
+  //   handleSubmit,
+  //   onSubmit,
+  //   onClear,
+  // }: FiltroPedidosFormProps
+) {
+  const control = null as unknown as Control<any>;
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      onReset={onClear}
+      // onSubmit={handleSubmit(onSubmit)}
+      // onReset={onClear}
       className="flex min-w-[200px] flex-wrap gap-2 mb-4"
     >
       <div className="flex gap-2 flex-wrap">
@@ -168,7 +171,7 @@ export function FiltroProspectsForm({
           <Button
             variant="outlined"
             color="green"
-            onClick={onClear}
+            // onClick={onClear}
             style={{ width: "24px", height: "28px", color: "#029d23" }}
           >
             X

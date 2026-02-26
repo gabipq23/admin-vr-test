@@ -5,17 +5,19 @@ import { formatCEP } from "@/utils/formatCEP";
 import React from "react";
 import { getTypeOfPayment } from "@/utils/getTypeOfPayment";
 
-export function OrderDetailsModal({
-  isModalOpen,
-  closeModal,
-  dataSource,
-  selectedId,
-}: {
-  isModalOpen: boolean;
-  closeModal: () => void;
-  dataSource: any | undefined;
-  selectedId: any | null;
-}) {
+export function OrderDetailsModal(
+  {
+    isModalOpen,
+    closeModal,
+    dataSource,
+    selectedId,
+  }: {
+    isModalOpen: boolean;
+    closeModal: () => void;
+    dataSource: any | undefined;
+    selectedId: any | null;
+  }
+) {
   return (
     <ConfigProvider
       theme={{

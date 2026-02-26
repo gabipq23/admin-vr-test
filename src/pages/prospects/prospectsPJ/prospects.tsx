@@ -1,40 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useAllOrdersFilterController } from "./controllers/filterController";
 import { FiltroProspectsForm } from "./components/filter";
-import { useAllOrdersController } from "./controllers/dataController";
 
 import { ConfigProvider, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { OrderDetailsModal } from "./modals/orderDetails";
 import { customLocale } from "@/utils/customLocale";
 
 function Prospects() {
   const queryClient = new QueryClient();
-  const {
-    prospectsFilteredQuery,
-    showModal,
-    closeModal,
-    isModalOpen,
-    dataSource,
-    isProspectsFetching,
-  } = useAllOrdersController();
-  const navigate = useNavigate();
 
-  const {
-    control,
-    onSubmit,
-    handleSubmit,
-    clearFilters,
-    selectedProspect,
-    setSelectedProspect,
-    currentPage,
-    pageSize,
-    totalItems,
-    columns,
-    styles,
-  } = useAllOrdersFilterController({
-    prospectsFilteredQuery,
-  });
+  const navigate = useNavigate();
 
   // const rowClassName = (record: DataType) => {
   //   return record.cliente_gold === 0 ? "ant-table-row-yellow" : "";
@@ -49,10 +23,10 @@ function Prospects() {
           </div>
           {/* Filtro */}
           <FiltroProspectsForm
-            control={control}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            onClear={clearFilters}
+          // control={control}
+          // handleSubmit={handleSubmit}
+          // onSubmit={onSubmit}
+          // onClear={clearFilters}
           />
 
           <ConfigProvider
@@ -69,22 +43,22 @@ function Prospects() {
             {/* Tabela */}
             <div className="overflow-y-auto ">
               <Table<any>
-                className={styles.customTable}
-                columns={columns}
+                // className={styles.customTable}
+                // columns={columns}
                 // rowClassName={rowClassName}
-                loading={isProspectsFetching}
-                dataSource={dataSource}
-                onRow={(record) => ({
-                  onClick: () => {
-                    setSelectedProspect(record);
-                    showModal();
-                  },
-                  style: { cursor: "pointer" },
-                })}
+                // loading={isProspectsFetching}
+                // dataSource={dataSource}
+                // onRow={(record) => ({
+                //   onClick: () => {
+                //     setSelectedProspect(record);
+                //     showModal();
+                //   },
+                //   style: { cursor: "pointer" },
+                // })}
                 pagination={{
-                  current: currentPage,
-                  pageSize: pageSize,
-                  total: totalItems,
+                  // current: currentPage,
+                  // pageSize: pageSize,
+                  // total: totalItems,
                   showSizeChanger: true,
                   pageSizeOptions: ["50", "100", "200", "500"],
                   showLessItems: true,
@@ -101,12 +75,12 @@ function Prospects() {
           </ConfigProvider>
 
           {/* Modal */}
-          <OrderDetailsModal
-            isModalOpen={isModalOpen}
-            closeModal={closeModal}
-            selectedId={selectedProspect}
-            dataSource={prospectsFilteredQuery}
-          />
+          {/* <OrderDetailsModal */}
+          {/* // isModalOpen={isModalOpen}
+          // closeModal={closeModal}
+          // selectedId={selectedProspect}
+          // dataSource={prospectsFilteredQuery} */}
+          {/* /> */}
         </div>
       </QueryClientProvider>
     </>
