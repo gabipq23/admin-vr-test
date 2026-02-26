@@ -253,7 +253,7 @@ export default function SubHeader() {
         </span>
       ),
     },
-     {
+    {
       key: "files",
       label: (
         <span
@@ -283,19 +283,7 @@ export default function SubHeader() {
         </span>
       ),
     },
-    {
-      key: "prospects-pf",
-      label: (
-        <span
-          onClick={() => {
-            setSelectedLink("prospects-pf");
-            navigate(`/admin/prospects-pf`);
-          }}
-        >
-          PF
-        </span>
-      ),
-    },
+
   ];
 
   return (

@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { FiltroProspectsForm } from "./components/filter";
+// import { FiltroProspectsForm } from "./components/filter";
 
 import { ConfigProvider, Table } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -22,12 +22,12 @@ function Prospects() {
             <h1 className="text-[22px]">Prospects PJ</h1>
           </div>
           {/* Filtro */}
-          <FiltroProspectsForm
-          // control={control}
+          {/* <FiltroProspectsForm */}
+          {/* // control={control}
           // handleSubmit={handleSubmit}
           // onSubmit={onSubmit}
           // onClear={clearFilters}
-          />
+          // /> */}
 
           <ConfigProvider
             locale={customLocale}
