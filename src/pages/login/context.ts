@@ -5,15 +5,15 @@ import { AuthState, ILoginData } from "@/interfaces/login";
 const authService = new AuthService();
 const initialAuth = authService.getAuthToken();
 
-export const useAuthContext = create<AuthState>((set, _get, state) => ({
+export const useAuthContext = create<AuthState>((set) => ({
   user: initialAuth?.user ?? null,
   login: async ({ email, senha }: ILoginData) => {
     const res = await authService.login({ email, senha });
     set({ user: res?.user ?? null });
   },
   logout: () => {
-    authService.logout();
-    set(state.getInitialState());
+    set({ user: null });
+    void authService.logout();
   },
 
   checkAuth: () => {
