@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useStyle } from "@/style/tableStyle";
-import { useRHTableColumns } from "../components/tableColumns";
+import { useMobilidadeTableColumns } from "../components/tableColumns";
 
 export function getFiltersFromURL(): any {
   const params = new URLSearchParams(window.location.search);
@@ -136,7 +136,7 @@ export function useAllOrdersFilterController() {
   const { styles } = useStyle();
 
   const alwaysVisibleKeys = ["obs", "whatsapp,avatar"];
-  const allTableColumns = useRHTableColumns();
+  const allTableColumns = useMobilidadeTableColumns();
 
   const allColumnOptions = allTableColumns
     .filter(

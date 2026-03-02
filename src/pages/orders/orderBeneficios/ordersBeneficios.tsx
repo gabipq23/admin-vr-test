@@ -6,12 +6,12 @@ import { useAllOrdersFilterController } from "./controllers/filterController.tsx
 import { useNavigate } from "react-router-dom";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
-import { FiltroOrdersRHForm } from "./components/filter.tsx";
 import { VROrder } from "@/interfaces/VROrder";
-import { OrdersRHDetailsModal } from "./modals/RHDetails.tsx";
-import { useRHOrdersController } from "./controllers/dataController.tsx";
+import { useBeneficiosOrdersController } from "./controllers/dataController.tsx";
+import { OrdersBeneficiosDetailsModal } from "./modals/beneficiosDetails.tsx";
+import { FiltroOrderBeneficiosForm } from "./components/filter.tsx";
 
-type RHTableRow = VROrder & {
+type BeneficiosTableRow = VROrder & {
   availability?: boolean | number | null;
   encontrado_via_range?: number;
   cep_unico?: number;
@@ -28,7 +28,7 @@ export default function OrdersBeneficios() {
     totalItems,
     removeOrderData,
     isRemoveOrderFetching,
-  } = useRHOrdersController();
+  } = useBeneficiosOrdersController();
   const navigate = useNavigate();
   const {
     control,
@@ -46,7 +46,7 @@ export default function OrdersBeneficios() {
     handleColumnsChange,
   } = useAllOrdersFilterController();
 
-  const rowClassName = (record: RHTableRow) => {
+  const rowClassName = (record: BeneficiosTableRow) => {
     const hasAvaiability = record?.availability;
     const isCoveredByRange = record?.encontrado_via_range;
     const hasUnicCep = record?.cep_unico;
@@ -67,7 +67,7 @@ export default function OrdersBeneficios() {
   };
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
-  const rowSelection: TableProps<RHTableRow>["rowSelection"] = {
+  const rowSelection: TableProps<BeneficiosTableRow>["rowSelection"] = {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => {
       setSelectedRowKeys(newSelectedRowKeys);
@@ -84,7 +84,7 @@ export default function OrdersBeneficios() {
                 <h1 className="text-[22px] pl-16 ">Pedidos Benefícios</h1>
               </div>
               {/* Filtro */}
-              <FiltroOrdersRHForm
+              <FiltroOrderBeneficiosForm
                 control={control}
                 // handleSubmit={handleSubmit}
                 // onSubmit={onSubmit}
@@ -123,7 +123,7 @@ export default function OrdersBeneficios() {
           >
             {/* Tabela */}
             <div className="overflow-y-auto ">
-              <Table<RHTableRow>
+              <Table<BeneficiosTableRow>
                 rowKey="id"
                 loading={isLoading}
                 scroll={{ y: 800 }}
@@ -159,7 +159,7 @@ export default function OrdersBeneficios() {
           </ConfigProvider>
 
           {/* Modal */}
-          <OrdersRHDetailsModal
+          <OrdersBeneficiosDetailsModal
             // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
 
             // updateOrderData={updateBandaLargaOrder}

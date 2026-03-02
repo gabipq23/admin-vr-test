@@ -4,7 +4,7 @@ import { VROrdersService } from "@/services/vrOrders";
 import { toast } from "sonner";
 
 
-export function useRHOrdersController() {
+export function useMobilidadeOrdersController() {
   const vrOrdersService = new VROrdersService();
   const queryClient = useQueryClient();
 

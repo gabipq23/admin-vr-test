@@ -62,7 +62,7 @@ export function OrdersRHDetailsModal({
                 width={1200}
             >
                 <div className="text-[#666666] mt-4 h-[460px] overflow-y-auto scrollbar-thin">
-                    <OrdersRHDisplayModal />
+                    <OrdersRHDisplayModal selectedOrder={selectedOrder} />
                 </div>
                 <div className="mt-4 flex gap-4 justify-end">
                     {!isEditing && (

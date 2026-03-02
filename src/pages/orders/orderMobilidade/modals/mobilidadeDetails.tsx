@@ -6,9 +6,9 @@ import ConfirmDeleteModal from "@/components/confirmDeleteModal";
 import FooterButtons from "@/components/orders/footerButtons";
 import { generatePDF } from "../controllers/exportPDF";
 import { VROrder } from "@/interfaces/VROrder";
-import { OrdersRHDisplayModal } from "./RHDisplay";
+import { OrdersMobilidadeDisplayModal } from "./mobilidadeDisplay";
 
-export function OrdersRHDetailsModal({
+export function OrdersMobilidadeDetailsModal({
     isModalOpen,
     closeModal,
     selectedOrder,
@@ -62,7 +62,7 @@ export function OrdersRHDetailsModal({
                 width={1200}
             >
                 <div className="text-[#666666] mt-4 h-[460px] overflow-y-auto scrollbar-thin">
-                    <OrdersRHDisplayModal />
+                    <OrdersMobilidadeDisplayModal selectedOrder={selectedOrder} />
                 </div>
                 <div className="mt-4 flex gap-4 justify-end">
                     {!isEditing && (

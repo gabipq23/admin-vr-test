@@ -12,8 +12,9 @@ import { formatCNPJ } from "@/utils/formatCNPJ";
 import { capitalizeWords } from "@/utils/capitaliWords";
 import { formatBRL } from "@/utils/formatBRL";
 import { VROrder } from "@/interfaces/VROrder";
+import { formatCompanySizeRange, formatContactObjective } from "@/utils/vrOrderFieldFormatters";
 
-export const useRHTableColumns = (): TableColumnsType<VROrder> => {
+export const useBeneficiosTableColumns = (): TableColumnsType<VROrder> => {
     const filters = getFiltersFromURL();
     const navigate = useNavigate();
     return [
@@ -735,10 +736,10 @@ export const useRHTableColumns = (): TableColumnsType<VROrder> => {
                     : "-",
         },
         {
-            title: "Faixa porte empresa",
+            title: "Nº de Colaboradores",
             dataIndex: ["vr_order", "company_size_range"],
             width: 170,
-            render: (company_size_range) => company_size_range || "-",
+            render: (company_size_range) => formatCompanySizeRange(company_size_range),
         },
         {
             title: "Objetivo do contato",
@@ -747,18 +748,22 @@ export const useRHTableColumns = (): TableColumnsType<VROrder> => {
                 showTitle: false,
             },
             width: 180,
-            render: (contact_objective) => (
-                <Tooltip
-                    placement="topLeft"
-                    title={contact_objective}
-                    styles={{ body: { fontSize: "12px" } }}
-                >
-                    {contact_objective || "-"}
-                </Tooltip>
-            ),
+            render: (contact_objective) => {
+                const displayValue = formatContactObjective(contact_objective);
+
+                return (
+                    <Tooltip
+                        placement="topLeft"
+                        title={displayValue}
+                        styles={{ body: { fontSize: "12px" } }}
+                    >
+                        {displayValue}
+                    </Tooltip>
+                );
+            },
         },
         {
-            title: "Landing Page",
+            title: "Tipo",
             dataIndex: ["vr_order", "landing_page"],
             ellipsis: {
                 showTitle: false,

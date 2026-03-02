@@ -12,152 +12,31 @@ import { useEffect } from "react";
 // import { ExclamationOutlined } from "@ant-design/icons";
 import { EmpresasDisplay } from "@/components/empresasDisplay";
 import { convertData } from "@/utils/convertData";
+import { formatCompanySizeRange, formatContactObjective } from "@/utils/vrOrderFieldFormatters";
 
 // interface OrderBandaLargaPFDisplayProps {
-// localData: RHDisplayData;
+// selectedOrder: RHDisplayData;
 // updateOrderData: (payload: {
 //   id: number | undefined;
 //   data: { pedido: { obs: string } };
 // }) => void;
 // }
 
-const localData = {
-  order_type: "RH",
-  additional_operator: "Claro S.A.",
-  additional_phone: "48999887766",
-  additional_phone_ported: false,
-  additional_phone_porting_date: null,
-  additional_phone_valid: true,
-  address_info: {
-    address: "Rua das Flores",
-    block: "B",
-    building_or_house: "building",
-    city: "São Paulo",
-    complement: "Sala 402",
-    district: "Centro",
-    floor: "4",
-    lot: null,
-    number: "1200",
-    reference_point: "Próximo ao metrô",
-    single_zip_code: 0,
-    state: "SP",
-    zip_code: "01001000",
-    zip_code_type: "logradouro",
-  },
-  after_sales_status: "Em andamento",
-  capital_social: "50000.00",
-  client_ip: "189.45.22.180",
-  cnpj: "11222333000181",
-  company_name: "Empresa Exemplo LTDA",
-  company_size: "Médio",
-  cpf: "14720194907",
-  created_at: "16/03/2026 17:30:00",
-  email: "contato@empresaexemplo.com.br",
-  fingerprint: {
-    browser: {
-      name: "Chrome",
-      version: "122.0.0.0",
-    },
-    device: "desktop",
-    os: {
-      name: "Windows",
-      version: "11",
-    },
-    resolution: {
-      dpr: 1,
-      height: 1080,
-      width: 1920,
-    },
-    timezone: "America/Sao_Paulo",
-    timezone_name: "BRT",
-    timezone_offset: 180,
-  },
-  fingerprint_id: "fp-abc-123",
-  full_name: "Carlos Eduardo da Silva",
-  geolocation: {
-    formatted_address: "Rua das Flores, 1200 - Centro, São Paulo - SP",
-    latitude: "-23.55052",
-    longitude: "-46.633308",
-    maps_link: "https://maps.google.com/?q=-23.55052,-46.633308",
-    precision: "ROOFTOP",
-    queried_at: "2026-02-25T20:38:16.282Z",
-    street_view_link:
-      "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=-23.55052,-46.633308",
-    success: true,
-  },
-  id: 5,
-  id_order: null,
-  ip_access_type: "fixo",
-  ip_as: "AS12345",
-  ip_isp: "Vivo Fibra",
-  ip_org: "Telefonica Brasil S.A.",
-  is_email_valid: true,
-  is_mei: false,
-  is_socio: true,
-  obs: "Lead validado e com documentação completa",
-  operator: "TIM S/A",
-  order_number: 96248817,
-
-  phone: "48999202542",
-  phone_ported: "Não",
-  phone_porting_date: null,
-  phone_valid: true,
-  responsible_name: "Ana Paula",
-  rfb_birth_date: "2004-03-16T00:00:00.000Z",
-  rfb_gender: "M",
-  rfb_name: "CARLOS EDUARDO DA SILVA",
-  rfb_status: "Ativa",
-  socios_empresas: [
-    {
-      cpf: "12345678901",
-      is_admin: "1",
-      name: "João Pedro Souza",
-    },
-    {
-      cpf: "98765432100",
-      is_admin: "0",
-      name: "Mariana Costa Lima",
-    },
-  ],
-  status: "ABERTO",
-  temperature: 7,
-  updated_at: "2026-02-25T21:10:10.000Z",
-  url: "https://portal.exemplo.com/pedido/96248817",
-  vr_order: {
-    already_has_point_solution: true,
-    number_of_employees_home: 10,
-    number_of_employees_office: 25,
-    point_solution_name: "PontoTel",
-    whats_rh_digital: true,
-  },
-  whatsapp: {
-    address: null,
-    avatar: "",
-    category: "Serviços empresariais",
-    exists_on_whatsapp: true,
-    is_commercial: true,
-    links: ["https://wa.me/5548999202542"],
-    number: "5548999202542",
-    status_message: "Atendimento comercial",
-    success: true,
-    verified_at: "2026-02-25T20:40:00.000Z",
-  },
-};
 
 
-export function OrdersRHDisplayModal(
+export function OrdersRHDisplayModal({ selectedOrder }: any
   // {
-  //  localData,
+  //  selectedOrder,
   // updateOrderData,
   // }: OrderBandaLargaPFDisplayProps) 
 ) {
   const [form] = Form.useForm();
 
 
-  const addressInfo = localData?.address_info;
-  const geolocation = localData?.geolocation
-  const fingerprint = localData?.fingerprint
-  const vrOrder = localData?.vr_order as Record<string, unknown> | undefined;
+  const addressInfo = selectedOrder?.address_info;
+  const geolocation = selectedOrder?.geolocation
+  const fingerprint = selectedOrder?.fingerprint
+  const vrOrder = selectedOrder?.vr_order as Record<string, unknown> | undefined;
   const mapsLink =
     (geolocation as { maps_link?: string; link_maps?: string } | undefined)
       ?.maps_link ||
@@ -175,9 +54,9 @@ export function OrdersRHDisplayModal(
       | undefined
     )?.link_street_view;
   const mainPhonePortingDate =
-    localData.phone_porting_date
+    selectedOrder.phone_porting_date
   const additionalPhonePortingDate =
-    localData.additional_phone_porting_date
+    selectedOrder.additional_phone_porting_date
 
   const formatYesNo = (value: unknown) => {
     if (value === true || value === 1 || value === "Sim") return "Sim";
@@ -212,11 +91,10 @@ export function OrdersRHDisplayModal(
     return "-";
   };
 
-
   useEffect(() => {
-    if (localData) {
+    if (selectedOrder) {
       form.setFieldsValue({
-        obs: localData.obs || "",
+        obs: selectedOrder.obs || "",
       });
     }
   }, [form]);
@@ -276,7 +154,7 @@ export function OrdersRHDisplayModal(
   //     values.obs.trim() !== ""
   //   ) {
   //     updateOrderData({
-  //       id: localData?.id,
+  //       id: selectedOrder?.id,
   //       data: { pedido: { obs: values.obs } },
   //     });
   //   }
@@ -292,7 +170,7 @@ export function OrdersRHDisplayModal(
         <div className="mt-4 text-neutral-700">
           <div className="bg-white rounded-md p-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {localData.order_type === "RH" &&
+              {selectedOrder.order_type === "RH" &&
                 vrOrder?.["whats_rh_digital"] !== undefined && (
                   <>
                     <DisplayGenerator
@@ -316,15 +194,15 @@ export function OrdersRHDisplayModal(
                       value={(vrOrder?.["point_solution_name"] as string) || "-"}
                     />
                     <DisplayGenerator
-                      title="Faixa porte empresa:"
-                      value={(vrOrder?.["company_size_range"] as string) || "-"}
+                      title="Nº de Colaboradores:"
+                      value={formatCompanySizeRange(vrOrder?.["company_size_range"])}
                     />
                     <DisplayGenerator
                       title="Objetivo do contato:"
-                      value={(vrOrder?.["contact_objective"] as string) || "-"}
+                      value={formatContactObjective(vrOrder?.["contact_objective"])}
                     />
                     <DisplayGenerator
-                      title="Landing page:"
+                      title="Tipo:"
                       value={(vrOrder?.["landing_page"] as string) || "-"}
                     />
                   </>
@@ -347,11 +225,11 @@ export function OrdersRHDisplayModal(
         <div className="flex flex-col text-neutral-800 gap-4 rounded-lg">
           {/* Dados Pessoais */}
           <div className="bg-white rounded-md p-2">
-            {localData.temperature === 10 ? (
+            {selectedOrder.temperature === 10 ? (
               <div className="flex bg-[#d63535] rounded-full w-10 h-10 items-center justify-center relative mr-3">
                 <img
                   src={
-                    localData.whatsapp?.avatar || "/assets/anonymous_avatar.png"
+                    selectedOrder.whatsapp?.avatar || "/assets/anonymous_avatar.png"
                   }
                   className="rounded-full w-10 h-10"
                 />
@@ -362,36 +240,36 @@ export function OrdersRHDisplayModal(
             ) : (
               <img
                 src={
-                  localData.whatsapp?.avatar || "/assets/anonymous_avatar.png"
+                  selectedOrder.whatsapp?.avatar || "/assets/anonymous_avatar.png"
                 }
                 className="h-10 w-10 rounded-full mr-3"
               />
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <DisplayGenerator title="Nome:" value={localData.full_name} />
+              <DisplayGenerator title="Nome:" value={selectedOrder.full_name} />
               <DisplayGenerator
                 title="Nome (RFB):"
-                value={localData.rfb_name}
+                value={selectedOrder.rfb_name}
               />
               <DisplayGenerator
                 title="Gênero:"
                 value={
-                  (localData.rfb_gender) === "M"
+                  (selectedOrder.rfb_gender) === "M"
                     ? "Masculino"
-                    : (localData.rfb_gender) === "F"
+                    : (selectedOrder.rfb_gender) === "F"
                       ? "Feminino"
                       : "-"
                 }
               />
-              <DisplayGenerator title="CPF:" value={formatCPF(localData.cpf || "")} />
+              <DisplayGenerator title="CPF:" value={formatCPF(selectedOrder.cpf || "")} />
 
 
               <DisplayGenerator
                 title="Data Nascimento (RFB):"
-                value={localData.rfb_birth_date ? convertData(localData.rfb_birth_date) : "-"}
+                value={selectedOrder.rfb_birth_date ? convertData(selectedOrder.rfb_birth_date) : "-"}
               />
 
-              <DisplayGenerator title="Email:" value={localData.email} />
+              <DisplayGenerator title="Email:" value={selectedOrder.email} />
             </div>
           </div>
 
@@ -406,22 +284,22 @@ export function OrdersRHDisplayModal(
                 <div className="p-1 space-y-1">
                   <DisplayGenerator
                     title="Número:"
-                    value={formatPhoneNumber(localData.phone || "")}
+                    value={formatPhoneNumber(selectedOrder.phone || "")}
                   />
                   <DisplayGenerator
                     title="Anatel:"
-                    value={formatYesNo(localData.phone_valid)}
+                    value={formatYesNo(selectedOrder.phone_valid)}
                   />
                   <DisplayGenerator
                     title="Operadora:"
-                    value={localData.operator}
+                    value={selectedOrder.operator}
                   />
                   <DisplayGenerator
                     title="Portado:"
                     value={
-                      localData.phone_ported === "Sim" || localData.phone_ported === "Não"
-                        ? localData.phone_ported
-                        : formatYesNo(localData.phone_ported)
+                      selectedOrder.phone_ported === "Sim" || selectedOrder.phone_ported === "Não"
+                        ? selectedOrder.phone_ported
+                        : formatYesNo(selectedOrder.phone_ported)
                     }
                   />
                   <DisplayGenerator
@@ -435,11 +313,11 @@ export function OrdersRHDisplayModal(
 
                   {/* <DisplayGenerator
                     title="Status:"
-                    value={localData.whatsapp?.recado}
+                    value={selectedOrder.whatsapp?.recado}
                   /> */}
                   {/* <DisplayGenerator
                     title="Título WA:"
-                    value={localData.nome_whatsapp}
+                    value={selectedOrder.nome_whatsapp}
                   /> */}
                 </div>
               </div>
@@ -452,19 +330,19 @@ export function OrdersRHDisplayModal(
                 <div className="rounded p-1 space-y-1">
                   <DisplayGenerator
                     title="Número:"
-                    value={formatPhoneNumber(localData.additional_phone || "")}
+                    value={formatPhoneNumber(selectedOrder.additional_phone || "")}
                   />
                   <DisplayGenerator
                     title="Anatel:"
-                    value={formatYesNo(localData.additional_phone_valid)}
+                    value={formatYesNo(selectedOrder.additional_phone_valid)}
                   />
                   <DisplayGenerator
                     title="Operadora:"
-                    value={localData.additional_operator}
+                    value={selectedOrder.additional_operator}
                   />{" "}
                   <DisplayGenerator
                     title="Portado:"
-                    value={formatYesNo(localData.additional_phone_ported)}
+                    value={formatYesNo(selectedOrder.additional_phone_ported)}
                   />
                   <DisplayGenerator
                     title="Data da Portabilidade:"
@@ -477,9 +355,9 @@ export function OrdersRHDisplayModal(
                   {/* <DisplayGenerator
                     title="WhatsApp:"
                     value={
-                      localData.whatsapp?.is_comercial === true
+                      selectedOrder.whatsapp?.is_comercial === true
                         ? "Business"
-                        : localData.whatsapp?.is_comercial === false
+                        : selectedOrder.whatsapp?.is_comercial === false
                           ? "Messenger"
                           : "-"
                     }
@@ -494,13 +372,13 @@ export function OrdersRHDisplayModal(
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <DisplayGenerator
                 title="Sócio:"
-                value={formatYesNo(localData.is_socio)}
+                value={formatYesNo(selectedOrder.is_socio)}
               />{" "}
-              <EmpresasDisplay empresas={localData.socios_empresas} />
+              <EmpresasDisplay empresas={selectedOrder.socios_empresas} />
               <div className="md:col-span-2">
                 <DisplayGenerator
                   title="MEI:"
-                  value={formatYesNo(localData.is_mei)}
+                  value={formatYesNo(selectedOrder.is_mei)}
                 />
               </div>
             </div>
@@ -614,29 +492,29 @@ export function OrdersRHDisplayModal(
           {/* Informações de Rede */}
           <div className="bg-white rounded-md p-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <DisplayGenerator title="IP:" value={localData.client_ip} />
-              <DisplayGenerator title="Provedor:" value={localData.ip_isp} />
+              <DisplayGenerator title="IP:" value={selectedOrder.client_ip} />
+              <DisplayGenerator title="Provedor:" value={selectedOrder.ip_isp} />
               <DisplayGenerator
                 title="Tipo de acesso:"
                 value={
-                  (localData.ip_access_type) === "movel"
+                  (selectedOrder.ip_access_type) === "movel"
                     ? "Móvel"
-                    : (localData.ip_access_type) === "fixo"
+                    : (selectedOrder.ip_access_type) === "fixo"
                       ? "Fixo"
-                      : (localData.ip_access_type) === "hosting"
+                      : (selectedOrder.ip_access_type) === "hosting"
                         ? "Hosting"
-                        : (localData.ip_access_type) === "proxy"
+                        : (selectedOrder.ip_access_type) === "proxy"
                           ? "Proxy"
-                          : (localData.ip_access_type) === "local"
+                          : (selectedOrder.ip_access_type) === "local"
                             ? "Local"
-                            : (localData.ip_access_type) === "desconhecido"
+                            : (selectedOrder.ip_access_type) === "desconhecido"
                               ? "Desconhecido"
                               : "-"
                 }
               />
               <DisplayGenerator
                 title="URL:"
-                value={localData.url}
+                value={selectedOrder.url}
                 maxLength={50}
               />
             </div>
@@ -671,18 +549,18 @@ export function OrdersRHDisplayModal(
               />
               <DisplayGenerator
                 title="ID Fingerprint:"
-                value={localData.fingerprint_id || "-"}
+                value={selectedOrder.fingerprint_id || "-"}
               />
             </div>
           </div>
         </div>
       </div>
-      {/* {localData?.status === "FECHADO" &&
+      {/* {selectedOrder?.status === "FECHADO" &&
         getAlertScenarios(
-          localData?.availability,
-          localData?.encontrado_via_range,
-          localData?.cep_unico,
-          localData?.status,
+          selectedOrder?.availability,
+          selectedOrder?.encontrado_via_range,
+          selectedOrder?.cep_unico,
+          selectedOrder?.status,
         ).map((scenario, idx) => (
           <div
             key={idx}
