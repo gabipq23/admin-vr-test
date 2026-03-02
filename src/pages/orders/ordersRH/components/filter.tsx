@@ -111,9 +111,9 @@ export function FiltroOrdersRHForm({
                   value={field.value?.length ? field.value : []}
                   onChange={field.onChange}
                   options={[
-                    { value: "aberto", label: "Aberto" },
-                    { value: "fechado", label: "Fechado" },
-                    { value: "cancelado", label: "Cancelado" },
+                    { value: "ABERTO", label: "Aberto" },
+                    { value: "FECHADO", label: "Fechado" },
+                    { value: "CANCELADO", label: "Cancelado" },
                   ]}
                   allowClear
                 />

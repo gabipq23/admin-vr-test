@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LocalStorageKeys, LocalStorageService } from "@/services/storage";
 
 // essa vai mudar pra novo cliente
 export const apiPurchase = axios.create({
@@ -7,6 +8,27 @@ export const apiPurchase = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const api = axios.create({
+  baseURL: "https://evolution.bigdates.com.br:3720",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+const attachAuthToken = (config: any) => {
+  const localStorageService = new LocalStorageService();
+  const token = localStorageService.getItem(LocalStorageKeys.accessToken);
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+};
+
+api.interceptors.request.use(attachAuthToken);
+apiPurchase.interceptors.request.use(attachAuthToken);
 
 // Tools
 export const apiBase2b = axios.create({

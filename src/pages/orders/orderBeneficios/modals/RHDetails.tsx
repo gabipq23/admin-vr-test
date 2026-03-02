@@ -12,10 +12,14 @@ export function OrdersRHDetailsModal({
     isModalOpen,
     closeModal,
     selectedOrder,
+    removeOrderData,
+    isRemoveOrderFetching,
 }: {
     isModalOpen: boolean;
     closeModal: () => void;
     selectedOrder: VROrder | null;
+    removeOrderData: (id: number) => void;
+    isRemoveOrderFetching: boolean;
 }) {
     const [isEditing, setIsEditing] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -74,11 +78,12 @@ export function OrdersRHDetailsModal({
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={() => {
-                    console.log("isso");
+                    removeOrderData(selectedOrder.id);
+                    closeModal();
                 }}
-                isLoading={false}
+                isLoading={isRemoveOrderFetching}
                 message="Tem certeza que deseja excluir o pedido"
-                itemToDelete={""}
+                itemToDelete={selectedOrder.order_number}
             />
         </ConfigProvider>
     );

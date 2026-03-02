@@ -120,7 +120,7 @@ const localData =
       name: "Mariana Costa Lima",
     },
   ],
-  status: "aberto",
+  status: "ABERTO",
   temperature: 7,
   updated_at: "2026-02-25T21:10:10.000Z",
   url: "https://portal.exemplo.com/pedido/96248817",
@@ -235,7 +235,7 @@ export function OrdersRHDisplayModal(
   //   const isCoveredByRange = encontrado_via_range === 1;
   //   const hasUnicCep = cep_unico === 1;
 
-  //   if (status === "fechado") {
+  //   if (status === "FECHADO") {
   //     if (noAvailability) {
   //       scenarios.push({
   //         color: "#ffeaea",
@@ -257,7 +257,7 @@ export function OrdersRHDisplayModal(
   //   }
 
   //   if (
-  //     status === "fechado" &&
+  //     status === "FECHADO" &&
   //     !hasUnicCep &&
   //     !isCoveredByRange &&
   //     !noAvailability
@@ -316,6 +316,18 @@ export function OrdersRHDisplayModal(
                     <DisplayGenerator
                       title="Valor médio por colaborador:"
                       value={formatBRL(vrOrder?.["average_value_per_employee"]) || "-"}
+                    />
+                    <DisplayGenerator
+                      title="Faixa porte empresa:"
+                      value={(vrOrder?.["company_size_range"] as string) || "-"}
+                    />
+                    <DisplayGenerator
+                      title="Objetivo do contato:"
+                      value={(vrOrder?.["contact_objective"] as string) || "-"}
+                    />
+                    <DisplayGenerator
+                      title="Landing page:"
+                      value={(vrOrder?.["landing_page"] as string) || "-"}
                     />
                   </>
                 )}
@@ -667,7 +679,7 @@ export function OrdersRHDisplayModal(
           </div>
         </div>
       </div>
-      {/* {localData?.status === "fechado" &&
+      {/* {localData?.status === "FECHADO" &&
         getAlertScenarios(
           localData?.availability,
           localData?.encontrado_via_range,

@@ -14,7 +14,7 @@ export function getFiltersFromURL(): any {
       : rawInitialStatus === "pedido"
         ? "pedido"
         : "";
-  const allowedStatus: any[] = ["aberto", "fechado", "cancelado"];
+  const allowedStatus: any[] = ["ABERTO", "FECHADO", "CANCELADO"];
   const status = allowedStatus.includes(rawStatus as any)
     ? (rawStatus as any)
     : null;

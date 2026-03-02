@@ -4,9 +4,10 @@ import { useAuthContext } from "./context";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import axios from "axios";
 interface ILoginForm {
   email: string;
-  senha: string;
+  password: string;
 }
 
 export function Login() {
@@ -19,10 +20,14 @@ export function Login() {
     onSuccess: () => {
       navigate("/admin/pedidos-aparelhos-pj");
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      const axiosMessage = axios.isAxiosError(error)
+        ? error.response?.data?.message
+        : undefined;
+
       const errorMessage =
-        error?.response?.data?.message ||
-        error?.erro ||
+        (error instanceof Error ? error.message : undefined) ||
+        axiosMessage ||
         "Erro ao realizar login";
 
       toast.error(`${errorMessage}`);
@@ -84,11 +89,11 @@ export function Login() {
               <p className="text-[14px] text-neutral-200">Senha: </p>
 
               <Controller
-                name="senha"
+                name="password"
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
-                  <Input.Password {...field} placeholder="Digite sua senha" />
+                  <Input.Password {...field} placeholder="Digite sua password" />
                 )}
               />
               <div className="flex justify-center mt-4">

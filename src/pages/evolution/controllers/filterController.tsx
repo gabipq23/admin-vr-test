@@ -32,7 +32,7 @@ function getFiltersFromURL(): {
   const params = new URLSearchParams(window.location.search);
 
   // const rawStatus = params.get("status");
-  // const allowedStatus: any[] = ["aberto", "fechado", "cancelado"];
+  // const allowedStatus: any[] = ["ABERTO", "FECHADO", "CANCELADO"];
   // const status = allowedStatus.includes(rawStatus as any)
   //   ? (rawStatus as any)
   //   : null;

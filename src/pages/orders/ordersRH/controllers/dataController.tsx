@@ -1,7 +1,48 @@
 import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { VROrdersService } from "@/services/vrOrders";
+import { toast } from "sonner";
 
 
 export function useRHOrdersController() {
+  const vrOrdersService = new VROrdersService();
+  const queryClient = useQueryClient();
+
+  const params = new URLSearchParams(window.location.search);
+  const pageParam = Number(params.get("page") || "1");
+  const limitParam = Number(params.get("limit") || "20");
+  const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam;
+  const perPage = Number.isNaN(limitParam) || limitParam < 1 ? 20 : limitParam;
+
+  const { data: ordersResponse, isLoading } = useQuery({
+    queryKey: ["vrOrders", "RH", page, perPage],
+    queryFn: () =>
+      vrOrdersService.getOrders({
+        page,
+        per_page: perPage,
+        order_type: "RH",
+      }),
+    refetchOnWindowFocus: false,
+  });
+
+  const ordersRH = ordersResponse?.orders ?? [];
+  const totalItems = ordersResponse?.total ?? 0;
+
+  const { mutate: removeOrder, isPending: isRemoveOrderFetching } = useMutation({
+    mutationFn: async ({ id }: { id: number }) =>
+      vrOrdersService.deleteOrder(id),
+    onMutate: async () =>
+      await queryClient.cancelQueries({ queryKey: ["vrOrders", "RH"] }),
+    onSuccess: async () => {
+      toast.success("Pedido removido com sucesso!");
+      await queryClient.invalidateQueries({ queryKey: ["vrOrders", "RH"] });
+    },
+    onError: (error) => {
+      toast.error("Houve um erro ao remover o pedido. Tente novamente");
+      console.error(error);
+    },
+  });
+
   //   const bandaLargaService = new BandaLargaService();
   //   const queryClient = useQueryClient();
   //   const params = new URLSearchParams(window.location.search);
@@ -9,6 +50,10 @@ export function useRHOrdersController() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const removeOrderData = (id: number) => {
+    removeOrder({ id });
+  };
   //   // Modal
   //   const [isModalOpen, setIsModalOpen] = useState(false);
   //   const showModal = () => setIsModalOpen(true);
@@ -170,6 +215,11 @@ export function useRHOrdersController() {
   //   );
 
   return {
+    ordersRH,
+    isLoading,
+    totalItems,
+    removeOrderData,
+    isRemoveOrderFetching,
     // ordersBandaLarga,
     showModal,
     closeModal,

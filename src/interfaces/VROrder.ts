@@ -1,4 +1,10 @@
-type RHVROrder = {
+type CommonVROrderFields = {
+  company_size_range?: string | null;
+  contact_objective?: string | null;
+  landing_page?: string | null;
+};
+
+type RHVROrder = CommonVROrderFields & {
   already_has_point_solution: boolean;
   number_of_employees_home: number;
   number_of_employees_office: number;
@@ -6,7 +12,7 @@ type RHVROrder = {
   whats_rh_digital: boolean;
 };
 
-type BeneficiosVROrder = {
+type BeneficiosVROrder = CommonVROrderFields & {
   already_has_another_benefit: boolean;
   benefit_name: string;
   number_of_beneficiaries: number;
@@ -18,7 +24,7 @@ type BeneficiosVROrder = {
   average_value_per_employee_vale_auto: number;
 };
 
-type MobilidadeVROrder = {
+type MobilidadeVROrder = CommonVROrderFields & {
   whats_vt: boolean;
   already_has_another_solution: boolean;
   point_solution_name: string;

@@ -1,8 +1,9 @@
 export interface IUser {
   id: number;
-  nome: string;
+  name: string;
   email: string;
-  perfil: string;
+  nome?: string;
+  perfil?: string;
 }
 
 export interface AuthState {
@@ -14,5 +15,5 @@ export interface AuthState {
 
 export interface ILoginData {
   email: string;
-  senha: string;
+  password: string;
 }

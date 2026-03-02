@@ -9,7 +9,7 @@ export default function SubHeader() {
   const navigate = useNavigate();
   const [selectedLink, setSelectedLink] = useState<string>("pedidos");
   const { logout } = useAuthContext();
-  // const user = JSON.parse(localStorage.getItem("vivoGold@user") || "null");
+  // const user = JSON.parse(localStorage.getItem("vr@user") || "null");
   // const userID = user?.id;
 
   const handleLogOut = useCallback(() => {

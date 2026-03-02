@@ -52,9 +52,9 @@ export default function HeaderInputs(
                   //   });
                   // }}
                   options={[
-                    { value: "aberto", label: "Aberto" },
-                    { value: "fechado", label: "Fechado" },
-                    { value: "cancelado", label: "Cancelado" },
+                    { value: "ABERTO", label: "Aberto" },
+                    { value: "FECHADO", label: "Fechado" },
+                    { value: "CANCELADO", label: "Cancelado" },
                   ]}
                 />
               </div>

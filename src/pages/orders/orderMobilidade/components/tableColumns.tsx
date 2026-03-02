@@ -108,11 +108,11 @@ export const useRHTableColumns = (): TableColumnsType<VROrder> => {
             title: "Pedido",
             dataIndex: "status",
             render: (status: string) =>
-                status === "aberto"
+                status === "ABERTO"
                     ? "Aberto"
-                    : status === "fechado"
+                    : status === "FECHADO"
                         ? "Fechado"
-                        : status === "cancelado"
+                        : status === "CANCELADO"
                             ? "Cancelado"
                             : "-",
             width: 80,
@@ -635,9 +635,9 @@ export const useRHTableColumns = (): TableColumnsType<VROrder> => {
                             {record.email || "-"}
                         </span>
                     </Tooltip>
-                    {record.is_email_valid === 1 ? (
+                    {record.is_email_valid === true ? (
                         <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    ) : record.is_email_valid === 0 ? (
+                    ) : record.is_email_valid === false ? (
                         <XCircle className="h-4 w-4 text-red-500" />
                     ) : null}
                 </span>
@@ -698,6 +698,46 @@ export const useRHTableColumns = (): TableColumnsType<VROrder> => {
                 average_value_per_employee !== null && average_value_per_employee !== undefined
                     ? formatBRL(average_value_per_employee)
                     : "-",
+        },
+        {
+            title: "Faixa porte empresa",
+            dataIndex: ["vr_order", "company_size_range"],
+            width: 170,
+            render: (company_size_range) => company_size_range || "-",
+        },
+        {
+            title: "Objetivo do contato",
+            dataIndex: ["vr_order", "contact_objective"],
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 180,
+            render: (contact_objective) => (
+                <Tooltip
+                    placement="topLeft"
+                    title={contact_objective}
+                    styles={{ body: { fontSize: "12px" } }}
+                >
+                    {contact_objective || "-"}
+                </Tooltip>
+            ),
+        },
+        {
+            title: "Landing Page",
+            dataIndex: ["vr_order", "landing_page"],
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 170,
+            render: (landing_page) => (
+                <Tooltip
+                    placement="topLeft"
+                    title={landing_page}
+                    styles={{ body: { fontSize: "12px" } }}
+                >
+                    {landing_page || "-"}
+                </Tooltip>
+            ),
         },
 
         {

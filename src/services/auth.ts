@@ -1,33 +1,47 @@
-import { apiPurchase } from "../configs/api";
+import { api } from "../configs/api";
 import { LocalStorageKeys, LocalStorageService } from "./storage";
 interface ILoginRequest {
   email: string;
-  senha: string;
+  password: string;
+}
+
+interface ILoginApiResponse {
+  success: boolean;
+  token: string;
+  admin: {
+    id: number;
+    name: string;
+    email: string;
+  };
 }
 
 interface ILoginResponse {
   token: string;
   user: {
     id: number;
-    nome: string;
+    name: string;
     email: string;
-    perfil: string;
   };
 }
 
 class AuthService {
-  async login({ email, senha }: ILoginRequest): Promise<ILoginResponse> {
-    const response = await apiPurchase.post<ILoginResponse>("/auth/login", {
+  async login({ email, password }: ILoginRequest): Promise<ILoginResponse> {
+    const response = await api.post<ILoginApiResponse>("/auth/login", {
       email,
-      senha,
+      password,
     });
 
-    const { token, user } = response.data;
+    const { success, token, admin } = response.data;
+
+    if (!success || !token || !admin) {
+      throw new Error("Falha na autenticação. Verifique suas credenciais.");
+    }
+
     const localStorageService = new LocalStorageService();
     localStorageService.setItem(LocalStorageKeys.accessToken, token);
-    localStorageService.setItem(LocalStorageKeys.user, JSON.stringify(user));
+    localStorageService.setItem(LocalStorageKeys.user, JSON.stringify(admin));
 
-    return { token, user };
+    return { token, user: admin };
   }
 
   getAuthToken(): ILoginResponse | null {
@@ -44,7 +58,7 @@ class AuthService {
 
   async logout(): Promise<void> {
     try {
-      await apiPurchase.post("/auth/logout");
+      await api.post("/auth/logout");
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     } finally {
