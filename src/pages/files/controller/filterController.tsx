@@ -19,7 +19,15 @@ export function getFiltersFromURL(): any {
 }
 
 
-export function useFilesFilterController() {
+export function useFilesFilterController({
+    changeFileStatus,
+    changeFileObservation,
+    removeFile,
+}: {
+    changeFileStatus: (args: { id: number; status: string }) => void;
+    changeFileObservation: (args: { id: number; observation: string }) => void;
+    removeFile: (id: number) => void;
+}) {
     const navigate = useNavigate();
     const filters = getFiltersFromURL();
 
@@ -61,8 +69,12 @@ export function useFilesFilterController() {
 
     const { styles } = useStyle();
 
-    const alwaysVisibleKeys = [""];
-    const allTableColumns = useRHTableColumns();
+    const alwaysVisibleKeys = ["actions"];
+    const allTableColumns = useRHTableColumns({
+        changeFileStatus,
+        changeFileObservation,
+        removeFile,
+    });
 
     const allColumnOptions = allTableColumns
         .filter(
@@ -95,15 +107,15 @@ export function useFilesFilterController() {
     const columns = [
         ...allTableColumns.filter(
             (col) =>
-                "dataIndex" in col && alwaysVisibleKeys.includes(String(col.dataIndex)),
-        ),
-        ...allTableColumns.filter(
-            (col) =>
                 "dataIndex" in col &&
                 !alwaysVisibleKeys.includes(String(col.dataIndex)) &&
                 visibleColumns.includes(
                     String(col.key || ("dataIndex" in col ? col.dataIndex : "")),
                 ),
+        ),
+        ...allTableColumns.filter(
+            (col) =>
+                "dataIndex" in col && alwaysVisibleKeys.includes(String(col.dataIndex)),
         ),
     ];
 

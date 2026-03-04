@@ -22,6 +22,9 @@ export function FiltroUsersForm({
 }: FiltroUsersFormProps) {
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
 
+  const greenOutlineButtonClass =
+    "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
   return (
     <>
       <form
@@ -116,12 +119,10 @@ export function FiltroUsersForm({
             styles={{ body: { fontSize: "11px" } }}
           >
             <Button
-              variant="outlined"
-              color="green"
+              className={greenOutlineButtonClass}
               style={{
                 width: "24px",
                 height: "28px",
-                color: "#029d23",
               }}
               htmlType="submit"
             >
@@ -135,10 +136,9 @@ export function FiltroUsersForm({
             styles={{ body: { fontSize: "11px" } }}
           >
             <Button
-              variant="outlined"
-              color="green"
+              className={greenOutlineButtonClass}
               onClick={onClear}
-              style={{ width: "24px", height: "28px", color: "#029d23" }}
+              style={{ width: "24px", height: "28px" }}
             >
               X
             </Button>
@@ -149,10 +149,9 @@ export function FiltroUsersForm({
             styles={{ body: { fontSize: "12px" } }}
           >
             <Button
-              variant="outlined"
-              color="green"
+              className={greenOutlineButtonClass}
               onClick={() => setShowCreateUserModal(true)}
-              style={{ width: "24px", height: "28px", color: "#029d23" }}
+              style={{ width: "24px", height: "28px" }}
             >
               +
             </Button>

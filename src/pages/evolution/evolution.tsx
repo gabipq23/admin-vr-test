@@ -8,6 +8,12 @@ import ModalQRCode from "./modals/modalQRCode";
 import { useEvolutionController } from "./controllers/dataController";
 // import { useEvolutionController } from "./controllers/dataController";
 
+const greenOutlineButtonClass =
+  "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
+const redOutlineButtonClass =
+  "!border-[#ef4444] !text-[#ef4444] hover:!border-[#ef4444] hover:!bg-[#ef444414]";
+
 export default function Evolution() {
   const queryClient = new QueryClient();
   const handleDeleteItem = (item: any) => {
@@ -69,7 +75,10 @@ export default function Evolution() {
                       },
                     }}
                   >
-                    <Button onClick={() => setShowModal(true)}>
+                    <Button
+                      className={greenOutlineButtonClass}
+                      onClick={() => setShowModal(true)}
+                    >
                       Conectar conta
                     </Button>
                   </ConfigProvider>
@@ -235,7 +244,7 @@ export function ModalDelete({
             }}
           >
             <Button
-              variant="outlined"
+              className={greenOutlineButtonClass}
               onClick={() => setShowDeleteModal(false)}
               style={{
                 fontSize: "14px",
@@ -244,12 +253,11 @@ export function ModalDelete({
               Cancelar
             </Button>
             <Button
-              variant="outlined"
+              className={redOutlineButtonClass}
               onClick={handleDelete}
               style={{
                 fontSize: "14px",
               }}
-              danger
             >
               Remover
             </Button>
@@ -323,7 +331,7 @@ export function ModalDisconnect({
             }}
           >
             <Button
-              variant="outlined"
+              className={greenOutlineButtonClass}
               onClick={() => setShowDisconnectModal(false)}
               style={{
                 fontSize: "14px",
@@ -332,12 +340,11 @@ export function ModalDisconnect({
               Cancelar
             </Button>
             <Button
-              variant="outlined"
+              className={redOutlineButtonClass}
               onClick={handleDisconnect}
               style={{
                 fontSize: "14px",
               }}
-              danger
             >
               Desconectar
             </Button>

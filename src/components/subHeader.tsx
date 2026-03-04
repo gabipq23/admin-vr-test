@@ -412,7 +412,7 @@ export default function SubHeader() {
 
               .logout-btn:hover .anticon {
                 color: #029d23 !important;
-                font-size: 15px;
+                font-size: 17px;
               }
             
               `}

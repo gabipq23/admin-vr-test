@@ -34,6 +34,10 @@ export function FiltroContactForm({
   contactsQuery,
 }: FiltroPedidosFormProps) {
   const { RangePicker } = DatePicker;
+
+  const greenOutlineButtonClass =
+    "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -209,12 +213,10 @@ export function FiltroContactForm({
           styles={{ body: { fontSize: "11px" } }}
         >
           <Button
-            variant="outlined"
-            color="green"
+            className={greenOutlineButtonClass}
             style={{
               width: "24px",
               height: "28px",
-              color: "#029d23",
             }}
             htmlType="submit"
           >
@@ -228,10 +230,9 @@ export function FiltroContactForm({
           styles={{ body: { fontSize: "11px" } }}
         >
           <Button
-            variant="outlined"
-            color="green"
+            className={greenOutlineButtonClass}
             onClick={onClear}
-            style={{ width: "24px", height: "28px", color: "#029d23" }}
+            style={{ width: "24px", height: "28px" }}
           >
             X
           </Button>
@@ -242,10 +243,9 @@ export function FiltroContactForm({
           styles={{ body: { fontSize: "11px" } }}
         >
           <Button
-            variant="outlined"
-            color="green"
+            className={greenOutlineButtonClass}
             onClick={onClear}
-            style={{ width: "24px", height: "28px", color: "#029d23" }}
+            style={{ width: "24px", height: "28px" }}
           >
             <DeleteOutlined onClick={removeContacts} />
           </Button>

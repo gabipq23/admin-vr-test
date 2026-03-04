@@ -102,7 +102,10 @@ export default function CheckOperadora() {
                         placement="top"
                         styles={{ body: { fontSize: "12px" } }}
                       >
-                        <Button onClick={handleClear} className="w-6 h-6">
+                        <Button
+                          onClick={handleClear}
+                          className="w-6 h-6 !border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]"
+                        >
                           X
                         </Button>
                       </Tooltip>

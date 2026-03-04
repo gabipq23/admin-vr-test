@@ -129,7 +129,10 @@ export default function Base2bEmpresa() {
                         placement="top"
                         styles={{ body: { fontSize: "12px" } }}
                       >
-                        <Button className="w-6 h-6" onClick={handleClear}>
+                        <Button
+                          className="w-6 h-6 !border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]"
+                          onClick={handleClear}
+                        >
                           X
                         </Button>
                       </Tooltip>

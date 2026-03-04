@@ -12,6 +12,13 @@ import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { formatCPF } from "@/utils/formatCPF";
 import { customLocale } from "@/utils/customLocale";
 import ConfirmDeleteModal from "@/components/confirmDeleteModal";
+
+const greenOutlineButtonClass =
+  "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
+const redOutlineButtonClass =
+  "!border-[#ef4444] !text-[#ef4444] hover:!border-[#ef4444] hover:!bg-[#ef444414]";
+
 export default function EditUserModal({
   isModalOpen,
   closeModal,
@@ -232,20 +239,16 @@ export default function EditUserModal({
                   {/* Botões de Ação */}
                   <div className="flex justify-end gap-3 pt-4">
                     <Button
-                      style={{ borderColor: "#029d23", color: "#029d23" }}
+                      className={greenOutlineButtonClass}
                       onClick={() => setIsEditing(false)}
                     >
                       Cancelar
                     </Button>
                     <Button
-                      type="primary"
+                      className={greenOutlineButtonClass}
                       onClick={() => {
                         handleSave();
                         setIsEditing(false);
-                      }}
-                      style={{
-                        backgroundColor: "#029d23",
-                        borderColor: "#029d23",
                       }}
                     >
                       Salvar
@@ -334,22 +337,14 @@ export default function EditUserModal({
 
                 {/* Botão de Editar */}
                 <div className="flex justify-end pt-4 gap-2">
-                  <Button
-                    type="primary"
-                    onClick={() => setIsEditing(true)}
-                    style={{
-                      backgroundColor: "#029d23",
-                      borderColor: "#029d23",
-                    }}
-                  >
+                  <Button className={greenOutlineButtonClass} onClick={() => setIsEditing(true)}>
                     Editar
                   </Button>
                   <Button
                     onClick={() => {
                       setShowDeleteModal(true);
                     }}
-                    color="red"
-                    variant="outlined"
+                    className={redOutlineButtonClass}
                   >
                     Remover
                   </Button>

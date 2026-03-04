@@ -10,6 +10,9 @@ interface ILoginForm {
   password: string;
 }
 
+const greenOutlineButtonClass =
+  "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
 export function Login() {
   const navigate = useNavigate();
   const { login } = useAuthContext();
@@ -97,7 +100,7 @@ export function Login() {
                 )}
               />
               <div className="flex justify-center mt-4">
-                <Button variant="outlined" color="green" htmlType="submit">
+                <Button className={greenOutlineButtonClass} htmlType="submit">
                   Entrar
                 </Button>
               </div>

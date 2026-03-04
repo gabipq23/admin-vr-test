@@ -13,6 +13,23 @@ export function Files() {
     const queryClient = new QueryClient();
 
     const {
+        // filesQuery: { status, error, refetch },
+        itemsPerPage,
+        // currentPage,
+        totalPages,
+        // files,
+        sortedData,
+        // changePage,
+        // changeItemsPerPage,
+        changeFileStatus,
+        changeFileObservation,
+        removeFile,
+        // toggleSortOrder,
+        // sortOrder,
+        // sortBy,
+    } = useFilesController();
+
+    const {
         //  isFiltered,
         control,
         onSubmit,
@@ -28,23 +45,11 @@ export function Files() {
         visibleColumns,
         handleColumnsChange,
 
-    } = useFilesFilterController();
-    const {
-        // filesQuery: { status, error, refetch },
-        itemsPerPage,
-        // currentPage,
-        totalPages,
-        // files,
-        sortedData,
-        // changePage,
-        // changeItemsPerPage,
-        // changeFileStatus,
-        // changeFileObservation,
-        // removeFile,
-        // toggleSortOrder,
-        // sortOrder,
-        // sortBy,
-    } = useFilesController();
+    } = useFilesFilterController({
+        changeFileStatus,
+        changeFileObservation,
+        removeFile,
+    });
 
     return (
 

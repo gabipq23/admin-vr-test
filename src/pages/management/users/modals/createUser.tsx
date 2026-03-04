@@ -9,6 +9,9 @@ import {
   Checkbox,
 } from "antd";
 
+const greenOutlineButtonClass =
+  "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
 export default function CreateUserModal({
   showCreateUserModal,
   setShowCreateUserModal,
@@ -193,17 +196,10 @@ export default function CreateUserModal({
 
             {/* Botões de Ação */}
             <div className="flex justify-end gap-3 pt-4">
-              <Button
-                style={{ borderColor: "#029d23", color: "#029d23" }}
-                onClick={handleCancel}
-              >
+              <Button className={greenOutlineButtonClass} onClick={handleCancel}>
                 Cancelar
               </Button>
-              <Button
-                onClick={handleSave}
-                type="primary"
-                style={{ backgroundColor: "#029d23", borderColor: "#029d23" }}
-              >
+              <Button className={greenOutlineButtonClass} onClick={handleSave}>
                 Adicionar
               </Button>
             </div>

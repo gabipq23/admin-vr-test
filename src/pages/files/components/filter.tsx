@@ -36,6 +36,9 @@ export function FiltroFilesForm({
 }: FiltroFilesFormProps) {
   const { RangePicker } = DatePicker;
 
+  const greenOutlineButtonClass =
+    "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
 
   return (
     <form
@@ -179,12 +182,10 @@ export function FiltroFilesForm({
               styles={{ body: { fontSize: "11px" } }}
             >
               <Button
-                variant="outlined"
-                color="green"
+                className={greenOutlineButtonClass}
                 style={{
                   width: "24px",
                   height: "28px",
-                  color: "#029d23",
                 }}
                 htmlType="submit"
               >
@@ -198,10 +199,9 @@ export function FiltroFilesForm({
               styles={{ body: { fontSize: "11px" } }}
             >
               <Button
-                variant="outlined"
-                color="green"
+                className={greenOutlineButtonClass}
                 onClick={onClear}
-                style={{ width: "24px", height: "28px", color: "#029d23" }}
+                style={{ width: "24px", height: "28px" }}
               >
                 X
               </Button>
@@ -282,7 +282,7 @@ export function FiltroFilesForm({
                 </div>
               )}
             >
-              <Button>Selecionar Colunas</Button>
+              <Button className={greenOutlineButtonClass}>Selecionar Colunas</Button>
             </Dropdown>
           </div>
         </ConfigProvider>

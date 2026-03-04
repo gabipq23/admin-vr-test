@@ -6,6 +6,9 @@ import { CopyOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Modal, Select, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 
+const greenOutlineButtonClass =
+  "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
 export function ContactInfoModal({
   isModalOpen,
   closeModal,
@@ -158,15 +161,7 @@ export function ContactInfoModal({
       </div>
 
       <div className="mt-4 flex gap-4 justify-end mr-4">
-        <Button
-          onClick={closeModal}
-          color="green"
-          variant="outlined"
-          style={{
-            color: "#029d23",
-            fontSize: "14px",
-          }}
-        >
+        <Button className={greenOutlineButtonClass} onClick={closeModal}>
           Fechar
         </Button>
       </div>

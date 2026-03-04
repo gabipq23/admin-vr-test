@@ -1,13 +1,35 @@
-import { TableColumnsType, Tooltip } from "antd";
+import {
+    TableColumnsType,
+    Tooltip,
+} from "antd";
 import { IFiles } from "@/interfaces/files";
 import { convertData } from "@/utils/convertData";
+import { FileActions } from "./fileActions";
+import { Status } from "@/services/files";
 
 type IFilesWithFallbackFields = IFiles & {
     creatdAt?: string;
     statys?: string;
 };
 
-export const useRHTableColumns = (): TableColumnsType<IFiles> => {
+const statusLabels: { [key in Status]: string } = {
+    [Status.PENDING]: "Pendente",
+    [Status.REJECTED]: "Reprovado",
+    [Status.APPROVED]: "Aprovado",
+};
+
+const getStatusLabel = (status: Status = Status.PENDING): string =>
+    statusLabels[status] || statusLabels[Status.PENDING];
+
+export const useRHTableColumns = ({
+    changeFileStatus,
+    changeFileObservation,
+    removeFile,
+}: {
+    changeFileStatus: (args: { id: number; status: string }) => void;
+    changeFileObservation: (args: { id: number; observation: string }) => void;
+    removeFile: (id: number) => void;
+}): TableColumnsType<IFiles> => {
     return [
         {
             title: "Avatar",
@@ -79,7 +101,8 @@ export const useRHTableColumns = (): TableColumnsType<IFiles> => {
             render: (_, record) => {
                 const status =
                     record.status || (record as IFilesWithFallbackFields).statys;
-                return status || "-";
+                if (!status) return "-";
+                return getStatusLabel(status as Status);
             },
         },
         {
@@ -98,5 +121,27 @@ export const useRHTableColumns = (): TableColumnsType<IFiles> => {
                 </Tooltip>
             ),
         },
+        {
+            title: "Ações",
+            key: "actions",
+            dataIndex: "actions",
+            width: 190,
+            fixed: "right",
+            render: (_, record) => (
+                <FileActions
+                    id={record.id}
+                    fileUrl={record.url}
+                    fileType={record.fileType}
+                    format={record.format}
+                    fileName={record.name}
+                    status={record.status}
+                    observation={record.observation}
+                    changeFileStatus={changeFileStatus}
+                    changeFileObservation={changeFileObservation}
+                    removeFile={removeFile}
+                />
+            ),
+        },
+
     ];
 };

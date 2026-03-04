@@ -1,6 +1,9 @@
 import { Button, ConfigProvider, Input, Modal } from "antd";
 import { useState } from "react";
 
+const greenOutlineButtonClass =
+  "!border-[#029d23] !text-[#029d23] hover:!border-[#029d23] hover:!bg-[#029d2314]";
+
 export function ModalCreateEvolution({
   showModal,
   setShowModal,
@@ -8,7 +11,12 @@ export function ModalCreateEvolution({
 }: {
   showModal: boolean;
   setShowModal: (show: boolean) => void;
-  createEvolutionInstance: any;
+  createEvolutionInstance: (payload: {
+    instanceName: string;
+    number: string;
+    qrcode: boolean;
+    clientId: string;
+  }) => void;
 }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -97,7 +105,7 @@ export function ModalCreateEvolution({
             }}
           >
             <Button
-              variant="outlined"
+              className={greenOutlineButtonClass}
               onClick={handleClose}
               style={{
                 fontSize: "14px",
@@ -106,7 +114,7 @@ export function ModalCreateEvolution({
               Cancelar
             </Button>
             <Button
-              variant="outlined"
+              className={greenOutlineButtonClass}
               onClick={handleSave}
               style={{
                 fontSize: "14px",

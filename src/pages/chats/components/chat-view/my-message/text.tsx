@@ -12,6 +12,9 @@ import { Modal } from "@/components/chat/common/modal";
 import { DialogClose, DialogFooter } from "@/components/chat/ui/dialog";
 import { Button } from "@/components/chat/ui/button";
 
+const greenOutlineButtonClass =
+  "border border-[#029d23] text-[#029d23] hover:bg-[#029d2314] hover:text-[#029d23]";
+
 interface ITextMessage extends IBaseMessage {
   onDeleteMessage: () => void;
   onEditMessage: (text: string) => void;
@@ -115,9 +118,8 @@ export const TextMessage = ({
             onSelect={() => setIsEditModalOpen(true)}
           >
             <p
-              className={`flex items-center gap-2 font-bold ${
-                canEdit ? "text-blue-400" : "text-muted"
-              }`}
+              className={`flex items-center gap-2 font-bold ${canEdit ? "text-blue-400" : "text-muted"
+                }`}
             >
               <Pen size={14} />
               Editar
@@ -135,9 +137,8 @@ export const TextMessage = ({
               onConfirm={() => handleDeleteMessage()}
             >
               <p
-                className={`flex items-center gap-2 font-bold ${
-                  canDelete ? "text-red-500" : "text-muted"
-                }`}
+                className={`flex items-center gap-2 font-bold ${canDelete ? "text-red-500" : "text-muted"
+                  }`}
               >
                 <Trash size={14} />
                 Apagar
@@ -175,13 +176,14 @@ export const TextMessage = ({
               <DialogClose asChild>
                 <Button
                   type="button"
-                  variant="secondary"
-                  className="shadow-md hover:bg-slate-100   "
+                  className={`shadow-md ${greenOutlineButtonClass}`}
                 >
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button type="submit">Editar</Button>
+              <Button type="submit" className={greenOutlineButtonClass}>
+                Editar
+              </Button>
             </DialogFooter>
           </DialogFooter>
         </form>
