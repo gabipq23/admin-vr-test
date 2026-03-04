@@ -35,9 +35,9 @@ export default function OrdersRH() {
   const navigate = useNavigate();
   const {
     control,
-    // onSubmit,
-    // handleSubmit,
-    // clearFilters,
+    onSubmit,
+    handleSubmit,
+    clearFilters,
     selectedBLOrder,
     setSelectedBLOrder,
     currentPage,
@@ -89,10 +89,10 @@ export default function OrdersRH() {
               {/* Filtro */}
               <FiltroOrdersRHForm
                 control={control}
-                // handleSubmit={handleSubmit}
-                // onSubmit={onSubmit}
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
                 selectedRowKeys={selectedRowKeys}
-                // onClear={clearFilters}
+                onClear={clearFilters}
                 // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
                 // orderBandaLargaPF={orderBandaLargaPF}
                 ordersRH={ordersRH}
@@ -148,7 +148,7 @@ export default function OrdersRH() {
                   pageSize: pageSize,
                   total: totalItems,
                   showSizeChanger: true,
-                  pageSizeOptions: ["50", "100", "200", "500"],
+                  pageSizeOptions: ["50", "100"],
                   showLessItems: true,
                   onChange: (page, pageSize) => {
                     const params = new URLSearchParams(window.location.search);

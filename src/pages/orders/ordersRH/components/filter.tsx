@@ -1,4 +1,4 @@
-import { Controller, Control, } from "react-hook-form";
+import { Controller, Control, UseFormHandleSubmit } from "react-hook-form";
 import {
   Input,
   Button,
@@ -19,9 +19,9 @@ import { VROrder } from "@/interfaces/VROrder";
 
 interface FiltroPedidosFormProps {
   control: Control<any>;
-  // handleSubmit: UseFormHandleSubmit<any>;
-  // onSubmit: (data: any) => void;
-  // onClear: () => void;
+  handleSubmit: UseFormHandleSubmit<any>;
+  onSubmit: (data: any) => void;
+  onClear: () => void;
   selectedRowKeys: React.Key[];
   // statusOptions?: string[];
   ordersRH: VROrder[];
@@ -42,9 +42,9 @@ const CPFInput = (props: PatternFormatProps) => (
 );
 export function FiltroOrdersRHForm({
   control,
-  // handleSubmit,
-  // onSubmit,
-  // onClear,
+  handleSubmit,
+  onSubmit,
+  onClear,
   // statusOptions,
   selectedRowKeys,
   ordersRH,
@@ -60,8 +60,8 @@ export function FiltroOrdersRHForm({
 
   return (
     <form
-      // onSubmit={handleSubmit(onSubmit)}
-      // onReset={onClear}
+      onSubmit={handleSubmit(onSubmit)}
+      onReset={onClear}
       className="flex justify-between items-center  min-w-[200px] flex-wrap  gap-2 "
     >
       <div className="flex gap-2 items-center flex-wrap ">
@@ -91,7 +91,7 @@ export function FiltroOrdersRHForm({
           >
             <Controller
               control={control}
-              name="ordernumber"
+              name="id"
               render={({ field }) => (
                 <Input
                   {...field}
@@ -110,10 +110,9 @@ export function FiltroOrdersRHForm({
               name="status"
               render={({ field }) => (
                 <Select
-                  mode="multiple"
                   style={{ minWidth: "120px" }}
                   placeholder="Pedido"
-                  value={field.value?.length ? field.value : []}
+                  value={field.value || undefined}
                   onChange={field.onChange}
                   options={[
                     { value: "ABERTO", label: "Aberto" },
@@ -155,14 +154,14 @@ export function FiltroOrdersRHForm({
               )}
             />
 
-            {/* Período de datas: data_de (início) e data_ate (fim) */}
+            {/* Período de datas: date_from (início) e date_to (fim) */}
             <Controller
               control={control}
-              name="data_de"
+              name="date_from"
               render={({ field: fieldDe }) => (
                 <Controller
                   control={control}
-                  name="data_ate"
+                  name="date_to"
                   render={({ field: fieldAte }) => (
                     <RangePicker
                       style={{
@@ -184,16 +183,12 @@ export function FiltroOrdersRHForm({
                       onChange={(dates) => {
                         fieldDe.onChange(
                           dates && dates[0]
-                            ? encodeURIComponent(
-                              dates[0].startOf("day").format("YYYY-MM-DD"),
-                            )
+                            ? dates[0].startOf("day").format("YYYY-MM-DD")
                             : null,
                         );
                         fieldAte.onChange(
                           dates && dates[1]
-                            ? encodeURIComponent(
-                              dates[1].endOf("day").format("YYYY-MM-DD"),
-                            )
+                            ? dates[1].endOf("day").format("YYYY-MM-DD")
                             : null,
                         );
                       }}
@@ -230,7 +225,7 @@ export function FiltroOrdersRHForm({
             >
               <Button
                 className={greenOutlineButtonClass}
-                // onClick={onClear}
+                htmlType="reset"
                 style={{ width: "24px", height: "28px" }}
               >
                 X

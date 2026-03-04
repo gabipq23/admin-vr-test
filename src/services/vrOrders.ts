@@ -8,6 +8,10 @@ export interface IGetVROrdersParams {
   page?: number;
   per_page?: number;
   order_type?: VROrderType;
+  id?: number;
+  status?: VROrderStatus;
+  date_from?: string;
+  date_to?: string;
 }
 
 export interface IGetVROrdersResponse {
@@ -28,12 +32,20 @@ export class VROrdersService {
     page = 1,
     per_page = 20,
     order_type,
+    id,
+    status,
+    date_from,
+    date_to,
   }: IGetVROrdersParams): Promise<IGetVROrdersResponse> {
     const res = await api.get<IGetVROrdersResponse>("/orders", {
       params: {
         page,
         per_page,
         order_type,
+        id,
+        status,
+        date_from,
+        date_to,
       },
     });
 

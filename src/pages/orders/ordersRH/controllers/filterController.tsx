@@ -28,11 +28,12 @@ export function getFiltersFromURL(): any {
   const cpf = params.get("cpf") || undefined;
   const cnpj = params.get("cnpj") || undefined;
   const razaosocial = params.get("razaosocial") || undefined;
-  const ordernumber = params.get("ordernumber") || undefined;
-  const data_ate = params.get("data_ate") || undefined;
-  const data_de = params.get("data_de") || undefined;
+  const id = params.get("id") || params.get("ordernumber") || undefined;
+  const date_from = params.get("date_from") || params.get("data_de") || undefined;
+  const date_to = params.get("date_to") || params.get("data_ate") || undefined;
   const page = parseInt(params.get("page") || "1", 10);
-  const limit = parseInt(params.get("limit") || "200", 10);
+  const limitRaw = parseInt(params.get("limit") || "100", 10);
+  const limit = Number.isNaN(limitRaw) || limitRaw < 1 ? 100 : Math.min(limitRaw, 100);
   const order = params.get("order") as "asc" | "desc" | null;
   const sort = params.get("sort") || undefined;
   const status_pos_venda = params.get("status_pos_venda") || null;
@@ -45,9 +46,9 @@ export function getFiltersFromURL(): any {
     cpf,
     cnpj,
     razaosocial,
-    ordernumber,
-    data_ate,
-    data_de,
+    id,
+    date_from,
+    date_to,
     page,
     limit,
     order: order === "asc" || order === "desc" ? order : undefined,
@@ -77,12 +78,12 @@ export function useAllOrdersFilterController() {
       cpf: "",
       cnpj: "",
       razaosocial: "",
-      ordernumber: "",
-      data_ate: "",
-      data_de: "",
+      id: filters.id || "",
+      date_from: filters.date_from || "",
+      date_to: filters.date_to || "",
       order: undefined,
       sort: "",
-      status: null,
+      status: filters.status || null,
       status_pos_venda: "",
       initial_status: filters.initial_status || "",
     },
@@ -112,14 +113,14 @@ export function useAllOrdersFilterController() {
       params.set("cnpj", cnpjSemMascara);
     }
     if (data.razaosocial) params.set("razaosocial", data.razaosocial);
-    if (data.ordernumber) params.set("ordernumber", data.ordernumber);
-    if (data.data_de) params.set("data_de", data.data_de);
-    if (data.data_ate) params.set("data_ate", data.data_ate);
+    if (data.id) params.set("id", String(data.id));
+    if (data.date_from) params.set("date_from", data.date_from);
+    if (data.date_to) params.set("date_to", data.date_to);
     if (data.status) params.set("status", data.status);
     if (data.initial_status) params.set("initial_status", data.initial_status);
 
     params.set("page", "1");
-    params.set("limit", "200");
+    params.set("limit", "100");
     if (data.order) params.set("order", data.order);
     if (data.sort) params.set("sort", data.sort);
 

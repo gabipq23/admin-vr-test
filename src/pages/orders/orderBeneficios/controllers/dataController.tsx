@@ -14,16 +14,34 @@ export function useBeneficiosOrdersController() {
   const params = new URLSearchParams(window.location.search);
   const pageParam = Number(params.get("page") || "1");
   const limitParam = Number(params.get("limit") || "20");
+  const idParam = Number(params.get("id"));
+  const statusParam = params.get("status");
+  const dateFromParam = params.get("date_from");
+  const dateToParam = params.get("date_to");
   const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam;
-  const perPage = Number.isNaN(limitParam) || limitParam < 1 ? 20 : limitParam;
+  const perPage =
+    Number.isNaN(limitParam) || limitParam < 1
+      ? 20
+      : Math.min(limitParam, 100);
+  const allowedStatus: VROrderStatus[] = ["ABERTO", "FECHADO", "CANCELADO"];
+  const id = Number.isNaN(idParam) || idParam < 1 ? undefined : idParam;
+  const status = allowedStatus.includes(statusParam as VROrderStatus)
+    ? (statusParam as VROrderStatus)
+    : undefined;
+  const date_from = dateFromParam || undefined;
+  const date_to = dateToParam || undefined;
 
   const { data: ordersResponse, isLoading } = useQuery({
-    queryKey: ["vrOrders", "BENEFICIOS", page, perPage],
+    queryKey: ["vrOrders", "BENEFICIOS", page, perPage, id, status, date_from, date_to],
     queryFn: () =>
       vrOrdersService.getOrders({
         page,
         per_page: perPage,
         order_type: "BENEFICIOS",
+        id,
+        status,
+        date_from,
+        date_to,
       }),
     refetchOnWindowFocus: false,
   });
