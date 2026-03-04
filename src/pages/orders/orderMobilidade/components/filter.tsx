@@ -14,15 +14,17 @@ import { DatePicker } from "antd";
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 import dayjs from "dayjs";
 import { customLocale } from "@/utils/customLocale";
+import { handleExportVROrdersXLSX } from "../../shared/export-xlsx-vr";
+import { VROrder } from "@/interfaces/VROrder";
 
 interface FiltroPedidosFormProps {
   control: Control<any>;
   // handleSubmit: UseFormHandleSubmit<any>;
   // onSubmit: (data: any) => void;
   // onClear: () => void;
-  // selectedRowKeys: any;
+  selectedRowKeys: React.Key[];
   // statusOptions?: string[];
-  // orderRH: any;
+  ordersMobilidade: VROrder[];
   allColumnOptions: any[];
   visibleColumns: string[];
   handleColumnsChange: (checked: string[]) => void;
@@ -44,8 +46,8 @@ export function FiltroOrdersMobilidadeForm({
   // onSubmit,
   // onClear,
   // statusOptions,
-  // selectedRowKeys,
-  // orderRH,
+  selectedRowKeys,
+  ordersMobilidade,
   allColumnOptions,
   visibleColumns,
   handleColumnsChange,
@@ -243,9 +245,16 @@ export function FiltroOrdersMobilidadeForm({
                 variant="outlined"
                 color="green"
                 style={{ width: "24px", height: "28px", color: "#029d23" }}
-              // onClick={() =>
-              //   handleExportXLSX(orderRH, selectedRowKeys)
-              // }
+                onClick={() =>
+                  handleExportVROrdersXLSX({
+                    type: "MOBILIDADE",
+                    data: ordersMobilidade,
+                    selectedRowKeys: selectedRowKeys.filter(
+                      (key): key is string | number =>
+                        typeof key === "string" || typeof key === "number",
+                    ),
+                  })
+                }
               >
                 <DownloadOutlined />
               </Button>

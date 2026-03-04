@@ -10,6 +10,7 @@ import { FiltroOrdersMobilidadeForm } from "./components/filter.tsx";
 import { VROrder } from "@/interfaces/VROrder";
 import { OrdersMobilidadeDetailsModal } from "./modals/mobilidadeDetails.tsx";
 import { useMobilidadeOrdersController } from "./controllers/dataController.tsx";
+import { VROrderStatus } from "@/services/vrOrders";
 
 type MobilidadeTableRow = VROrder & {
   availability?: boolean | number | null;
@@ -27,7 +28,9 @@ export default function OrdersMobilidade() {
     isLoading,
     totalItems,
     removeOrderData,
+    changeOrderStatusData,
     isRemoveOrderFetching,
+    isChangeOrderStatusFetching,
   } = useMobilidadeOrdersController();
   const navigate = useNavigate();
   const {
@@ -88,10 +91,11 @@ export default function OrdersMobilidade() {
                 control={control}
                 // handleSubmit={handleSubmit}
                 // onSubmit={onSubmit}
-                // selectedRowKeys={selectedRowKeys}
+                selectedRowKeys={selectedRowKeys}
                 // onClear={clearFilters}
                 // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
                 // orderBandaLargaPF={orderBandaLargaPF}
+                ordersMobilidade={ordersMobilidade}
 
                 allColumnOptions={allColumnOptions}
                 visibleColumns={visibleColumns}
@@ -168,6 +172,10 @@ export default function OrdersMobilidade() {
             selectedOrder={selectedBLOrder}
             removeOrderData={removeOrderData}
             isRemoveOrderFetching={isRemoveOrderFetching}
+            changeOrderStatusData={(id: number, status: VROrderStatus) =>
+              changeOrderStatusData(id, status)
+            }
+            isChangeOrderStatusFetching={isChangeOrderStatusFetching}
           // updateDataIdVivoAndConsultorResponsavel={
           //   updateDataIdVivoAndConsultorResponsavel
           // }

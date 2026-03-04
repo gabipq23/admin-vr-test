@@ -539,7 +539,7 @@ export function OrdersRHDisplayModal({ selectedOrder }: any
               />
               <DisplayGenerator
                 title="TimeZone:"
-                value={fingerprint?.timezone || "-"}
+                value={selectedOrder.fingerprint?.timezone + " - " + selectedOrder.fingerprint?.timezone_name || "-"}
               />
               <DisplayGenerator
                 title="Resolução:"

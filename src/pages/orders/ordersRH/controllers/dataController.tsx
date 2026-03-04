@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { VROrdersService } from "@/services/vrOrders";
+import {
+  VROrdersService,
+  VROrderStatus,
+} from "@/services/vrOrders";
 import { toast } from "sonner";
 
 
@@ -43,6 +46,29 @@ export function useRHOrdersController() {
     },
   });
 
+  const { mutate: changeOrderStatus, isPending: isChangeOrderStatusFetching } =
+    useMutation({
+      mutationFn: async ({
+        id,
+        data,
+      }: {
+        id: number;
+        data: { status: VROrderStatus };
+      }) => vrOrdersService.updateOrderStatus(id, data),
+      onMutate: async () =>
+        await queryClient.cancelQueries({ queryKey: ["vrOrders", "RH"] }),
+      onSuccess: async () => {
+        toast.success("Status do pedido alterado com sucesso!");
+        await queryClient.invalidateQueries({
+          queryKey: ["vrOrders", "RH"],
+        });
+      },
+      onError: (error) => {
+        toast.error("Houve um erro ao alterar o status do pedido.");
+        console.error(error);
+      },
+    });
+
   //   const bandaLargaService = new BandaLargaService();
   //   const queryClient = useQueryClient();
   //   const params = new URLSearchParams(window.location.search);
@@ -53,6 +79,13 @@ export function useRHOrdersController() {
 
   const removeOrderData = (id: number) => {
     removeOrder({ id });
+  };
+
+  const changeOrderStatusData = (id: number, status: VROrderStatus) => {
+    changeOrderStatus({
+      id,
+      data: { status },
+    });
   };
   //   // Modal
   //   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -219,7 +252,9 @@ export function useRHOrdersController() {
     isLoading,
     totalItems,
     removeOrderData,
+    changeOrderStatusData,
     isRemoveOrderFetching,
+    isChangeOrderStatusFetching,
     // ordersBandaLarga,
     showModal,
     closeModal,

@@ -10,6 +10,7 @@ import { VROrder } from "@/interfaces/VROrder";
 import { useBeneficiosOrdersController } from "./controllers/dataController.tsx";
 import { OrdersBeneficiosDetailsModal } from "./modals/beneficiosDetails.tsx";
 import { FiltroOrderBeneficiosForm } from "./components/filter.tsx";
+import { VROrderStatus } from "@/services/vrOrders";
 
 type BeneficiosTableRow = VROrder & {
   availability?: boolean | number | null;
@@ -27,7 +28,9 @@ export default function OrdersBeneficios() {
     isLoading,
     totalItems,
     removeOrderData,
+    changeOrderStatusData,
     isRemoveOrderFetching,
+    isChangeOrderStatusFetching,
   } = useBeneficiosOrdersController();
   const navigate = useNavigate();
   const {
@@ -88,10 +91,11 @@ export default function OrdersBeneficios() {
                 control={control}
                 // handleSubmit={handleSubmit}
                 // onSubmit={onSubmit}
-                // selectedRowKeys={selectedRowKeys}
+                selectedRowKeys={selectedRowKeys}
                 // onClear={clearFilters}
                 // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
                 // orderBandaLargaPF={orderBandaLargaPF}
+                ordersBeneficios={ordersBeneficios}
 
                 allColumnOptions={allColumnOptions}
                 visibleColumns={visibleColumns}
@@ -168,6 +172,10 @@ export default function OrdersBeneficios() {
             selectedOrder={selectedBLOrder}
             removeOrderData={removeOrderData}
             isRemoveOrderFetching={isRemoveOrderFetching}
+            changeOrderStatusData={(id: number, status: VROrderStatus) =>
+              changeOrderStatusData(id, status)
+            }
+            isChangeOrderStatusFetching={isChangeOrderStatusFetching}
           // updateDataIdVivoAndConsultorResponsavel={
           //   updateDataIdVivoAndConsultorResponsavel
           // }

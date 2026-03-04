@@ -2,6 +2,7 @@ import { api } from "@/configs/api";
 import { VROrder } from "@/interfaces/VROrder";
 
 export type VROrderType = "RH" | "BENEFICIOS" | "MOBILIDADE";
+export type VROrderStatus = "ABERTO" | "FECHADO" | "CANCELADO";
 
 export interface IGetVROrdersParams {
   page?: number;
@@ -16,6 +17,10 @@ export interface IGetVROrdersResponse {
   page: number;
   perPage: number;
   totalPages: number;
+}
+
+export interface IUpdateVROrderStatusPayload {
+  status: VROrderStatus;
 }
 
 export class VROrdersService {
@@ -37,5 +42,12 @@ export class VROrdersService {
 
   async deleteOrder(id: number): Promise<void> {
     await api.delete(`/orders/${id}`);
+  }
+
+  async updateOrderStatus(
+    id: number,
+    data: IUpdateVROrderStatusPayload,
+  ): Promise<void> {
+    await api.patch(`/orders/${id}/status`, data);
   }
 }

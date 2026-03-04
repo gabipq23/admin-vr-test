@@ -10,6 +10,7 @@ import { FiltroOrdersRHForm } from "./components/filter";
 import { VROrder } from "@/interfaces/VROrder";
 import { OrdersRHDetailsModal } from "./modals/RHDetails.tsx";
 import { useRHOrdersController } from "./controllers/dataController";
+import { VROrderStatus } from "@/services/vrOrders";
 
 type RHTableRow = VROrder & {
   availability?: boolean | number | null;
@@ -27,7 +28,9 @@ export default function OrdersRH() {
     isLoading,
     totalItems,
     removeOrderData,
+    changeOrderStatusData,
     isRemoveOrderFetching,
+    isChangeOrderStatusFetching,
   } = useRHOrdersController();
   const navigate = useNavigate();
   const {
@@ -88,10 +91,11 @@ export default function OrdersRH() {
                 control={control}
                 // handleSubmit={handleSubmit}
                 // onSubmit={onSubmit}
-                // selectedRowKeys={selectedRowKeys}
+                selectedRowKeys={selectedRowKeys}
                 // onClear={clearFilters}
                 // statusOptions={ordersBandaLarga?.status_pos_venda_enum}
                 // orderBandaLargaPF={orderBandaLargaPF}
+                ordersRH={ordersRH}
 
                 allColumnOptions={allColumnOptions}
                 visibleColumns={visibleColumns}
@@ -168,6 +172,10 @@ export default function OrdersRH() {
             selectedOrder={selectedBLOrder}
             removeOrderData={removeOrderData}
             isRemoveOrderFetching={isRemoveOrderFetching}
+            changeOrderStatusData={(id: number, status: VROrderStatus) =>
+              changeOrderStatusData(id, status)
+            }
+            isChangeOrderStatusFetching={isChangeOrderStatusFetching}
           // updateDataIdVivoAndConsultorResponsavel={
           //   updateDataIdVivoAndConsultorResponsavel
           // }

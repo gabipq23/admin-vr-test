@@ -4,9 +4,10 @@ import HeaderInputs from "./headerInputs";
 
 import ConfirmDeleteModal from "@/components/confirmDeleteModal";
 import FooterButtons from "@/components/orders/footerButtons";
-import { generatePDF } from "../controllers/exportPDF";
+import { generateVRPDF } from "../../shared/export-pdf-vr";
 import { VROrder } from "@/interfaces/VROrder";
 import { OrdersRHDisplayModal } from "./RHDisplay";
+import { VROrderStatus } from "@/services/vrOrders";
 
 export function OrdersRHDetailsModal({
     isModalOpen,
@@ -14,12 +15,16 @@ export function OrdersRHDetailsModal({
     selectedOrder,
     removeOrderData,
     isRemoveOrderFetching,
+    changeOrderStatusData,
+    isChangeOrderStatusFetching,
 }: {
     isModalOpen: boolean;
     closeModal: () => void;
     selectedOrder: VROrder | null;
     removeOrderData: (id: number) => void;
     isRemoveOrderFetching: boolean;
+    changeOrderStatusData: (id: number, status: VROrderStatus) => void;
+    isChangeOrderStatusFetching: boolean;
 }) {
     const [isEditing, setIsEditing] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -55,7 +60,13 @@ export function OrdersRHDetailsModal({
         >
             <Modal
                 centered
-                title={<HeaderInputs />}
+                title={
+                    <HeaderInputs
+                        selectedOrder={selectedOrder}
+                        changeOrderStatusData={changeOrderStatusData}
+                        isChangeOrderStatusFetching={isChangeOrderStatusFetching}
+                    />
+                }
                 open={isModalOpen}
                 onCancel={closeModal}
                 footer={null}
@@ -67,7 +78,7 @@ export function OrdersRHDetailsModal({
                 <div className="mt-4 flex gap-4 justify-end">
                     {!isEditing && (
                         <FooterButtons
-                            onGeneratePDF={() => generatePDF("")}
+                            onGeneratePDF={() => generateVRPDF(selectedOrder)}
                             onEdit={() => setIsEditing(false)}
                             onDelete={() => setShowDeleteModal(true)}
                         />

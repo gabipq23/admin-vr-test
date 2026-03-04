@@ -1,21 +1,33 @@
 import { ConfigProvider, Select } from "antd";
+import { VROrder } from "@/interfaces/VROrder";
+import { VROrderStatus } from "@/services/vrOrders";
+import { useEffect, useState } from "react";
 
-export default function HeaderInputs(
-  //   {
-  //   localData,
-  //   setLocalData,
-  //   selectedId,
-  //   changeBandaLargaOrderStatus,
-  //   statusOptions,
-  //   updateOrderData,
-  // }: any
-) {
+interface HeaderInputsProps {
+  selectedOrder: VROrder;
+  changeOrderStatusData: (id: number, status: VROrderStatus) => void;
+  isChangeOrderStatusFetching: boolean;
+}
+
+export default function HeaderInputs({
+  selectedOrder,
+  changeOrderStatusData,
+  isChangeOrderStatusFetching,
+}: HeaderInputsProps) {
+  const [selectedStatus, setSelectedStatus] = useState<VROrderStatus>(
+    selectedOrder.status as VROrderStatus,
+  );
+
+  useEffect(() => {
+    setSelectedStatus(selectedOrder.status as VROrderStatus);
+  }, [selectedOrder.id, selectedOrder.status]);
+
   return (
     <>
       <div className="flex  flex-col md:flex-row lg:flex-row gap-4 mg:items-start lg:items-start justify-between">
         <span style={{ color: "#252525" }}>
           Pedido Nº
-          {/* {localData.ordernumber || localData.id} */}
+          {` ${selectedOrder.order_number || selectedOrder.id}`}
         </span>
         <div className="flex flex-col  flex-wrap items-center gap-4 ">
           <ConfigProvider
@@ -41,16 +53,12 @@ export default function HeaderInputs(
                 <Select
                   size="small"
                   style={{ width: 110 }}
-                  // value={localData?.status}
-                  // onChange={(value) => {
-                  //   setLocalData((prev: any) =>
-                  //     prev ? { ...prev, status: value } : null,
-                  //   );
-                  //   changeBandaLargaOrderStatus({
-                  //     id: selectedId?.id,
-                  //     data: { status: value },
-                  //   });
-                  // }}
+                  value={selectedStatus}
+                  loading={isChangeOrderStatusFetching}
+                  onChange={(value: VROrderStatus) => {
+                    setSelectedStatus(value);
+                    changeOrderStatusData(selectedOrder.id, value);
+                  }}
                   options={[
                     { value: "ABERTO", label: "Aberto" },
                     { value: "FECHADO", label: "Fechado" },

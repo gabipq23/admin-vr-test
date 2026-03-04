@@ -1101,8 +1101,24 @@ export const useBeneficiosTableColumns = (): TableColumnsType<VROrder> => {
         {
             title: "TimeZone",
             dataIndex: ["fingerprint", "timezone"],
-            width: 120,
-            render: (timezone) => timezone || "-",
+            width: 210,
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (timezone, record) => {
+                const timezoneName = record?.fingerprint?.timezone_name;
+                const value = [timezone, timezoneName].filter(Boolean).join(" - ");
+
+                return (
+                    <Tooltip
+                        placement="topLeft"
+                        title={value || "-"}
+                        styles={{ body: { fontSize: "12px" } }}
+                    >
+                        {value || "-"}
+                    </Tooltip>
+                );
+            },
         },
         {
             title: "Resolução",
