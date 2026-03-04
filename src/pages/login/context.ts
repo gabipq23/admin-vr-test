@@ -13,7 +13,6 @@ export const useAuthContext = create<AuthState>((set) => ({
   },
   logout: () => {
     set({ user: null });
-    void authService.logout();
   },
 
   checkAuth: () => {

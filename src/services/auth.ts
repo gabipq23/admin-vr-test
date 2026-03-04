@@ -55,18 +55,6 @@ class AuthService {
 
     return null;
   }
-
-  async logout(): Promise<void> {
-    try {
-      await api.post("/auth/logout");
-    } catch (error) {
-      console.error("Erro ao fazer logout:", error);
-    } finally {
-      const localStorageService = new LocalStorageService();
-      localStorageService.removeItem(LocalStorageKeys.accessToken);
-      localStorageService.removeItem(LocalStorageKeys.user);
-    }
-  }
 }
 
 export { AuthService };
