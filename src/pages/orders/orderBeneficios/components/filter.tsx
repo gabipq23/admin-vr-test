@@ -11,7 +11,7 @@ import {
 import { FilterOutlined, DownloadOutlined } from "@ant-design/icons";
 import ptBR from "antd/es/locale/pt_BR";
 import { DatePicker } from "antd";
-import { PatternFormat, PatternFormatProps } from "react-number-format";
+// import { PatternFormat, PatternFormatProps } from "react-number-format";
 import dayjs from "dayjs";
 import { customLocale } from "@/utils/customLocale";
 import { handleExportVROrdersXLSX } from "../../shared/export-xlsx-vr";
@@ -31,15 +31,15 @@ interface FiltroPedidosFormProps {
   // tableColumns: any;
 }
 
-const CPFInput = (props: PatternFormatProps) => (
-  <PatternFormat
-    {...props}
-    format="###.###.###-##"
-    customInput={Input}
-    placeholder="CPF"
-    size="middle"
-  />
-);
+// const CPFInput = (props: PatternFormatProps) => (
+//   <PatternFormat
+//     {...props}
+//     format="###.###.###-##"
+//     customInput={Input}
+//     placeholder="CPF"
+//     size="middle"
+//   />
+// );
 export function FiltroOrderBeneficiosForm({
   control,
   handleSubmit,
@@ -123,7 +123,7 @@ export function FiltroOrderBeneficiosForm({
                 />
               )}
             />
-
+            {/* 
             <Controller
               control={control}
               name="cpf"
@@ -136,8 +136,8 @@ export function FiltroOrderBeneficiosForm({
                   style={{ width: "150px" }}
                 />
               )}
-            />
-
+            /> */}
+            {/* 
             <Controller
               control={control}
               name="phone"
@@ -152,7 +152,7 @@ export function FiltroOrderBeneficiosForm({
                   }}
                 />
               )}
-            />
+            /> */}
 
             {/* Período de datas: date_from (início) e date_to (fim) */}
             <Controller
