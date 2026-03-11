@@ -14,7 +14,7 @@ export function useRHOrdersController() {
   const params = new URLSearchParams(window.location.search);
   const pageParam = Number(params.get("page") || "1");
   const limitParam = Number(params.get("limit") || "20");
-  const idParam = Number(params.get("id"));
+  const idParam = Number(params.get("order_number"));
   const statusParam = params.get("status");
   const dateFromParam = params.get("date_from");
   const dateToParam = params.get("date_to");
@@ -24,7 +24,7 @@ export function useRHOrdersController() {
       ? 20
       : Math.min(limitParam, 100);
   const allowedStatus: VROrderStatus[] = ["ABERTO", "FECHADO", "CANCELADO"];
-  const id = Number.isNaN(idParam) || idParam < 1 ? undefined : idParam;
+  const order_number = Number.isNaN(idParam) || idParam < 1 ? undefined : idParam;
   const status = allowedStatus.includes(statusParam as VROrderStatus)
     ? (statusParam as VROrderStatus)
     : undefined;
@@ -32,13 +32,13 @@ export function useRHOrdersController() {
   const date_to = dateToParam || undefined;
 
   const { data: ordersResponse, isLoading } = useQuery({
-    queryKey: ["vrOrders", "RH", page, perPage, id, status, date_from, date_to],
+    queryKey: ["vrOrders", "RH", page, perPage, order_number, status, date_from, date_to],
     queryFn: () =>
       vrOrdersService.getOrders({
         page,
         per_page: perPage,
         order_type: "RH",
-        id,
+        order_number,
         status,
         date_from,
         date_to,
