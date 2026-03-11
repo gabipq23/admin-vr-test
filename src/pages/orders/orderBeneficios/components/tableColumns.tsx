@@ -737,13 +737,13 @@ export const useBeneficiosTableColumns = (): TableColumnsType<VROrder> => {
         },
         {
             title: "Nº de Colaboradores",
-            dataIndex: ["vr_order", "company_size_range"],
+            dataIndex: "company_size_range",
             width: 170,
             render: (company_size_range) => formatCompanySizeRange(company_size_range),
         },
         {
             title: "Objetivo do contato",
-            dataIndex: ["vr_order", "contact_objective"],
+            dataIndex: "contact_objective",
             ellipsis: {
                 showTitle: false,
             },
@@ -764,7 +764,7 @@ export const useBeneficiosTableColumns = (): TableColumnsType<VROrder> => {
         },
         {
             title: "Tipo",
-            dataIndex: ["vr_order", "landing_page"],
+            dataIndex: "landing_page",
             ellipsis: {
                 showTitle: false,
             },

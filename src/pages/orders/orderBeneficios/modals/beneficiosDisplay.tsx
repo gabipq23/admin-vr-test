@@ -174,7 +174,7 @@ export function OrdersBeneficiosDisplayModal({ selectedOrder }: any
           <div className="bg-white rounded-md p-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {selectedOrder.order_type === "BENEFICIOS" &&
-                vrOrder?.["already_has_another_benefit"] !== undefined && (
+                (
                   <>
                     <DisplayGenerator
                       title="Já possui outro benefício:"
@@ -215,16 +215,16 @@ export function OrdersBeneficiosDisplayModal({ selectedOrder }: any
                     />
                     <DisplayGenerator
                       title="Nº de Colaboradores:"
-                      value={formatCompanySizeRange(vrOrder?.["company_size_range"])}
+                      value={formatCompanySizeRange(selectedOrder?.["company_size_range"])}
+                    />  <DisplayGenerator
+                      title="Tipo:"
+                      value={(selectedOrder?.["landing_page"] as string) || "-"}
                     />
                     <DisplayGenerator
                       title="Objetivo do contato:"
-                      value={formatContactObjective(vrOrder?.["contact_objective"])}
+                      value={formatContactObjective(selectedOrder?.["contact_objective"])}
                     />
-                    <DisplayGenerator
-                      title="Tipo:"
-                      value={(vrOrder?.["landing_page"] as string) || "-"}
-                    />
+
                   </>
                 )}
             </div>

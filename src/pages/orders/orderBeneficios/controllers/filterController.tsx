@@ -28,7 +28,7 @@ export function getFiltersFromURL(): any {
   const cpf = params.get("cpf") || undefined;
   const cnpj = params.get("cnpj") || undefined;
   const razaosocial = params.get("razaosocial") || undefined;
-  const id = params.get("id") || params.get("ordernumber") || undefined;
+  const order_number = params.get("order_number") || params.get("order_number") || undefined;
   const date_from = params.get("date_from") || params.get("data_de") || undefined;
   const date_to = params.get("date_to") || params.get("data_ate") || undefined;
   const page = parseInt(params.get("page") || "1", 10);
@@ -46,7 +46,7 @@ export function getFiltersFromURL(): any {
     cpf,
     cnpj,
     razaosocial,
-    id,
+    order_number,
     date_from,
     date_to,
     page,
@@ -78,7 +78,7 @@ export function useAllOrdersFilterController() {
       cpf: "",
       cnpj: "",
       razaosocial: "",
-      id: filters.id || "",
+      order_number: filters.order_number || "",
       date_from: filters.date_from || "",
       date_to: filters.date_to || "",
       order: undefined,
@@ -113,7 +113,7 @@ export function useAllOrdersFilterController() {
       params.set("cnpj", cnpjSemMascara);
     }
     if (data.razaosocial) params.set("razaosocial", data.razaosocial);
-    if (data.id) params.set("id", String(data.id));
+    if (data.order_number) params.set("order_number", String(data.order_number));
     if (data.date_from) params.set("date_from", data.date_from);
     if (data.date_to) params.set("date_to", data.date_to);
     if (data.status) params.set("status", data.status);

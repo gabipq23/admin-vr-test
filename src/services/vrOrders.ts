@@ -8,7 +8,7 @@ export interface IGetVROrdersParams {
   page?: number;
   per_page?: number;
   order_type?: VROrderType;
-  id?: number;
+  order_number?: number;
   status?: VROrderStatus;
   date_from?: string;
   date_to?: string;
@@ -32,7 +32,7 @@ export class VROrdersService {
     page = 1,
     per_page = 20,
     order_type,
-    id,
+    order_number,
     status,
     date_from,
     date_to,
@@ -42,7 +42,7 @@ export class VROrdersService {
         page,
         per_page,
         order_type,
-        id,
+        order_number,
         status,
         date_from,
         date_to,
