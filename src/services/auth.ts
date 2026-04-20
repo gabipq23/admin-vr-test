@@ -26,10 +26,13 @@ interface ILoginResponse {
 
 class AuthService {
   async login({ email, password }: ILoginRequest): Promise<ILoginResponse> {
-    const response = await api.post<ILoginApiResponse>("/auth/login", {
-      email,
-      password,
-    });
+    const response = await api.post<ILoginApiResponse>(
+      "/benefits/vr/auth/login",
+      {
+        email,
+        password,
+      },
+    );
 
     const { success, token, admin } = response.data;
 
