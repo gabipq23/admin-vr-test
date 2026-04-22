@@ -36,12 +36,18 @@ import OrdersBeneficios from "./pages/orders/orderBeneficios/ordersBeneficios";
 import OrdersMobilidade from "./pages/orders/orderMobilidade/ordersMobilidade";
 
 export default function App() {
-  const { user, checkAuth } = useAuthContext();
+  const { user, checkAuth, isAuthLoading } = useAuthContext();
 
   useEffect(() => {
-    checkAuth();
+    void checkAuth();
   }, [checkAuth]);
-
+  if (isAuthLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Carregando sessao...
+      </div>
+    );
+  }
   return (
     <Router>
       <Routes>
