@@ -37,7 +37,7 @@ export class VROrdersService {
     date_from,
     date_to,
   }: IGetVROrdersParams): Promise<IGetVROrdersResponse> {
-    const res = await api.get<IGetVROrdersResponse>("/orders", {
+    const res = await api.get<IGetVROrdersResponse>("/benefits/vr/orders", {
       params: {
         page,
         per_page,
@@ -53,13 +53,13 @@ export class VROrdersService {
   }
 
   async deleteOrder(id: number): Promise<void> {
-    await api.delete(`/orders/${id}`);
+    await api.delete(`/benefits/vr/orders/${id}`);
   }
 
   async updateOrderStatus(
     id: number,
     data: IUpdateVROrderStatusPayload,
   ): Promise<void> {
-    await api.patch(`/orders/${id}/status`, data);
+    await api.patch(`/benefits/vr/orders/${id}/status`, data);
   }
 }

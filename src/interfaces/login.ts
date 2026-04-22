@@ -6,11 +6,19 @@ export interface IUser {
   perfil?: string;
 }
 
+// export interface AuthState {
+//   user: IUser | null;
+//   login: (data: ILoginData) => Promise<void>;
+//   logout: () => void;
+//   checkAuth: () => void;
+// }
+
 export interface AuthState {
   user: IUser | null;
+  isAuthLoading: boolean;
   login: (data: ILoginData) => Promise<void>;
-  logout: () => void;
-  checkAuth: () => void;
+  logout: () => Promise<void>;
+  checkAuth: () => Promise<void>;
 }
 
 export interface ILoginData {

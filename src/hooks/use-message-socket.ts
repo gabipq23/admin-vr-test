@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef } from "react";
 import { messagesSocket as socket } from "@/configs/socket";
-import { AuthService } from "@/services/auth";
+// import { AuthService } from "@/services/auth";
 import { IResponseChatSocket } from "@/interfaces/chat/chat";
 import { useChatContext } from "./use-chat";
 import { CHAT_CONFIG, socketLogger } from "@/configs/chat-config";
 import { Howl } from "howler";
 
-const authService = new AuthService();
+// const authService = new AuthService();
 
 // Interface para controlar o estado do socket
 interface SocketState {
@@ -195,10 +195,10 @@ export const useMessageSocket = () => {
     try {
       socketState.current.lastError = null;
 
-      const authToken = authService.getAuthToken();
-      if (authToken) {
-        socket.auth = { token: authToken.token };
-      }
+      // const authToken = authService.getAuthToken();
+      // if (authToken) {
+      //   socket.auth = { token: authToken.token };
+      // }
       socket.connect();
     } catch (error) {
       socketLogger.error("Erro ao conectar socket:", error);

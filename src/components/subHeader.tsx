@@ -12,9 +12,12 @@ export default function SubHeader() {
   // const user = JSON.parse(localStorage.getItem("vr@user") || "null");
   // const userID = user?.id;
 
-  const handleLogOut = useCallback(() => {
-    logout();
-    navigate("/admin");
+  const handleLogOut = useCallback(async () => {
+    try {
+      await logout();
+    } finally {
+      navigate("/admin");
+    }
   }, [logout, navigate]);
 
   const toolsMenuItems: MenuProps["items"] = [
@@ -394,7 +397,9 @@ export default function SubHeader() {
             </Button> */}
             <Button
               type="link"
-              onClick={handleLogOut}
+              onClick={() => {
+                void handleLogOut();
+              }}
               style={{ padding: 0 }}
               className="logout-btn "
             >

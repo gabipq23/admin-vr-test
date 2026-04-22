@@ -1,5 +1,4 @@
 import axios from "axios";
-import { LocalStorageKeys, LocalStorageService } from "@/services/storage";
 
 // essa vai mudar pra novo cliente
 export const apiPurchase = axios.create({
@@ -11,25 +10,45 @@ export const apiPurchase = axios.create({
 
 export const api = axios.create({
   baseURL: "https://evolution.bigdates.com.br:3720",
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-const attachAuthToken = (config: any) => {
-  const localStorageService = new LocalStorageService();
-  const token = localStorageService.getItem(LocalStorageKeys.accessToken);
+// const attachAuthToken = (config: any) => {
+//   const localStorageService = new LocalStorageService();
+//   const token = localStorageService.getItem(LocalStorageKeys.accessToken);
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   return config;
+// };
+
+const forceLogoutAndRedirect = () => {
+  localStorage.removeItem("vr@user");
+
+  if (window.location.pathname !== "/admin") {
+    window.location.replace("/admin");
   }
-
-  return config;
 };
+// api.interceptors.request.use(attachAuthToken);
+apiPurchase.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status;
+    const requestUrl = String(error?.config?.url ?? "");
+    const isLoginRequest = requestUrl.includes("/vr/auth/login");
 
-api.interceptors.request.use(attachAuthToken);
-apiPurchase.interceptors.request.use(attachAuthToken);
+    if (status === 401 && !isLoginRequest) {
+      forceLogoutAndRedirect();
+    }
 
+    return Promise.reject(error);
+  },
+);
 // Tools
 export const apiBase2b = axios.create({
   baseURL: "https://base2b.online:3000/api/v1",
