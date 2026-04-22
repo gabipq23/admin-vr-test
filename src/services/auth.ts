@@ -1,4 +1,4 @@
-import { apiPurchase } from "../configs/api";
+import { api } from "../configs/api";
 import { LocalStorageKeys, LocalStorageService } from "./storage";
 interface ILoginRequest {
   email: string;
@@ -26,7 +26,7 @@ interface ILoginResponse {
 
 class AuthService {
   async login({ email, password }: ILoginRequest): Promise<ILoginResponse> {
-    const response = await apiPurchase.post<ILoginApiResponse>(
+    const response = await api.post<ILoginApiResponse>(
       "/benefits/vr/auth/login",
       {
         email,
@@ -71,7 +71,7 @@ class AuthService {
   }
 
   async logout() {
-    await apiPurchase.post("/benefits/vr/auth/logout");
+    await api.post("/benefits/vr/auth/logout");
     localStorage.removeItem("vr@user");
   }
 }

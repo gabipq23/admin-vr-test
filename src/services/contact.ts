@@ -1,4 +1,4 @@
-import { apiPurchase } from "@/configs/api";
+import { api } from "@/configs/api";
 import { IContactResponse } from "src/interfaces/contacts";
 
 export class ContactService {
@@ -27,7 +27,7 @@ export class ContactService {
     page?: string | number;
     limit?: string | number;
   }): Promise<IContactResponse> {
-    const res = await apiPurchase.get(`/benefits/vr/messages`, {
+    const res = await api.get(`/benefits/vr/messages`, {
       params: {
         nome: nome,
         email: email,
@@ -52,12 +52,12 @@ export class ContactService {
     id: number;
     status_mensagem: "Visualizada" | "Respondida";
   }) {
-    return apiPurchase.patch(`/benefits/vr/messages/${id}/status-mensagem`, {
+    return api.patch(`/benefits/vr/messages/${id}/status-mensagem`, {
       status_mensagem: status_mensagem,
     });
   }
 
   async removeContact(id: number) {
-    await apiPurchase.delete(`/benefits/vr/messages/${id}`);
+    await api.delete(`/benefits/vr/messages/${id}`);
   }
 }
